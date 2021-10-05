@@ -1,6 +1,10 @@
 # from django.shortcuts import render
-from django.http import HttpResponse
+from .models import *
+from rest_framework import viewsets
+from .serializer import *
+from rest_framework import permissions
 
-# Create your views here.
-def index(request):
-    return HttpResponse("API VIEW")
+class NutrientViewSet(viewsets.ModelViewSet):
+    queryset = Nutrient.objects.all()
+    serializer_class = NutrientSerializer
+    # permission_classes = [permissions.IsAuthenticated]

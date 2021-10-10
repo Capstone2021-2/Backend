@@ -46,12 +46,12 @@ class NutritionFact(models.Model):
 
 
 class User(models.Model):
-    user_id = models.CharField(max_length=50)
-    email = models.EmailField(max_length=100)
-    age = models.ForeignKey('Age', blank=True, on_delete=models.CASCADE)
-    height = models.FloatField(blank=True)
-    weight = models.FloatField(blank=True)
-    body_type = models.ForeignKey('BodyType', null=False, on_delete=models.CASCADE)
+    user_id = models.CharField(max_length=50, unique=True)
+    email = models.EmailField(max_length=100, unique=True )
+    height = models.FloatField(blank=True, null=True)
+    weight = models.FloatField(blank=True, null=True)
+    age = models.ForeignKey('Age', blank=True, null= True, on_delete=models.CASCADE)
+    body_type = models.ForeignKey('BodyType', blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.login_id

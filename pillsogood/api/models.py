@@ -46,8 +46,8 @@ class NutritionFact(models.Model):
 
 
 class User(models.Model):
-    user_id = models.CharField(max_length=50, unique=True)
-    email = models.EmailField(max_length=100, unique=True )
+    user_id = models.CharField(max_length=50, null=False, unique=True)
+    email = models.EmailField(max_length=100, blank= False, null=False, unique=True )
     height = models.FloatField(blank=True, null=True)
     weight = models.FloatField(blank=True, null=True)
     age = models.ForeignKey('Age', blank=True, null= True, on_delete=models.CASCADE)

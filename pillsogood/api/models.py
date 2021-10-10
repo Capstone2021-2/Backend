@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 
 # Create your models here.
 
@@ -46,17 +47,26 @@ class NutritionFact(models.Model):
 
 class User(models.Model):
     user_id = models.CharField(max_length=50)
-    age = models.PositiveIntegerField()
+    age = models.ForeignKey('Age', null=False, on_delete=models.CASCADE)
+    height = models.FloatField()
     weight = models.FloatField()
     body_type = models.ForeignKey('BodyType', null=False, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.login_id
 
+class Age(models.Model):
+    age_range = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.age_range
+
 
 class BodyType(models.Model):
     body_type = models.CharField(max_length=20)
 
+    # Nutrient model(class)를 사용하여
+    # 새로운 model 'GoodForBodyType' 생성
     nutrient = models.ManyToManyField(
         'Nutrient',
         through = 'GoodForBodyType'

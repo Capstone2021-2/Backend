@@ -44,7 +44,7 @@ class UserLoginSerializer(serializers.Serializer):
     token = serializers.CharField(max_length=255, read_only=True)
 
     def validate(self, data):
-        login_id = data.get("login.id", None)
+        login_id = data.get("login_id", None)
         # email = data.get("email", None)
         # nickname = data.get("nickname", None)
         password = data.get("password", None)

@@ -77,7 +77,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
 
-    object = UserManager()
+    objects = UserManager()
 
     login_id = models.CharField(max_length=50,  unique=True)
     email = models.EmailField(max_length=100, default='', unique=True)

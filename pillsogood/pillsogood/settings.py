@@ -28,8 +28,6 @@ SECRET_KEY = my_settings.SECRET_KEY
 DEBUG = True
 
 ALLOWED_HOSTS = ['.amazonaws.com', '127.0.0.1', '172.16.101.165']
-<<<<<<< HEAD
-=======
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -50,7 +48,6 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),
 }
 
->>>>>>> refs/remotes/origin/master
 
 
 # Application definition

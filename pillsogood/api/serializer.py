@@ -38,17 +38,17 @@ JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
 
 class UserLoginSerializer(serializers.Serializer):
     login_id = serializers.CharField(max_length=50)
-    email = serializers.CharField(max_length=100)
-    nickname = serializers.CharField(max_length=20)
+    # email = serializers.CharField(max_length=100)
+    # nickname = serializers.CharField(max_length=20)
     password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
 
     def validate(self, data):
         login_id = data.get("login.id", None)
-        email = data.get("email", None)
-        nickname = data.get("nickname", None)
+        # email = data.get("email", None)
+        # nickname = data.get("nickname", None)
         password = data.get("password", None)
-        user = authenticate(login_id=login_id, email=email, nickname=nickname, password=password)
+        user = authenticate(login_id=login_id, password=password)  # email, nickname
 
         if user is None:
             return {

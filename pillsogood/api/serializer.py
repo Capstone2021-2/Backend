@@ -1,6 +1,6 @@
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
-from . models import User, Nutrient
+from . models import User as UserTemp, Nutrient
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
@@ -12,7 +12,7 @@ class NutrientSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = UserTemp
         fields = ['login_id', 'email', 'nickname']
 
 class UserCreateSerializer(serializers.Serializer):
@@ -22,7 +22,7 @@ class UserCreateSerializer(serializers.Serializer):
     password = serializers.CharField(required=True)
 
     def create(self, validated_data):
-        user = User.objects.create( # User 생성
+        user = UserTemp.objects.create( # User 생성
             login_id=validated_data['login_id'],  # validated_data에서 받은 값으로 설정
             email=validated_data['email'],
             nickname=validated_data['nickname']
@@ -58,7 +58,7 @@ class UserLoginSerializer(serializers.Serializer):
             payload = JWT_PAYLOAD_HANDLER(user)
             jwt_token = JWT_ENCODE_HANDLER(payload) # 토큰 발행
             update_last_login(None, user)
-        except User.DoesNotExist:
+        except UserTemp.DoesNotExist:
             raise serializers.ValidationError(
                 'User with given login_id and password does not exists'
             )

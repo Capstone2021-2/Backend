@@ -40,10 +40,10 @@ def login(request):
             
         if serializer.validated_data['login_id'] == "None": # login_id required
             return Response({'message': 'fail'}, status=status.HTTP_200_OK)
-        if serializer.validated_data['email'] == "None": # email required
-            return Response({'message': 'fail'}, status=status.HTTP_200_OK)
-        if serializer.validated_data['nickname'] == "None": # nickname required
-            return Response({'message': 'fail'}, status=status.HTTP_200_OK)
+        # if serializer.validated_data['email'] == "None": # email required
+        #     return Response({'message': 'fail'}, status=status.HTTP_200_OK)
+        # if serializer.validated_data['nickname'] == "None": # nickname required
+        #     return Response({'message': 'fail'}, status=status.HTTP_200_OK)
 
         response = {
             'success': True,

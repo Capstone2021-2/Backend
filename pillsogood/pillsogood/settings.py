@@ -26,7 +26,7 @@ SECRET_KEY = my_settings.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.amazonaws.com', '127.0.0.1']
+ALLOWED_HOSTS = ['.amazonaws.com', '127.0.0.1', '172.16.101.165']
 
 
 # Application definition

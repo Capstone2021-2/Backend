@@ -1,18 +1,18 @@
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
-from .models import *
+import models
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
 class NutrientSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Nutrient
+        model = models.Nutrient
         fields = ['name', 'upper', 'lower', 'unit']
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = models.User
         fields = ['login_id', 'email', 'nickname']
 
 class UserCreateSerializer(serializers.Serializer):
@@ -22,8 +22,8 @@ class UserCreateSerializer(serializers.Serializer):
     password = serializers.CharField(required=True)
 
     def create(self, validated_data):
-        user = User.objects.create( # User 생성
-            login_id=validated_data['login_id'],
+        user = models.User.objects.create( # User 생성
+            login_id=validated_data['login_id'],  # validated_data에서 받은 값으로 설정
             email=validated_data['email'],
             nickname=validated_data['nickname']
         )
@@ -52,18 +52,18 @@ class UserLoginSerializer(serializers.Serializer):
 
         if user is None:
             return {
-                'email': 'None'
+                'login_id' : 'None'
             }
         try:
             payload = JWT_PAYLOAD_HANDLER(user)
             jwt_token = JWT_ENCODE_HANDLER(payload) # 토큰 발행
             update_last_login(None, user)
-        except User.DoesNotExist:
+        except models.User.DoesNotExist:
             raise serializers.ValidationError(
-                'User with given email and password does not exists'
+                'User with given login_id and password does not exists'
             )
         return {
-            'email': user.email,
+            'login_id': user.login_id,
             'token': jwt_token
         }
 

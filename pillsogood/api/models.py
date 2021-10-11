@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 
@@ -45,16 +46,67 @@ class NutritionFact(models.Model):
         return '{} : {} ({})'.format(self.supplement, self.nutrient, self.amount)
 
 
-class User(models.Model):
-    user_id = models.CharField(max_length=50,  unique=True)
+class UserManager(BaseUserManager):
+    def create_user(self, login_id, email, nickname, password=None):
+        if not email:
+            raise ValueError('must have user email')
+        if not nickname:
+            raise ValueError('must have user nickname')
+        if not login_id:
+            raise ValueError('must have user login_id')
+        user = self.model(
+            login_id = login_id,
+            email=self.normalize_email(email),
+            nickname = nickname
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, login_id, email, nickname, password):
+        user = self.create_user(
+            login_id=login_id,
+            email=self.normalize_email(email),
+            nickname=nickname,
+            password=password
+        )
+        user.is_admin = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+class User(AbstractBaseUser):
+
+    object = UserManager()
+
+    login_id = models.CharField(max_length=50,  unique=True)
     email = models.EmailField(max_length=100, default='', unique=True)
+    nickname = models.CharField(max_length=20, default='', unique=True)
     height = models.FloatField(blank=True, null=True)
     weight = models.FloatField(blank=True, null=True)
     age = models.ForeignKey('Age', blank=True, null= True, on_delete=models.CASCADE)
     body_type = models.ForeignKey('BodyType', blank=True, null=True, on_delete=models.CASCADE)
 
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'login_id'
+    REQUIRED_FIELDS = ['email','nickname']
+
     def __str__(self):
         return self.login_id
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+
 
 class Age(models.Model):
     age_range = models.CharField(max_length=20)
@@ -107,7 +159,7 @@ class Review(models.Model):
     #     ('FOUR', 4)
     #     ('FIVE', 5)
     # )
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_nicname = models.ForeignKey(User, on_delete=models.CASCADE)
     supplement = models.ForeignKey(Supplement, on_delete=models.CASCADE)
     # rating = models.IntegerField(max_length=2, choices=RATING_CHOICES)
     rating = models.IntegerField()
@@ -116,7 +168,7 @@ class Review(models.Model):
     text = models.CharField(max_length=1000)
 
     def __str__(self):
-        return '{} : {} ({}) '.format(self.user_id, self.supplement, self.rating)
+        return '{} : {} ({}) '.format(self.user_nicname, self.supplement, self.rating)
 
 
 

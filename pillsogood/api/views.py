@@ -8,3 +8,4 @@ class NutrientViewSet(viewsets.ModelViewSet):
     queryset = Nutrient.objects.all()
     serializer_class = NutrientSerializer
     # permission_classes = [permissions.IsAuthenticated]
+

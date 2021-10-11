@@ -28,12 +28,12 @@ SECRET_KEY = my_settings.SECRET_KEY
 DEBUG = True
 
 ALLOWED_HOSTS = ['.amazonaws.com', '127.0.0.1', '172.16.101.165']
-<<<<<<< HEAD
-=======
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAdminUser', # 관리자만 접근 가능
+        'rest_framework.permissions.AllowAny', # 누구나 접근 가능
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
@@ -50,7 +50,6 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),
 }
 
->>>>>>> refs/remotes/origin/master
 
 
 # Application definition

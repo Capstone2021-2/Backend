@@ -9,6 +9,7 @@ mysqlclient = "*"
 pillow = "*"
 djangorestframework = "*"
 djangorestframework-jwt = "*"
+django-rest-auth = "*"
 
 [dev-packages]
 

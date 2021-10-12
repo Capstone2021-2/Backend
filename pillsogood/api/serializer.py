@@ -45,9 +45,11 @@ class UserLoginSerializer(serializers.Serializer):
 
     def validate(self, data):
         login_id = data.get("login_id", None)
+        print(login_id)
         # email = data.get("email", None)
         # nickname = data.get("nickname", None)
         password = data.get("password", None)
+        print(password)
         user = authenticate(login_id=login_id, password=password)  # email, nickname
 
         if user is None:

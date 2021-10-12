@@ -15,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = UserTemp
         fields = ['login_id', 'email', 'nickname']
 
+
 class UserCreateSerializer(serializers.Serializer):
     login_id = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
@@ -51,7 +52,7 @@ class UserLoginSerializer(serializers.Serializer):
         password = data.get("password", None)
         print(password)
         user = authenticate(login_id=login_id, password=password)  # email, nickname
-
+        print('user info: ', user)
         if user is None:
             return {
                 'login_id' : 'None'
@@ -66,7 +67,7 @@ class UserLoginSerializer(serializers.Serializer):
             )
         return {
             'login_id': user.login_id,
-            'token': jwt_token
+            'token': jwt_token,
         }
 
 # class UserSerializerWithToken(serializers.ModelSerializer):

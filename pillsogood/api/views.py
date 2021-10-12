@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 class NutrientViewSet(viewsets.ModelViewSet):
     queryset = Nutrient.objects.all()
     serializer_class = NutrientSerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 @api_view(['GET'])

@@ -20,6 +20,7 @@ def current_user(request):
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
 
+# signup
 @api_view(['POST']) 
 @permission_classes([permissions.AllowAny]) # 인증 필요없다
 def signup(request):
@@ -28,7 +29,7 @@ def signup(request):
         serializer.save() # DB 저장
         return Response(serializer.data, status=201) 
 
-
+# signin
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def login(request):

@@ -14,6 +14,9 @@ urlpatterns = [
     path('user/signup', views.signup),
     path('user/login', views.login),
     path('user/current/', views.current_user),
+    path('user/dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('', include('django.contrib.auth.urls')),
+    
 
     # path('user/', views.UserList),
     #path('user')

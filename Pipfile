@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
 mysqlclient = "*"
 pillow = "*"
 djangorestframework = "*"
 djangorestframework-jwt = "*"
-django-rest-auth = "*"
-dj-rest-auth = "*"
+django-rest-auth = "*"=
+django = "*"
+django-filter = "*"
 
 [dev-packages]
 

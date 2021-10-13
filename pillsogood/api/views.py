@@ -36,9 +36,9 @@ def find_id(request):
 
         result = User.objects.filter(email=serializer.data['email'])
         result_cnt = result.count()
-        if result_cnt is 0:
+        if result_cnt == 0:
             return Response({"message": "Invalid Email"}, status=status.HTTP_204_NO_CONTENT)
-            
+
         response = {
             'login_id': result[0].login_id
         }

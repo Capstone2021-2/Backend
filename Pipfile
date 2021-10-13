@@ -10,6 +10,7 @@ pillow = "*"
 djangorestframework = "*"
 djangorestframework-jwt = "*"
 django-rest-auth = "*"
+dj-rest-auth = "*"
 
 [dev-packages]
 

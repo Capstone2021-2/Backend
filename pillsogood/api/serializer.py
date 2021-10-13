@@ -16,6 +16,22 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['login_id', 'email', 'nickname']
 
 
+class FindIdSerializer(serializers.Serializer):
+    # serializer 데이터 항목에 정의되면 받아야하는 key 항목이네
+    # result = serializers.CharField(max_length=50)
+    email = serializers.CharField(max_length=100)
+
+    def validate(self, data):
+        # print(data)
+        email = data.get("email", None)
+
+        # login_id = result
+        if email is None:
+            return { 'email ' : 'None' }
+        else:
+            return { 'email' :  email }
+
+
 class UserCreateSerializer(serializers.Serializer):
     login_id = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
@@ -39,20 +55,21 @@ JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
 
 class UserLoginSerializer(serializers.Serializer):
     login_id = serializers.CharField(max_length=50)
-    # email = serializers.CharField(max_length=100)
-    # nickname = serializers.CharField(max_length=20)
     password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
+    # email = serializers.CharField(max_length=100)
+    # nickname = serializers.CharField(max_length=20)
+
 
     def validate(self, data):
         login_id = data.get("login_id", None)
-        print(login_id)
+        password = data.get("password", None)
         # email = data.get("email", None)
         # nickname = data.get("nickname", None)
-        password = data.get("password", None)
-        print(password)
+        # print(login_id)
+        # print(password)
         user = authenticate(login_id=login_id, password=password)  # email, nickname
-        print('user info: ', user)
+        # print('user info: ', user)
         if user is None:
             return {
                 'login_id' : 'None'

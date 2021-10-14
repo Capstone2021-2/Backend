@@ -8,7 +8,7 @@ mysqlclient = "*"
 pillow = "*"
 djangorestframework = "*"
 djangorestframework-jwt = "*"
-django-rest-auth = "*"=
+django-rest-auth = "*"
 django = "*"
 django-filter = "*"
 

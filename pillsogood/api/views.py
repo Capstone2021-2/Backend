@@ -29,9 +29,9 @@ def is_id_duplicate(request):
         result_cnt = result.count()
 
         if result_cnt == 0:
-            return Response({"message": "can use"}, status=status.HTTP_200_OK)
+            return Response({"isValid": 1}, status=status.HTTP_200_OK)
         else:
-            return Response({ "message": "can\'t use"}, status=status.HTTP_200_OK)
+            return Response({ "isValid": 0}, status=status.HTTP_200_OK)
 
 
 

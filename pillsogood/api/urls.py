@@ -17,4 +17,5 @@ urlpatterns = [
     path('user/dj-rest-auth/', include('dj_rest_auth.urls')),
     path('', include('django.contrib.auth.urls')),
     path('user/find-id/', views.find_id),
+    path('user/duplicate-id', views.is_id_duplicate)
 ]

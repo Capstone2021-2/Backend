@@ -10,6 +10,18 @@ class NutrientSerializer(serializers.ModelSerializer):
         fields = ['name', 'upper', 'lower', 'unit']
 
 
+class IsIdDuplicateSerializer(serializers.Serializer):
+    login_id = serializers.CharField(max_length=50)
+
+    def validate(self, data):
+        login_id = data.get("login_id", None)
+
+        if login_id is None:
+            return {'login_id' : 'None'}
+        else:
+            return { 'login_id' : login_id }
+            
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserTemp

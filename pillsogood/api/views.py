@@ -17,6 +17,23 @@ class NutrientViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     # permission_classes = [permissions.IsAuthenticated]
 
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def is_id_duplicate(request):
+    if request.method == 'POST':
+        serializer = IsIdDuplicateSerializer(data=request.data)
+        if not serializer.is_valid(raise_exception=True):
+            return Response({"message": "Request Body Error."}, status=status.HTTP_409_CONFLICT)
+
+        result = User.objects.filter(login_id=serializer.data['login_id'])
+        result_cnt = result.count()
+
+        if result_cnt == 0:
+            return Response({"message": "can use"}, status=status.HTTP_200_OK)
+        else:
+            return Response({ "message": "can\'t use"}, status=status.HTTP_200_OK)
+
+
 
 @api_view(['GET'])
 def current_user(request):
@@ -28,6 +45,7 @@ def current_user(request):
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny]) # 인증 필요없다
 def find_id(request):
+    result_cnt = 0
     if request.method == 'POST':
 
         serializer = FindIdSerializer(data=request.data)
@@ -43,13 +61,7 @@ def find_id(request):
             'login_id': result[0].login_id
         }
         return Response(response, status=status.HTTP_200_OK)
-
-class FindIdViewSet(generics.ListAPIView):
-    queryset = UserTemp.objects.all()
-    serializer_class = FindIdSerializer
-    pfilter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
    
-
 
 # signup
 @api_view(['POST']) 

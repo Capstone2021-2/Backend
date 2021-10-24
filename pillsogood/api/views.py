@@ -96,20 +96,3 @@ def login(request):
             'nickname': result[0].nickname,
         }
         return Response(response, status=status.HTTP_200_OK)
-
-
-# class UserList(APIView):
-
-#     permission_classes = (permissions.AllowAny,)
-
-#     def post(self, request, format=None):
-#         serializer = UserSerializerWithToken(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# class UserUpdateAPI(generics.UpdateAPIView):
-#     lookup_field = "login_id"
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer

@@ -11,6 +11,8 @@ djangorestframework-jwt = "*"
 django-rest-auth = "*"
 django = "*"
 django-filter = "*"
+requests = "*"
+django-extensions = "*"
 
 [dev-packages]
 

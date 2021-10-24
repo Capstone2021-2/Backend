@@ -5,9 +5,9 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
 
 class Nutrient(models.Model):
-    name = models.CharField(max_length=50)
-    upper = models.FloatField()
-    lower = models.FloatField()
+    name = models.CharField(max_length=100)
+    upper = models.FloatField(blank=True, null=True)
+    lower = models.FloatField(blank=True, null=True)
     unit = models.CharField(max_length=20)
 
     def __str__(self):
@@ -16,7 +16,7 @@ class Nutrient(models.Model):
 
 class Supplement(models.Model):
     name = models.CharField(max_length=50)
-    image = models.ImageField()
+    image = models.ImageField(blank=True, null=True)
     company = models.CharField(max_length=50)
     exp_date = models.CharField(max_length=50)
     dispos = models.CharField(max_length=50)

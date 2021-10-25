@@ -9,6 +9,7 @@ class Nutrient(models.Model):
     upper = models.FloatField(blank=True, null=True)
     lower = models.FloatField(blank=True, null=True)
     unit = models.CharField(max_length=20)
+    tmp_id = models.CharField(max_length=30)
 
     def __str__(self):
         return self.name

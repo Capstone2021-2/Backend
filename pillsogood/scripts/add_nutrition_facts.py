@@ -1,7 +1,9 @@
 from api.models import NutritionFact
+from api.models import Nutrient, Supplement
 import json
 import re
 from parse import search
+
 
 
 def run():
@@ -12,10 +14,12 @@ def run():
     try:
         for num in range(955):  # 데이터 몇 개 받아오는지 지정
             product = data['C003']['row'][num]['PRDLST_NM']  # PRDLIST_NM = 제품명
-            print('------------------------------------')
-            print(product)
-            print('------------------------------------')
+            # print('------------------------------------')
+            # print(product)
+            # print('------------------------------------')
             contents = data['C003']['row'][num]['STDR_STND'].split('\n')  # 함량 목록(STDR_STND) split 함수 사용해서 추출
+            tmp_id_sup = data['C003']['row'][num]["-id"]  # json 파일 id를 사용해서 manytomany할 때 참조 객체 찾아야함.
+
             cnt += 1
             # 여러 함량들 중 함량 하나씩 파싱하는 부분
             for content in contents:
@@ -137,6 +141,9 @@ def run():
                 elif c_name is not None and '아스타잔' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '헤마토코쿠스 추출물'
+                elif c_name is not None and '아스타진' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '헤마토코쿠스 추출물'
                 elif c_name is not None and '루테인' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '루테인지아잔틴복합추출물'
@@ -218,7 +225,7 @@ def run():
                     c_name.fixed[0] = '식이섬유'
                 elif c_name is not None and '포스파티' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
-                    c_name.fixed[0] = '포스파티딜세린틴'
+                    c_name.fixed[0] = '포스파티딜세린'
                 elif c_name is not None and '비오틴' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '비오틴'
@@ -247,6 +254,15 @@ def run():
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '엠에스엠(MSM, Methyl sulfonylmethane, 디메틸설폰)'
                 elif c_name is not None and '플라보' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '은행잎 추출물'
+                elif c_name is not None and '폴라보' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '은행잎 추출물'
+                elif c_name is not None and '플라포' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '은행잎 추출물'
+                elif c_name is not None and '폴라포' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '은행잎 추출물'
                 elif c_name is not None and '실리마린' in c_name.fixed[0]:
@@ -352,28 +368,61 @@ def run():
                     c_name.fixed[0] = '돌외잎주정추출분말'
                 elif c_name is not None and '폴리감마' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
-                    c_name.fixed[0] = '폴리감마글루탐마'
+                    c_name.fixed[0] = '폴리감마글루탐산'
                 elif c_name is not None and '식물스타놀' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '식물스타놀 에스테르'
                 elif c_name is not None and 'dipeptide' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '저분자콜라겐펩타이드NS'
-
-                elif c_name is not None and 'dipeptide' in c_name.fixed[0]:
-                    c_name.fixed = list(c_name.fixed)
-                    c_name.fixed[0] = '저분자콜라겐펩타이드NS'
-
                 elif c_name is not None and '갈산' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '보이차추출물'
+                elif c_name is not None and 'Ellagic' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '석류농축분말'
                 elif c_name is not None and '엘라그산' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '석류농축분말'
                 elif c_name is not None and 'Coumaric' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '강황 추출물(터마신)'
-
+                elif c_name is not None and '몰리브덴' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '몰리브덴'
+                elif c_name is not None and '풋사과' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '풋사과추출물 애플페논(Applephenon)'
+                elif c_name is not None and 'Hyperoside' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '로즈힙분말'
+                elif c_name is not None and 'Vitexin' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '호로파종자추출물(Testofen)'
+                elif c_name is not None and 'Luteolin-7' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '차즈기추출물'
+                elif c_name is not None and '오리자놀' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '미강주정추출물'
+                elif c_name is not None and 'Secoxyloganin' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '인동덩굴꽃봉오리추출물(그린세라-F)'
+                elif c_name is not None and '벤질헥사' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '마카 젤라틴화 분말'
+                elif c_name is not None and '틸리아닌' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '배초향 추출물(Agatri®)'
+                elif c_name is not None and '클로로겐산' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '해국추출물'
+                elif c_name is not None and 'aminobutyric' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '유산균 발효 다시마추출물'
+                elif c_name is not None and '나토균배양분말' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '나토균배양분말'
 
 
 
@@ -403,27 +452,31 @@ def run():
                     c_amount = search(' : {}/', content)  # : 1,000mg/100g 형식
 
 
-                
-                # NutritionFact.objects.create(supplement=product, nutrient=c_name, amount=c_amount)
+
+                supplement_obj = Supplement.objects.get(tmp_id=tmp_id_sup)
 
                 # 함량 이름과 양 둘 다 유효할 경우만 print
                 if c_name is not None and c_amount is not None:
-                    nutrient= c_name.fixed[0]
+                    nutrient_obj = Nutrient.objects.get(name=c_name.fixed[0])  # 영양소 성분 이름으로 찾기
                     if '프로바이오틱스' in c_name.fixed[0]:
-                        print(
-                            c_name.fixed[0],
-                            c_amount.fixed[0].replace('CFU', '').replace(' ', '').replace(',', '').replace('cfu', ''))
+                        # print(
+                        #     c_name.fixed[0],
+                        #     c_amount.fixed[0].replace('CFU', '').replace(' ', '').replace(',', '').replace('cfu', ''))
+
+                        # DB에 저장하는 부분
                         amount= c_amount.fixed[0].replace('CFU', '').replace(' ', '').replace(',', '').replace('cfu', '')
-                        NutritionFact.objects.create(supplement=product, nutrient=nutrient, amount=amount)
+                        NutritionFact.objects.create(supplement=supplement_obj, nutrient=nutrient_obj, amount=amount)
                     else:
                         # 오류 찾기용 print
                         # print(c_name)  # 영양소 이름이 잘못되었나?
                         # print(c_amount)  # 양이 잘못되었나?
                         floats = re.findall(r"[-+]?\d*[.,]\d+|\d+", c_amount.fixed[0])
-                        print(c_name.fixed[0], floats[0].replace(',', ''))
-                        amount= floats[0].replace(',', '')
-                        NutritionFact.objects.create(supplement=product, nutrient=nutrient, amount=amount)
+                        # print(c_name.fixed[0], floats[0].replace(',', ''))
 
-            print('\n')
+                        # DB에 저장하는 부분
+                        amount= floats[0].replace(',', '')
+                        NutritionFact.objects.create(supplement=supplement_obj, nutrient=nutrient_obj, amount=amount)
+
+            # print('\n')
     except IndexError:
         pass

@@ -16,7 +16,7 @@ def run():
             warning = data['C003']['row'][num]["IFTKN_ATNT_MATR_CN"]
             pri_func = data['C003']['row'][num]["PRIMARY_FNCLTY"]
             raw_material = data['C003']['row'][num]["RAWMTRL_NM"]
-            minus_id = data['C003']['row'][num]["-id"]
+            tmp_id = data['C003']['row'][num]["-id"]
 
             # 이름이 똑같은 영야제가 있을 수 있음
             try:
@@ -25,12 +25,12 @@ def run():
                 Supplement.objects.create(
                     name=product, company=company, exp_date=exp_date,
                     dispos=dispos, sug_use = sug_use, warning=warning,
-                    pri_func=pri_func, raw_material=raw_material, tmp_id=minus_id)
+                    pri_func=pri_func, raw_material=raw_material, tmp_id=tmp_id)
             else:
                 Supplement.objects.create(
                     name=product, company=company, exp_date=exp_date,
                     dispos=dispos, sug_use = sug_use, warning=warning,
-                    pri_func=pri_func, raw_material=raw_material, tmp_id=minus_id)
+                    pri_func=pri_func, raw_material=raw_material, tmp_id=tmp_id)
     except IndexError:
         pass
 

@@ -15,7 +15,7 @@ class Nutrient(models.Model):
 
 
 class Supplement(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     image = models.ImageField(blank=True, null=True)
     company = models.CharField(max_length=50)
     exp_date = models.CharField(max_length=50)
@@ -24,6 +24,7 @@ class Supplement(models.Model):
     warning = models.CharField(max_length=500)
     pri_func = models.CharField(max_length=500)
     raw_material = models.CharField(max_length=500)
+    tmp_id = models.CharField(max_length=30)
     nuntrient = models.ManyToManyField(
         Nutrient,
         through='NutritionFact'
@@ -38,8 +39,8 @@ class Supplement(models.Model):
 
 
 class NutritionFact(models.Model):
-    supplement = models.ForeignKey(Supplement, on_delete=models.CASCADE)
-    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
+    supplement = models.ForeignKey(Supplement, on_delete=models.CASCADE, db_column='supplement')
+    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE, db_column='nutrient')
     amount = models.FloatField()
 
     def __str__(self):
@@ -110,7 +111,7 @@ class User(AbstractBaseUser):
 
 class Age(models.Model):
     age_range = models.CharField(max_length=20)
-
+    
     def __str__(self):
         return self.age_range
 

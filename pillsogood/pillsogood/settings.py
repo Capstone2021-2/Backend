@@ -27,7 +27,7 @@ SECRET_KEY = my_settings.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =['.amazonaws.com', '127.0.0.1', '172.16.101.165']
+ALLOWED_HOSTS =['.amazonaws.com', '127.0.0.1', '172.16.101.165', '172.30.1.44']
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'django_extensions',
+    'parse'
 ]
 
 MIDDLEWARE = [

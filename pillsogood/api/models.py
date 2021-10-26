@@ -45,7 +45,7 @@ class NutritionFact(models.Model):
     amount = models.FloatField()
 
     def __str__(self):
-        return '{} : {} ({})'.format(self.supplement, self.nutrient, self.amount)
+        return '{} : {} {} '.format(self.supplement, self.nutrient, self.amount)
 
 
 class UserManager(BaseUserManager):
@@ -116,6 +116,16 @@ class Age(models.Model):
     def __str__(self):
         return self.age_range
 
+# 이번 model은 외래키를 사용하지 않고 만들어봄.
+class AgeNutrient(models.Model):
+    gender = models.CharField(max_length=10)
+    ages = models.CharField(max_length=10)
+    nutrient = models.CharField(max_length=30)
+    upper = models.FloatField()
+    lower = models.FloatField()
+
+    def __str__(self):
+        return '{} {} : {} '.format(self.gender, self.ages, self.nutrient)
 
 class BodyType(models.Model):
     body_type = models.CharField(max_length=20)

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
-from . models import User as UserTemp, Nutrient
+from . models import Supplement, User as UserTemp, Nutrient
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
@@ -8,6 +8,13 @@ class NutrientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nutrient
         fields = ['name', 'upper', 'lower', 'unit']
+
+
+# image 추가해줘야함
+class SupplementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Supplement
+        fields = ['name', 'company', 'exp_date', 'dispos', 'sug_use', 'warning', 'pri_func', 'raw_material', 'tmp_id']
 
 
 class IsIdDuplicateSerializer(serializers.Serializer):

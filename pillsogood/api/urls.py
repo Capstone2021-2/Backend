@@ -4,7 +4,10 @@ from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 router =  routers.DefaultRouter()
-router.register(r'nutrient', views.NutrientViewSet)
+router.register(r'nutrients', views.NutrientViewSet)
+router.register(r'supplements', views.SupplementViewSet)
+# router.register(r'nutrition_facts', views.NutrientViewSet)
+# router.register(r'age_nutrients', views.SupplementViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

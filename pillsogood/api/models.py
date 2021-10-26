@@ -45,7 +45,7 @@ class NutritionFact(models.Model):
     amount = models.FloatField()
 
     def __str__(self):
-        return '{} : {} {} '.format(self.supplement, self.nutrient, self.amount)
+        return '{} : {}  {} '.format(self.supplement, self.nutrient, self.amount)
 
 
 class UserManager(BaseUserManager):

@@ -11,12 +11,36 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 import django_filters.rest_framework
 
+#--------------------------클래스형 view--------------------------
+
 class NutrientViewSet(viewsets.ModelViewSet):
     queryset = Nutrient.objects.all()
     serializer_class = NutrientSerializer
     permission_classes = [permissions.AllowAny]
     # permission_classes = [permissions.IsAuthenticated]
 
+
+class SupplementViewSet(viewsets.ModelViewSet):
+    queryset = Supplement.objects.all().order_by('name')
+    serializer_class = SupplementSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class NutritionFactViewSet(viewsets.ModelViewSet):
+    queryset = Supplement.objects.all()
+    serializer_class = SupplementSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class AgeNutrientViewSet(viewsets.ModelViewSet):
+    queryset = Supplement.objects.all()
+    serializer_class = SupplementSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+#-------------------------함수형 view-----------------------------
+
+# 아이디 중복 확인용
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def is_id_duplicate(request):
@@ -42,6 +66,8 @@ def current_user(request):
     return Response(serializer.data)
 
 
+
+# 아이디 찾기
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny]) # 인증 필요없다
 def find_id(request):

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
-from . models import Supplement, User as UserTemp, Nutrient
+from . models import NutritionFact, Supplement, User as UserTemp, Nutrient
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
@@ -14,8 +14,14 @@ class NutrientSerializer(serializers.ModelSerializer):
 class SupplementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supplement
-        fields = ['name', 'company', 'exp_date', 'dispos', 'sug_use', 'warning', 'pri_func', 'raw_material', 'tmp_id']
+        fields = ['pk', 'name', 'company', 'exp_date', 'dispos', 'sug_use', 'warning', 'pri_func', 'raw_material', 'tmp_id']
 
+class NutritionFactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NutritionFact
+        fields = ['supplement', 'nutrient', 'amount']
+
+#--------------------------------User ID 관련 Serializer---------------------------------------#
 
 class IsIdDuplicateSerializer(serializers.Serializer):
     login_id = serializers.CharField(max_length=50)
@@ -36,7 +42,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class FindIdSerializer(serializers.Serializer):
-    # serializer 데이터 항목에 정의되면 받아야하는 key 항목이네
     # result = serializers.CharField(max_length=50)
     email = serializers.CharField(max_length=100)
 
@@ -52,6 +57,9 @@ class FindIdSerializer(serializers.Serializer):
 
 
 class UserCreateSerializer(serializers.Serializer):
+    # 데이터 직렬화(Serializer)하기 위해 필요한 값들.
+    # 사용자로 부터 validated_data를 받으면 그 값으로 채워 넣고
+    # save() 해줌.
     login_id = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     nickname = serializers.CharField(required=True)
@@ -105,6 +113,8 @@ class UserLoginSerializer(serializers.Serializer):
             'login_id': user.login_id,
             'token': jwt_token,
         }
+
+#--------------------------------User ID 관련 Serializer---------------------------------------#
 
 # class UserSerializerWithToken(serializers.ModelSerializer):
 #     token = serializers.SerializerMethodField()

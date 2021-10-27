@@ -1,8 +1,10 @@
 # from django.shortcuts import render
 
 from .models import *
-from rest_framework import viewsets
 from .serializer import *
+from rest_framework import viewsets, mixins, generics
+from django.http.response import Http404
+from django.db.models import query
 
 from django.http import HttpResponseRedirect
 from rest_framework import permissions, status, generics
@@ -12,7 +14,7 @@ from rest_framework.views import APIView
 import django_filters.rest_framework
 
 #--------------------------클래스형 view--------------------------
-
+# APIView는 클래스형 view를 사용할 때 사용
 class NutrientViewSet(viewsets.ModelViewSet):
     queryset = Nutrient.objects.all()
     serializer_class = NutrientSerializer
@@ -26,26 +28,51 @@ class SupplementViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
+class SupplementDetail(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self, name):
+        print("이름 출력:", name)
+        try:
+            return Supplement.objects.get(name=name)
+        except Supplement.DoesNotExist:
+            raise Http404
+    def get(self, request, name, format=None):
+        supplement = self.get_object(name)
+        serializer = SupplementSerializer(supplement)
+        return Response(serializer.data)
+
+
+
 class NutritionFactViewSet(viewsets.ModelViewSet):
-    queryset = Supplement.objects.all()
-    serializer_class = SupplementSerializer
+    queryset = NutritionFact.objects.all()
+    serializer_class = NutritionFactSerializer
     permission_classes = [permissions.AllowAny]
 
 
-class AgeNutrientViewSet(viewsets.ModelViewSet):
-    queryset = Supplement.objects.all()
-    serializer_class = SupplementSerializer
-    permission_classes = [permissions.AllowAny]
+
+
+# class AgeNutrientViewSet(viewsets.ModelViewSet):
+#     queryset = AgeNutrient.objects.all()
+#     serializer_class = SupplementSerializer
+#     permission_classes = [permissions.AllowAny]
 
 
 #-------------------------함수형 view-----------------------------
 
 # 아이디 중복 확인용
-@api_view(['POST'])
+@api_view(['POST'])  # @api_view는 함수형 view를 사용할 때 사용
 @permission_classes([permissions.AllowAny])
 def is_id_duplicate(request):
     if request.method == 'POST':
-        serializer = IsIdDuplicateSerializer(data=request.data)
+        # 다수의 데이터 queryset 형태를 serialize화 하고자 할 때, many=True를 사용합니다.
+        # 예시
+        # data = [
+        #    {'title': 'The bell jar', 'author': 'Sylvia Plath'},
+        #    {'title': 'For whom the bell tolls', 'author': 'Ernest Hemingway'}
+        # ]
+        # serializer = BookSerializer(data=data, many=True)
+        serializer = IsIdDuplicateSerializer(data=request.data)  # Request 객체인 request를 사용하여 request.data (POST, PUT, PATCH 사용 가능)
         if not serializer.is_valid(raise_exception=True):
             return Response({"message": "Request Body Error."}, status=status.HTTP_409_CONFLICT)
 
@@ -53,7 +80,7 @@ def is_id_duplicate(request):
         result_cnt = result.count()
 
         if result_cnt == 0:
-            return Response({"isValid": 1}, status=status.HTTP_200_OK)
+            return Response({"isValid": 1}, status=status.HTTP_200_OK)  # Response 객체를 사용하여 client에게 적절한 return type으로 제공
         else:
             return Response({ "isValid": 0}, status=status.HTTP_200_OK)
 
@@ -61,7 +88,8 @@ def is_id_duplicate(request):
 
 @api_view(['GET'])
 def current_user(request):
-    print('request.user', request.data)
+    print('request.user', request.data)  # post하지 않았기 때문에 데이터가 비어 있게 출력된다.
+    print(type(request.user), request.user)  # <class 'django.utils.functional.SimpleLazyObject'> changseon
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
 
@@ -93,7 +121,7 @@ def find_id(request):
 @api_view(['POST']) 
 @permission_classes([permissions.AllowAny]) # 인증 필요없다
 def signup(request):
-    serializer = UserCreateSerializer(data=request.data) 
+    serializer = UserCreateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save() # DB 저장
         return Response(serializer.data, status=201) 

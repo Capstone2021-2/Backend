@@ -38,6 +38,10 @@ class Supplement(models.Model):
     def __str__(self):
         return self.name
 
+    def __eq__(self, other):
+        return self.pk == other.pk
+        
+
 
 class NutritionFact(models.Model):
     supplement = models.ForeignKey(Supplement, on_delete=models.CASCADE, db_column='supplement')

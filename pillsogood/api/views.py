@@ -1,5 +1,6 @@
 # from django.shortcuts import render
 
+from django.utils.regex_helper import contains
 from rest_framework import views
 from .models import *
 from .serializer import *
@@ -106,29 +107,45 @@ class GoodForOrganDetail(APIView):
 class GoodForOrganToSupplements(APIView):
     permission_classes = [permissions.AllowAny]
     def get(self, request, organ, format=None):
-        nutrient_list = GoodForOrgan.objects.all().filter(organ=organ)
+        nutrient_list = GoodForOrgan.objects.all().filter(organ=organ)  # organ에 좋은 영양소 리스트
+        tmp_list = []  # serializer 하기 전에 data 있는지 없는지 확인하기 위한 용도
         return_list = []
-        print(nutrient_list)
+        # print(nutrient_list)
         for num in range(nutrient_list.count()):
             try:
                 nutrient_name = nutrient_list[num].nutrient
-                nutrient_object = Nutrient.objects.all().filter(name=nutrient_name)
+                nutrient_object = Nutrient.objects.all().filter(name=nutrient_name)  # 영양소 객체 구하기
                 # print('영양소 이름: ', nutrient_name)
                 # print('영양소 이름 갖는 영양소 객체: ', nutrient_object)
 
-                
-                # pk 값 구하기 (정확히는 pk가 아니라 nutrient 객체 자체가 나옴)
-                nutrient_pk = nutrient_object[0].pk
+                nutrient_pk = nutrient_object[0].pk  # 영양소 pk 값 구하기 (정확히는 pk가 아니라 nutrient 객체 자체가 나옴)
                 # print('nutrient_object: ', nutrient_object[0].pk)
 
-                # nutrient를 활용하여 해당 nutrient 가지고 있는 supplement 찾기
-                nutrition_facts_oject = NutritionFact.objects.all().filter(nutrient=nutrient_pk)
-                for num2 in range(nutrition_facts_oject.count()):
-                    supplement_pk = nutrition_facts_oject[num2].supplement
+                nutrition_facts_oject = NutritionFact.objects.all().filter(nutrient=nutrient_pk) # nutrient 가지고 있는 supplement 찾기
+                for i in range(nutrition_facts_oject.count()):
+                    supplement_pk = nutrition_facts_oject[i].supplement
                     serializer = SupplementSerializer(supplement_pk)
                     return_list.append(serializer.data)
-            except:
+                    tmp_list.append(supplement_pk)
+                        
+            except IndexError:
                 pass
+
+        # organ 활용하여 pri_func 속성에 좋다고 표시되어 있으면 찾기
+        if organ == '요로':
+            pri_func = Supplement.objects.all().filter(pri_func__icontains=organ)
+            for i in range(pri_func.count()):
+                supplement_pk = pri_func[i]
+                have = False
+
+                for item in tmp_list:   # 위에서 추가된 값들과 중복되는지 확인
+                    if supplement_pk == item:
+                        have = True
+
+                if not have:
+                    serializer = SupplementSerializer(supplement_pk)
+                    return_list.append(serializer.data)
+                    tmp_list.append(supplement_pk)
         return Response(return_list)
             
 

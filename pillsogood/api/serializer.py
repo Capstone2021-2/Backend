@@ -1,13 +1,13 @@
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
-from . models import NutritionFact, Supplement, User as UserTemp, Nutrient
+from . models import GoodForOrgan, NutritionFact, Supplement, User as UserTemp, Nutrient
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
 class NutrientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nutrient
-        fields = ['name', 'upper', 'lower', 'unit']
+        fields = ['pk', 'name', 'upper', 'lower', 'unit']
 
 
 # image 추가해줘야함
@@ -20,6 +20,11 @@ class NutritionFactSerializer(serializers.ModelSerializer):
     class Meta:
         model = NutritionFact
         fields = ['supplement', 'nutrient', 'amount']
+
+class GoodForOrganSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GoodForOrgan
+        fields = ['organ', 'nutrient']
 
 #--------------------------------User ID 관련 Serializer---------------------------------------#
 

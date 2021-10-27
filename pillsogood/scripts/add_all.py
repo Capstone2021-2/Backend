@@ -1,3 +1,4 @@
+from pillsogood.scripts import add_good_for_organ
 from scripts import add_age_nutrients, add_ages, add_nutrients, add_nutrition_facts, add_supplements
 
 def run():
@@ -6,3 +7,4 @@ def run():
     add_nutrients.run()
     add_supplements.run()
     add_nutrition_facts.run()
+    add_good_for_organ.run()

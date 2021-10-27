@@ -6,12 +6,16 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify
 router =  routers.DefaultRouter()
 router.register(r'nutrients', views.NutrientViewSet, basename='nutrients')
 router.register(r'supplements', views.SupplementViewSet, basename='supplements')
-# router.register(r'nutrition_facts', views.NutrientViewSet)
+router.register(r'nutrition_facts', views.NutritionFactViewSet, basename='nutrition_facts')
+router.register(r'good_for_organs', views.GoodForOrganViewSet, basename='good_for_organs')
 # router.register(r'age_nutrients', views.SupplementViewSet)
+
 
 urlpatterns = [
     path('', include(router.urls)),  # include는 폴더 자체를 저장하는 것임.
-    path('supplements/<str:name>', views.SupplementDetail.as_view()),
+    path('nutrients/<str:name>', views.NutrientDetail.as_view()),
+    path('nutrition_facts/<int:nutrient>', views.NutritionFactDetail.as_view()),
+    path('good_for_organs/<str:organ>', views.GoodForOrganDetail.as_view()),
     path('user/jwt-auth/', obtain_jwt_token),
     path('user/jwt-auth/verify/', verify_jwt_token),
     path('user/jwt-auth/refresh/', refresh_jwt_token),

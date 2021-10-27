@@ -132,31 +132,31 @@ class BodyType(models.Model):
 
     # Nutrient model(class)를 사용하여
     # 새로운 model 'GoodForBodyType' 생성
-    nutrient = models.ManyToManyField(
-        'Nutrient',
-        through = 'GoodForBodyType'
-    )
+    # nutrient = models.ManyToManyField(
+    #     'Nutrient',
+    #     through = 'GoodForBodyType'
+    # )
 
     def __str__(self):
         return self.body_type
 
 
 class Organ(models.Model):
-    organ = models.CharField(max_length=20)
-    nutrient = models.ManyToManyField(
-        'Nutrient',
-        through = 'GoodForOrgan'
-    )
+    organ = models.CharField(max_length=20, unique=True)
+    # nutrient = models.ManyToManyField(
+    #     'Nutrient',
+    #     through = 'GoodForOrgan'
+    # )
 
     def __str__(self):
         return self.organ
 
 class LifeStyle(models.Model):
-    life_style = models.CharField(max_length=50)
-    nutrient = models.ManyToManyField(
-        'Nutrient',
-        through = 'GoodForLifeStyle'
-    )
+    life_style = models.CharField(max_length=50, unique=True)
+    # nutrient = models.ManyToManyField(
+    #     'Nutrient',
+    #     through = 'GoodForLifeStyle'
+    # )
 
     def __str__(self):
         return self.life_style
@@ -186,24 +186,29 @@ class Review(models.Model):
 
 
 class GoodForBodyType(models.Model):
-    body_type = models.ForeignKey(BodyType, on_delete=models.CASCADE)
-    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
+    # body_type = models.ForeignKey(BodyType, on_delete=models.CASCADE)
+    # nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
+    body_type =models.CharField(max_length=30)
+    nutrient = models.CharField(max_length=50)
 
     def __str__(self):
         return '{} : {} '.format(self.body_type, self.nutrient)
 
 
 class GoodForOrgan(models.Model):
-    organ = models.ForeignKey(Organ, on_delete=models.CASCADE)
-    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
+    organ = models.CharField(max_length=20)
+    nutrient = models.CharField(max_length=50)
 
     def __str__(self):
         return '{} : {} '.format(self.organ, self.nutrient)
 
 
 class GoodForLifeStyle(models.Model):
-    life_style = models.ForeignKey(LifeStyle, on_delete=models.CASCADE)
-    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
+    # life_style = models.ForeignKey(LifeStyle, on_delete=models.CASCADE)
+    # nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
+
+    life_style =models.CharField(max_length=50)
+    nutrient = models.CharField(max_length=50)
 
     def __str__(self):
         return '{} : {} '.format(self.life_style, self.nutrient)

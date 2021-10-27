@@ -1,5 +1,6 @@
 # from django.shortcuts import render
 
+from rest_framework import views
 from .models import *
 from .serializer import *
 from rest_framework import viewsets, mixins, generics
@@ -20,6 +21,20 @@ class NutrientViewSet(viewsets.ModelViewSet):
     serializer_class = NutrientSerializer
     permission_classes = [permissions.AllowAny]
     # permission_classes = [permissions.IsAuthenticated]
+
+class NutrientDetail(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self, name):
+        print("이름 출력:", name)
+        try:
+            return Nutrient.objects.get(name=name)
+        except Nutrient.DoesNotExist:
+            raise Http404
+    def get(self, request, name, format=None):
+        nutrient = self.get_object(name)
+        serializer = NutrientSerializer(nutrient)
+        return Response(serializer.data)
 
 
 class SupplementViewSet(viewsets.ModelViewSet):
@@ -50,12 +65,48 @@ class NutritionFactViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
+class NutritionFactDetail(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self, nutrient):
+        print("이름 출력:", nutrient)
+        try:
+            return NutritionFact.objects.all().filter(nutrient=nutrient)  # 여러 데이터 전달하기 위해
+        except NutritionFact.DoesNotExist:
+            raise Http404
+    def get(self, request, nutrient, format=None):
+        nutrition = self.get_object(nutrient)
+        serializer = NutritionFactSerializer(nutrition, many=True)  # 결과가 여러개 나오기 때문에 many = True
+        return Response(serializer.data)  # 
 
 
-# class AgeNutrientViewSet(viewsets.ModelViewSet):
-#     queryset = AgeNutrient.objects.all()
-#     serializer_class = SupplementSerializer
-#     permission_classes = [permissions.AllowAny]
+class GoodForOrganViewSet(viewsets.ModelViewSet):
+    queryset = GoodForOrgan.objects.all()
+    serializer_class = GoodForOrganSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class GoodForOrganDetail(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    # 예) 클라이언트가 '간'에 좋은 영양소를 요청하면
+    # organ에 '간'이 올 것임.
+    def get_object(self, organ):
+        print("장기 이름 출력:", organ)
+        try:
+            return GoodForOrgan.objects.all().filter(organ=organ)  # organ 이름으로 filtering
+        except GoodForOrgan.DoesNotExist:
+            raise Http404
+    def get(self, request, organ, format=None):
+        nutrient = self.get_object(organ)
+        serializer = GoodForOrganSerializer(nutrient, many=True)  # 해당 organ에 좋은 영양소 결과가 여러개 나오기 때문에 many = True
+        return Response(serializer.data)  # 
+
+
+class AgeNutrientViewSet(viewsets.ModelViewSet):
+    queryset = AgeNutrient.objects.all()
+    serializer_class = SupplementSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 #-------------------------함수형 view-----------------------------

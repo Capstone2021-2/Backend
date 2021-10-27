@@ -16,6 +16,7 @@ urlpatterns = [
     path('nutrients/<str:name>', views.NutrientDetail.as_view()),
     path('nutrition_facts/<int:nutrient>', views.NutritionFactDetail.as_view()),
     path('good_for_organs/<str:organ>', views.GoodForOrganDetail.as_view()),
+    path('good_for_organs_supplements/<str:organ>', views.GoodForOrganToSupplements.as_view()), # organ에 좋은 영양제 검색
     path('user/jwt-auth/', obtain_jwt_token),
     path('user/jwt-auth/verify/', verify_jwt_token),
     path('user/jwt-auth/refresh/', refresh_jwt_token),

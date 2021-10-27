@@ -103,6 +103,35 @@ class GoodForOrganDetail(APIView):
         return Response(serializer.data)  # 
 
 
+class GoodForOrganToSupplements(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request, organ, format=None):
+        nutrient_list = GoodForOrgan.objects.all().filter(organ=organ)
+        return_list = []
+        print(nutrient_list)
+        for num in range(nutrient_list.count()):
+            try:
+                nutrient_name = nutrient_list[num].nutrient
+                nutrient_object = Nutrient.objects.all().filter(name=nutrient_name)
+                # print('영양소 이름: ', nutrient_name)
+                # print('영양소 이름 갖는 영양소 객체: ', nutrient_object)
+
+                
+                # pk 값 구하기 (정확히는 pk가 아니라 nutrient 객체 자체가 나옴)
+                nutrient_pk = nutrient_object[0].pk
+                # print('nutrient_object: ', nutrient_object[0].pk)
+
+                # nutrient를 활용하여 해당 nutrient 가지고 있는 supplement 찾기
+                nutrition_facts_oject = NutritionFact.objects.all().filter(nutrient=nutrient_pk)
+                for num2 in range(nutrition_facts_oject.count()):
+                    supplement_pk = nutrition_facts_oject[num2].supplement
+                    serializer = SupplementSerializer(supplement_pk)
+                    return_list.append(serializer.data)
+            except:
+                pass
+        return Response(return_list)
+            
+
 class AgeNutrientViewSet(viewsets.ModelViewSet):
     queryset = AgeNutrient.objects.all()
     serializer_class = SupplementSerializer

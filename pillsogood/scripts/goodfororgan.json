@@ -1,26 +1,112 @@
-{ 
-    "goodfororgan": [{"id":1,"organ":"위","nutrient":"매스틱 검"},
-        {"id":2,"organ":"위","nutrient":"비즈왁스알코올"},
-        {"id":3,"organ":"위","nutrient":"스페인감초출물"},
-        {"id":4,"organ":"위","nutrient":"아티초크 추출물"},
-        {"id":5,"organ":"위","nutrient":"인동덩굴꽃봉오리추출물(그린세라-F)"},
-        {"id":6,"organ":"위","nutrient":"작약추출물등복합물(HT074)"},
-        {"id":7,"organ":"간","nutrient":"밀크씨슬(카르두스 마리아누스) 추출물"},
-        {"id":8,"organ":"간","nutrient":"HK표고버섯균사체"},
-        {"id":9,"organ":"간","nutrient":"곰피추출물"},
-        {"id":10,"organ":"간","nutrient":"댕댕이나무열매추출분말"},
-        {"id":11,"organ":"간","nutrient":"도라지추출물"},
-        {"id":12,"organ":"간","nutrient":"복분자추출분말"},
-        {"id":13,"organ":"간","nutrient":"유산균 발효 다시마추출물"},
-        {"id":14,"organ":"간","nutrient":"유산균발효다시마추출물"},
-        {"id":15,"organ":"간","nutrient":"유산균발효마늘추출물"},
-        {"id":16,"organ":"간","nutrient":"표고버섯균사체추출물"},
-        {"id":17,"organ":"간","nutrient":"헛개나무과병추출분말"},
-        {"id":18,"organ":"요로","nutrient":"크랜베리 추출물"},
-        {"id":19,"organ":"요로","nutrient":"파크랜 크랜베리 분말"},
-        {"id":20,"organ":"요로","nutrient":"호박씨추출물 등 복합물"},
-        {"id":21,"organ":"기관지","nutrient":"비타민 C"},
-        {"id":22,"organ":"기관지","nutrient":"비타민 E"},
-        {"id":23,"organ":"기관지","nutrient":"아연"},
-        {"id":24,"organ":"기관지","nutrient":"프로폴리스추출물"}]
+{
+    "goodfororgan": [
+        {
+            "organ": "위",
+            "nutrient": "매스틱 검"
+        },
+        {
+            "organ": "위",
+            "nutrient": "비즈왁스알코올"
+        },
+        {
+            "organ": "위",
+            "nutrient": "스페인감초출물"
+        },
+        {
+            "organ": "위",
+            "nutrient": "아티초크 추출물"
+        },
+        {
+            "organ": "위",
+            "nutrient": "인동덩굴꽃봉오리추출물(그린세라-F)"
+        },
+        {
+            "organ": "위",
+            "nutrient": "작약추출물등복합물(HT074)"
+        },
+        {
+            "organ": "간",
+            "nutrient": "밀크씨슬(카르두스 마리아누스) 추출물"
+        },
+        {
+            "organ": "간",
+            "nutrient": "HK표고버섯균사체"
+        },
+        {
+            "organ": "간",
+            "nutrient": "곰피추출물"
+        },
+        {
+            "organ": "간",
+            "nutrient": "댕댕이나무열매추출분말"
+        },
+        {
+            "organ": "간",
+            "nutrient": "도라지추출물"
+        },
+        {
+            "organ": "간",
+            "nutrient": "복분자추출분말"
+        },
+        {
+            "organ": "간",
+            "nutrient": "유산균 발효 다시마추출물"
+        },
+        {
+            "organ": "간",
+            "nutrient": "유산균발효다시마추출물"
+        },
+        {
+            "organ": "간",
+            "nutrient": "유산균발효마늘추출물"
+        },
+        {
+            "organ": "간",
+            "nutrient": "표고버섯균사체추출물"
+        },
+        {
+            "organ": "간",
+            "nutrient": "헛개나무과병추출분말"
+        },
+        {
+            "organ": "요로",
+            "nutrient": "파크랜 크랜베리 분말(PACran TM Whole Cranberry Powder)"
+        },
+        {
+            "organ": "요로",
+            "nutrient": "크랜베리추출분말"
+        },
+        {
+            "organ": "요로",
+            "nutrient": "크랜베리 추출물"
+        },
+        {
+            "organ": "요로",
+            "nutrient": "파크랜 크랜베리 분말"
+        },
+        {
+            "organ": "요로",
+            "nutrient": "호박씨추출물 등 복합물"
+        },
+        {
+            "organ": "기관지",
+            "nutrient": "포도종자추출물"
+        },
+        {
+            "organ": "기관지",
+            "nutrient": "스쿠알렌"
+        },
+        {
+            "organ": "기관지",
+            "nutrient": "아연"
+        },
+        {
+            "organ": "기관지",
+            "nutrient": "프로폴리스추출물"
+        },
+        {
+            "organ": "기관지",
+            "nutrient": "토마토추출물"
+        }
+    ]
 }

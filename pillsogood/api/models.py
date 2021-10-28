@@ -14,6 +14,12 @@ class Nutrient(models.Model):
     def __str__(self):
         return self.name
 
+class MainNutrient(models.Model):
+    name = models.CharField(max_length=20)
+    
+    def __str__(self):
+        return self.name
+
 
 class Supplement(models.Model):
     name = models.CharField(max_length=100)

@@ -15,7 +15,8 @@ class Nutrient(models.Model):
         return self.name
 
 class MainNutrient(models.Model):
-    name = models.ForeignKey(Nutrient, on_delete=models.CASCADE, db_column='name')
+    nutrient_pk = models.ForeignKey(Nutrient, on_delete=models.CASCADE, db_column='nutrient_pk')
+    name = models.CharField(max_length=20)
 
     def __str__(self):
         return '{}'.format(self.name)

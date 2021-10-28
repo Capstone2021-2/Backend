@@ -16,6 +16,11 @@ from rest_framework.views import APIView
 import django_filters.rest_framework
 
 #--------------------------클래스형 view--------------------------
+class MainNutrientViewSet(viewsets.ModelViewSet):
+    queryset = MainNutrient.objects.all()
+    serializer_class = MainNutrientSerializer
+    permission_classes = [permissions.AllowAny]
+
 # APIView는 클래스형 view를 사용할 때 사용
 class NutrientViewSet(viewsets.ModelViewSet):
     queryset = Nutrient.objects.all()
@@ -37,10 +42,6 @@ class NutrientDetail(APIView):
         serializer = NutrientSerializer(nutrient)
         return Response(serializer.data)
         
-class MainNutrientViewSet(viewsets.ModelViewSet):
-    queryset = MainNutrient.objects.all()
-    serializer_class = MainNutrientSerializer
-    permission_classes = [permissions.AllowAny]
 
 
 

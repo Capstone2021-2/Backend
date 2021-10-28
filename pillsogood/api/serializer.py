@@ -12,7 +12,7 @@ class NutrientSerializer(serializers.ModelSerializer):
 class MainNutrientSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainNutrient
-        fields = ['name']
+        fields = ['nutrient_pk', 'name']
 
 # image 추가해줘야함
 class SupplementSerializer(serializers.ModelSerializer):

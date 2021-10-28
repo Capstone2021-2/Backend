@@ -9,4 +9,4 @@ def run():
     add_nutrition_facts.run()
     add_good_for_organ.run()
     add_organs.run()
-    # add_main_nutrients.run()
+    add_main_nutrients.run()

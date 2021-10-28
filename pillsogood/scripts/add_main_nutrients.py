@@ -17,6 +17,6 @@ def run():
             # 메인 영양소 추가
             # Nutrient model을 참조하여 외래키로 추가
             nutrient_obj = Nutrient.objects.get(name=n)
-            MainNutrient.objects.create(name=nutrient_obj)
+            MainNutrient.objects.create(nutrient_pk=nutrient_obj, name=n)
     except IndexError:
         pass

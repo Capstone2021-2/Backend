@@ -63,6 +63,14 @@ class SupplementDetail(APIView):
         serializer = SupplementSerializer(supplement)
         return Response(serializer.data)
 
+class TmpBestSupplements(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, name, format=None ):
+        print('hi')
+        supplement = Supplement.objects.all().order_by('-avg_rating')[:10]
+        serializer = SupplementSerializer(supplement, many=True)
+        return Response(serializer.data)
 
 
 class NutritionFactViewSet(viewsets.ModelViewSet):
@@ -192,6 +200,10 @@ class BrandToSupplements(APIView):
         
         return Response(return_list)
 
+class ReviewViewSet(viewsets.ModelViewSet):
+    query = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [permissions.AllowAny]
 
 #-------------------------함수형 view-----------------------------
 

@@ -33,6 +33,7 @@ class Supplement(models.Model):
     pri_func = models.CharField(max_length=500)
     raw_material = models.CharField(max_length=500)
     tmp_id = models.CharField(max_length=30)
+    avg_rating = models.FloatField(default=0.0)
     nuntrient = models.ManyToManyField(
         Nutrient,
         through='NutritionFact'
@@ -45,8 +46,8 @@ class Supplement(models.Model):
     def __str__(self):
         return self.name
 
-    def __eq__(self, other):
-        return self.pk == other.pk
+    # def __eq__(self, other):
+    #     return self.pk == other.pk
         
 
 
@@ -126,6 +127,25 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 
+class Review(models.Model):
+
+    # RATING_CHOICES = (
+    #     ('ONE', 1)
+    #     ('TWO', 2)
+    #     ('THREE', 3)
+    #     ('FOUR', 4)
+    #     ('FIVE', 5)
+    # )
+    user_nickname = models.ForeignKey(User, on_delete=models.CASCADE)
+    supplement = models.ForeignKey(Supplement, on_delete=models.CASCADE)
+    # rating = models.IntegerField(max_length=2, choices=RATING_CHOICES)
+    rating = models.IntegerField()
+    time = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(blank=True, null=True)
+    text = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return '{} : {} ({}) '.format(self.user_nickname, self.supplement, self.rating)
 
 class Age(models.Model):
     age_range = models.CharField(max_length=20)
@@ -179,25 +199,6 @@ class LifeStyle(models.Model):
         return self.life_style
 
 
-class Review(models.Model):
-
-    # RATING_CHOICES = (
-    #     ('ONE', 1)
-    #     ('TWO', 2)
-    #     ('THREE', 3)
-    #     ('FOUR', 4)
-    #     ('FIVE', 5)
-    # )
-    user_nicname = models.ForeignKey(User, on_delete=models.CASCADE)
-    supplement = models.ForeignKey(Supplement, on_delete=models.CASCADE)
-    # rating = models.IntegerField(max_length=2, choices=RATING_CHOICES)
-    rating = models.IntegerField()
-    time = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField()
-    text = models.CharField(max_length=1000)
-
-    def __str__(self):
-        return '{} : {} ({}) '.format(self.user_nicname, self.supplement, self.rating)
 
 
 

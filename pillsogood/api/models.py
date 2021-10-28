@@ -58,6 +58,12 @@ class NutritionFact(models.Model):
     def __str__(self):
         return '{} : {}  {} '.format(self.supplement, self.nutrient, self.amount)
 
+class Brand(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
 
 class UserManager(BaseUserManager):
     def create_user(self, login_id, email, nickname, password=None):

@@ -2,7 +2,6 @@ from api.models import Organ
 
 import json
 
-
 def run():
     # url json 파일 읽어오는 부분
     with open('scripts/goodfororgan.json') as json_file:

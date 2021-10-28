@@ -5,8 +5,10 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify
 
 router =  routers.DefaultRouter()
 router.register(r'nutrients', views.NutrientViewSet, basename='nutrients')
+router.register(r'main_nutrients', views.MainNutrientViewSet, basename='main_nutrients')
 router.register(r'supplements', views.SupplementViewSet, basename='supplements')
 router.register(r'nutrition_facts', views.NutritionFactViewSet, basename='nutrition_facts')
+router.register(r'organs', views.OrganViewSet, basename='organs')
 router.register(r'good_for_organs', views.GoodForOrganViewSet, basename='good_for_organs')
 # router.register(r'age_nutrients', views.SupplementViewSet)
 

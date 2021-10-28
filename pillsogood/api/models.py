@@ -15,10 +15,10 @@ class Nutrient(models.Model):
         return self.name
 
 class MainNutrient(models.Model):
-    name = models.CharField(max_length=20)
-    
+    name = models.ForeignKey(Nutrient, on_delete=models.CASCADE, db_column='name')
+
     def __str__(self):
-        return self.name
+        return '{}'.format(self.name)
 
 
 class Supplement(models.Model):

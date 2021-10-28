@@ -36,6 +36,12 @@ class NutrientDetail(APIView):
         nutrient = self.get_object(name)
         serializer = NutrientSerializer(nutrient)
         return Response(serializer.data)
+        
+class MainNutrientViewSet(viewsets.ModelViewSet):
+    queryset = MainNutrient.objects.all()
+    serializer_class = MainNutrientSerializer
+    permission_classes = [permissions.AllowAny]
+
 
 
 class SupplementViewSet(viewsets.ModelViewSet):
@@ -78,7 +84,13 @@ class NutritionFactDetail(APIView):
     def get(self, request, nutrient, format=None):
         nutrition = self.get_object(nutrient)
         serializer = NutritionFactSerializer(nutrition, many=True)  # 결과가 여러개 나오기 때문에 many = True
-        return Response(serializer.data)  # 
+        return Response(serializer.data)
+
+
+class OrganViewSet(viewsets.ModelViewSet):
+    queryset = Organ.objects.all()
+    serializer_class = OrganSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class GoodForOrganViewSet(viewsets.ModelViewSet):

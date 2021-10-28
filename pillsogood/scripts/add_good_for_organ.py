@@ -7,7 +7,6 @@ def run():
     with open('scripts/goodfororgan.json') as json_file:
         data = json.load(json_file)
 
-    
     try:
         for num in range(len(data['goodfororgan'])):
             organ = data['goodfororgan'][num]['organ']

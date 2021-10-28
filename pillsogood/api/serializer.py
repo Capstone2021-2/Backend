@@ -1,6 +1,6 @@
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
-from . models import GoodForOrgan, MainNutrient, NutritionFact, Supplement, User as UserTemp, Nutrient, Organ
+from . models import Brand, GoodForOrgan, MainNutrient, NutritionFact, Supplement, User as UserTemp, Nutrient, Organ
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
@@ -34,6 +34,12 @@ class GoodForOrganSerializer(serializers.ModelSerializer):
     class Meta:
         model = GoodForOrgan
         fields = ['organ', 'nutrient']
+
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = ['name']
+
 
 
 #--------------------------------User ID 관련 Serializer---------------------------------------#

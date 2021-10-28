@@ -10,6 +10,7 @@ router.register(r'supplements', views.SupplementViewSet, basename='supplements')
 router.register(r'nutrition_facts', views.NutritionFactViewSet, basename='nutrition_facts')
 router.register(r'organs', views.OrganViewSet, basename='organs')
 router.register(r'good_for_organs', views.GoodForOrganViewSet, basename='good_for_organs')
+router.register(r'brands', views.BrandViewSet, basename='brands')
 # router.register(r'age_nutrients', views.SupplementViewSet)
 
 
@@ -19,6 +20,7 @@ urlpatterns = [
     path('nutrition_facts/<int:nutrient>', views.NutritionFactDetail.as_view()),
     path('good_for_organs/<str:organ>', views.GoodForOrganDetail.as_view()),
     path('good_for_organs_supplements/<str:organ>', views.GoodForOrganToSupplements.as_view()), # organ에 좋은 영양제 검색
+    path('brands/name/<str:brand>', views.BrandToSupplements.as_view()),  # brand로 영양제 검색
     path('user/jwt-auth/', obtain_jwt_token),
     path('user/jwt-auth/verify/', verify_jwt_token),
     path('user/jwt-auth/refresh/', refresh_jwt_token),

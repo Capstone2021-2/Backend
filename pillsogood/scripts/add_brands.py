@@ -6,7 +6,7 @@ def run():
     with open('scripts/01.json') as json_file:
         data = json.load(json_file)
     
-    print(int(data['C003']['total_count']))
+
     for num in range(950):
         id = data['C003']['row'][num]['-id']
         company = data['C003']['row'][num]["BSSH_NM"]

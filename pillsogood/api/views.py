@@ -43,8 +43,6 @@ class NutrientDetail(APIView):
         return Response(serializer.data)
         
 
-
-
 class SupplementViewSet(viewsets.ModelViewSet):
     queryset = Supplement.objects.all().order_by('name')
     serializer_class = SupplementSerializer
@@ -166,6 +164,33 @@ class AgeNutrientViewSet(viewsets.ModelViewSet):
     queryset = AgeNutrient.objects.all()
     serializer_class = SupplementSerializer
     permission_classes = [permissions.AllowAny]
+
+
+class BrandViewSet(viewsets.ModelViewSet):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class BrandToSupplements(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request, brand, format=None):
+        supplement_list = Supplement.objects.all().filter(company=brand)  # organ에 좋은 영양소 리스트
+        # print('리스티', supplement_list)
+        # tmp_list = []  # serializer 하기 전에 data 있는지 없는지 확인하기 위한 용도
+        return_list = []
+        # print(nutrient_list)
+        for num in range(supplement_list.count()):
+            try:
+                supplement_obj = supplement_list[num]
+                # print('옵젝', supplement_obj)
+                serializer = SupplementSerializer(supplement_obj)
+                return_list.append(serializer.data)
+                        
+            except IndexError:
+                pass
+        
+        return Response(return_list)
 
 
 #-------------------------함수형 view-----------------------------

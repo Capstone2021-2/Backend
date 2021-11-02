@@ -292,7 +292,7 @@ class GoodForOrganToSupplements(APIView):
         if organ == '요로':
             self.search_pri_func('요로')
 
-        elif organ == '간':
+        elif organ == '위':
             self.search_pri_func('위 건강')
             self.search_pri_func('담즙')
 

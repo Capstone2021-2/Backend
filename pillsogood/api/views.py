@@ -67,7 +67,6 @@ class TmpBestSupplements(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request, name, format=None ):
-        print('hi')
         supplement = Supplement.objects.all().order_by('-avg_rating')[:10]
         serializer = SupplementSerializer(supplement, many=True)
         return Response(serializer.data)

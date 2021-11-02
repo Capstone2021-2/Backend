@@ -107,6 +107,850 @@
         {
             "organ": "기관지",
             "nutrient": "토마토추출물"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "EPA 및 DHA 함유 유지"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "은행잎 추출물"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "홍삼"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "유산균 발효 다시마추출물"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "BT-11원지추출분말"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "당귀등추출복합물"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "구기자추출물"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "비파엽추출물"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "유산균발효다시마추출물"
+        },
+        {
+            "organ": "기억력",
+            "nutrient": "천마 등 복합추출물(HX106)"
+        },
+        {
+            "organ": "긴장완화",
+            "nutrient": "유단백가수분해물"
+        },
+        {
+            "organ": "긴장완화",
+            "nutrient": "테아닌"
+        },
+        {
+            "organ": "긴장완화",
+            "nutrient": "돌외잎추출물"
+        },
+        {
+            "organ": "긴장완화",
+            "nutrient": "아쉬아간다 추출물"
+        },
+        {
+            "organ": "수면",
+            "nutrient": "감태추출물"
+        },
+        {
+            "organ": "수면",
+            "nutrient": "유단백가수분해물(락티움)"
+        },
+        {
+            "organ": "인지기능",
+            "nutrient": "포스파티딜세린"
+        },
+        {
+            "organ": "인지기능",
+            "nutrient": "참당귀 추출분말(Nutragen)"
+        },
+        {
+            "organ": "인지기능",
+            "nutrient": "참당귀뿌리추출물"
+        },
+        {
+            "organ": "피로",
+            "nutrient": "매실추출물"
+        },
+        {
+            "organ": "피로",
+            "nutrient": "홍경천 추출물"
+        },
+        {
+            "organ": "피로",
+            "nutrient": "홍삼"
+        },
+        {
+            "organ": "피로",
+            "nutrient": "돈태반 발효추출물"
+        },
+        {
+            "organ": "피로",
+            "nutrient": "헛개나무과병추출분말"
+        },
+        {
+            "organ": "눈",
+            "nutrient": "루테인지아잔틴복합추출물"
+        },
+        {
+            "organ": "눈",
+            "nutrient": "마리골드꽃추출물"
+        },
+        {
+            "organ": "눈",
+            "nutrient": "빌베리 추출물"
+        },
+        {
+            "organ": "눈",
+            "nutrient": "헤마토코쿠스 추출물"
+        },
+        {
+            "organ": "눈",
+            "nutrient": "EPA 및 DHA 함유 유지"
+        },
+        {
+            "organ": "치아",
+            "nutrient": "자일리톨"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "NAG(엔에이지, N-아세틸글루코사민, N-Acetylglucosamine)"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "곤약감자추출물"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "스피루리나"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "알로에 겔"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "엽록소 함유 식물"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "포스파티딜세린"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "히알루론산"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "클로렐라"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "AP 콜라겐 효소분해 펩타이드"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "Collactive 콜라겐펩타이드"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "로즈마리자몽추출복합물(Nutroxsun)"
+        },
+        {
+            "organ": "피부",
+            "nutrient": "민들레 등 추출복합물"
+        },
+        {
+            "organ": "장",
+            "nutrient": "구아검/구아검가수분해물"
+        },
+        {
+            "organ": "장",
+            "nutrient": "글루코만난(곤약, 곤약만난)"
+        },
+        {
+            "organ": "장",
+            "nutrient": "난소화성말토덱스트린"
+        },
+        {
+            "organ": "장",
+            "nutrient": "대두식이섬유"
+        },
+        {
+            "organ": "장",
+            "nutrient": "라피노스"
+        },
+        {
+            "organ": "장",
+            "nutrient": "목이버섯식이섬유"
+        },
+        {
+            "organ": "장",
+            "nutrient": "밀식이섬유"
+        },
+        {
+            "organ": "장",
+            "nutrient": "분말한천"
+        },
+        {
+            "organ": "장",
+            "nutrient": "보리식이섬유"
+        },
+        {
+            "organ": "장",
+            "nutrient": "아라비아검(아카시아검)"
+        },
+        {
+            "organ": "장",
+            "nutrient": "알로에 겔"
+        },
+        {
+            "organ": "장",
+            "nutrient": "이눌린/치커리추출물"
+        },
+        {
+            "organ": "장",
+            "nutrient": "차전자피식이섬유"
+        },
+        {
+            "organ": "장",
+            "nutrient": "폴리덱스트로스"
+        },
+        {
+            "organ": "장",
+            "nutrient": "프락토올리고당"
+        },
+        {
+            "organ": "장",
+            "nutrient": "프로바이오틱스"
+        },
+        {
+            "organ": "장",
+            "nutrient": "락추로스 파우더(Lactulose Powder)"
+        },
+        {
+            "organ": "장",
+            "nutrient": "프로바이오틱스(드시모네)"
+        },
+        {
+            "organ": "장",
+            "nutrient": "갈락토올리고당 분말(Bimuno® GOS powder)"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "가르시니아캄보지아 추출물"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "공액리놀레산"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "녹차추출물"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "키토산/키토올리고당"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "APIC 대두배아열수추출물 등 복합물"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "L-카르니틴 타르트레이트"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "Lactobacillus gasseri BNR17"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "그린커피빈주정추출물"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "깻잎추출물(PF501)"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "락토페린(우유정제단백질)"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "레몬 밤 추출물 혼합분말"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "풋사과추출물 애플페논(Applephenon)"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "콜레우스 포스콜리 추출물"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "자몽추출물등 복합물(Sinetrol)"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "식물성유지 디글리세라이드(DG)"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "미역 등 복합추출물(잔티젠)"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "해국추출물"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "시서스추출물"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "씨제이 히비스커스 등 복합추출물"
+        },
+        {
+            "organ": "체지방",
+            "nutrient": "발효식초석류복합물"
+        },
+        {
+            "organ": "중성지방",
+            "nutrient": "EPA 및 DHA 함유 유지"
+        },
+        {
+            "organ": "중성지방",
+            "nutrient": "난소화성말토덱스트린"
+        },
+        {
+            "organ": "중성지방",
+            "nutrient": "글로빈 가수분해물"
+        },
+        {
+            "organ": "중성지방",
+            "nutrient": "정제오징어유"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "키토산/키토올리고당"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "감마리놀렌산 함유 유지"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "구아검/구아검가수분해물"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "귀리식이섬유"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "글루코만난(곤약, 곤약만난)"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "녹차추출물"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "대두단백"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "레시틴"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "마늘"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "스피루리나"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "식물스테롤/식물스테롤에스테르"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "옥수수겨식이섬유"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "이눌린/치커리추출물"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "홍국"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "클로렐라"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "차전자피식이섬유"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "보리베타글루칸추출물"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "보이차 추출물"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "보이차추출물"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "식물스타놀 에스테르"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "식물스타놀에스테르"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "창녕양파추출액"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "아마인"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "씨폴리놀 감태주정추출물"
+        },
+        {
+            "organ": "콜레스테롤",
+            "nutrient": "폴리코사놀-사탕수수왁스알코올"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "L-글루타민산 유래 GABA 함유 분말"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "나토균배양분말"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "가쯔오부시올리고펩타이드"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "올리브잎주정추출물"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "연어 펩타이드"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "카제인 가수분해물"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "카제인가수분해물"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "오가피열매추출물"
+        },
+        {
+            "organ": "혈압",
+            "nutrient": "포도씨 효소분해 추출 분말"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "EPA 및 DHA 함유 유지"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "감마리놀렌산 함유 유지"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "영지버섯 자실체 추출물"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "은행잎 추출물"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "홍삼"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "HK 나토배양물"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "L-아르기닌"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "나토균배양분말"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "상황버섯등 추출복합물"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "정제오징어유"
+        },
+        {
+            "organ": "혈액순환",
+            "nutrient": "카카오분말"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "구아검/구아검가수분해물"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "구아바잎 추출물"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "귀리식이섬유"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "난소화성말토덱스트린"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "달맞이꽃종자 추출물"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "대두식이섬유"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "밀식이섬유"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "바나바잎 추출물"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "옥수수겨식이섬유"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "이눌린/치커리추출물"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "호로파종자식이섬유"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "L-arabinose"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "PMO 참밀알부민"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "동결건조누에분말"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "미숙여주주정추출분말"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "상엽추출물"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "세리포리아 락세라타 균사체 배양물"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "솔잎 증류 농축액"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "씨폴리놀 감태주정추출물"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "히드록시프로필메틸셀룰로오스"
+        },
+        {
+            "organ": "혈당",
+            "nutrient": "키토올리고당"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "홍삼"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "회화나무열매추출물"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "Lactobacillus acidophilus YT1"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "MR-10 민들레등복합추출물"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "MS-10 엉겅퀴등복합추출물"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "대두추출물등 복합물"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "루바브뿌리 추출물"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "백수오 등 복합추출물"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "석류농축액"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "석류추출물"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "옻나무 추출분말"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "호로파종자 등 추출복합물"
+        },
+        {
+            "organ": "갱년기건강",
+            "nutrient": "호로파종자추출물(Testofen)"
+        },
+        {
+            "organ": "남성생식",
+            "nutrient": "쏘팔메토 열매 추출물"
+        },
+        {
+            "organ": "남성생식",
+            "nutrient": "쏘팔메토 열매 추출물 등 복합물"
+        },
+        {
+            "organ": "여성생식",
+            "nutrient": "감마리놀렌산 함유 유지"
+        },
+        {
+            "organ": "여성생식",
+            "nutrient": "UREX 프로바이오틱스"
+        },
+        {
+            "organ": "여성생식",
+            "nutrient": "리스펙타(Respecta®) 프로바이오틱스"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "NAG(엔에이지, N-아세틸글루코사민, N-Acetylglucosamine)"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "글루코사민"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "대두이소플라본"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "뮤코다당.단백"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "엠에스엠(MSM, Methyl sulfonylmethane, 디메틸설폰)"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "CMO 함유 FAC(Fatty Acid Complex)"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "가시오가피숙지황복합추출물"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "가시오갈피 등 복합추출물"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "강황 추출물(터마신)"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "닭가슴연골분말(UC-II)"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "까마귀쪽나무 열매 주정추출물"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "로즈힙분말"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "보스웰리아 추출물"
+        },
+        {
+            "organ": "관절및뼈",
+            "nutrient": "발효우슬등복합물"
+        },
+        {
+            "organ": "근육",
+            "nutrient": "오미자추출물"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "상황버섯추출물"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "알로에 겔"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "클로렐라"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "홍삼"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "L-글루타민"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "동충하초 주정추출물"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "바이오게르마늄 효모"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "베타글루칸분말"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "인삼다당체추출물"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "청국장균배양정제물(폴리감마글루탐산칼륨)"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "헤모힘 당귀등 혼합추출물"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "효모베타글루칸"
+        },
+        {
+            "organ": "면역",
+            "nutrient": "피엘에이지(PLAG,1-palmitoyl-2-linoleoyl-3-acetyl-rac-glycerol)"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "녹차추출물"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "스쿠알렌"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "엽록소 함유 식물"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "스피루리나"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "클로렐라"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "토마토추출물"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "프로폴리스추출물"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "홍삼"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "비즈왁스알코올"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "포도종자추출물"
+        },
+        {
+            "organ": "항산화",
+            "nutrient": "피크노제놀-프랑스해안송껍질추출물"
+        },
+        {
+            "organ": "정자운동성",
+            "nutrient": "마카 젤라틴화 분말"
         }
     ]
 }

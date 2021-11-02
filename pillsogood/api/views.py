@@ -67,7 +67,6 @@ class TmpBestSupplements(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request, name, format=None ):
-        print('hi')
         supplement = Supplement.objects.all().order_by('-avg_rating')[:10]
         serializer = SupplementSerializer(supplement, many=True)
         return Response(serializer.data)
@@ -123,49 +122,6 @@ class GoodForOrganDetail(APIView):
         return Response(serializer.data)  # 
 
 
-class GoodForOrganToSupplements(APIView):
-    permission_classes = [permissions.AllowAny]
-    def get(self, request, organ, format=None):
-        nutrient_list = GoodForOrgan.objects.all().filter(organ=organ)  # organ에 좋은 영양소 리스트
-        tmp_list = []  # serializer 하기 전에 data 있는지 없는지 확인하기 위한 용도
-        return_list = []
-        # print(nutrient_list)
-        for num in range(nutrient_list.count()):
-            try:
-                nutrient_name = nutrient_list[num].nutrient
-                nutrient_object = Nutrient.objects.all().filter(name=nutrient_name)  # 영양소 객체 구하기
-                # print('영양소 이름: ', nutrient_name)
-                # print('영양소 이름 갖는 영양소 객체: ', nutrient_object)
-
-                nutrient_pk = nutrient_object[0].pk  # 영양소 pk 값 구하기 (정확히는 pk가 아니라 nutrient 객체 자체가 나옴)
-                # print('nutrient_object: ', nutrient_object[0].pk)
-
-                nutrition_facts_oject = NutritionFact.objects.all().filter(nutrient=nutrient_pk) # nutrient 가지고 있는 supplement 찾기
-                for i in range(nutrition_facts_oject.count()):
-                    supplement_pk = nutrition_facts_oject[i].supplement
-                    serializer = SupplementSerializer(supplement_pk)
-                    return_list.append(serializer.data)
-                    tmp_list.append(supplement_pk)
-                        
-            except IndexError:
-                pass
-
-        # organ 활용하여 pri_func 속성에 좋다고 표시되어 있으면 찾기
-        if organ == '요로':
-            pri_func = Supplement.objects.all().filter(pri_func__icontains=organ)
-            for i in range(pri_func.count()):
-                supplement_pk = pri_func[i]
-                have = False
-
-                for item in tmp_list:   # 위에서 추가된 값들과 중복되는지 확인
-                    if supplement_pk == item:
-                        have = True
-
-                if not have:
-                    serializer = SupplementSerializer(supplement_pk)
-                    return_list.append(serializer.data)
-                    tmp_list.append(supplement_pk)
-        return Response(return_list)
             
 
 class AgeNutrientViewSet(viewsets.ModelViewSet):
@@ -297,3 +253,146 @@ def login(request):
             'nickname': result[0].nickname,
         }
         return Response(response, status=status.HTTP_200_OK)
+
+
+class GoodForOrganToSupplements(APIView):
+    permission_classes = [permissions.AllowAny]
+    tmp_list = []  # serializer 하기 전에 data 있는지 없는지 확인하기 위한 용도
+    return_list = []
+
+    def search_pri_func(self, keyword):
+        pri_func = Supplement.objects.all().filter(pri_func__icontains=keyword)
+        for i in range(pri_func.count()):
+            supplement_pk = pri_func[i]
+            have = False
+
+            # for item in self.tmp_list:   # 위에서 추가된 값들과 중복되는지 확인
+            #     if supplement_pk == item:
+            #         have = True
+
+            if not have:
+                serializer = SupplementSerializer(supplement_pk)
+                self.return_list.append(serializer.data)
+                self.tmp_list.append(supplement_pk)
+
+    def get(self, request, organ, format=None):
+        nutrient_list = GoodForOrgan.objects.all().filter(organ=organ)  # organ에 좋은 영양소 리스트
+        self.tmp_list = []
+        self.return_list = []
+        # print(nutrient_list)
+        # for num in range(nutrient_list.count()):
+        #     try:
+        #         nutrient_name = nutrient_list[num].nutrient
+        #         nutrient_object = Nutrient.objects.all().filter(name=nutrient_name)  # 영양소 객체 구하기
+        #         # print('영양소 이름: ', nutrient_name)
+        #         # print('영양소 이름 갖는 영양소 객체: ', nutrient_object)
+
+        #         nutrient_pk = nutrient_object[0].pk  # 영양소 pk 값 구하기 (정확히는 pk가 아니라 nutrient 객체 자체가 나옴)
+        #         # print('nutrient_object: ', nutrient_object[0].pk)
+
+        #         nutrition_facts_oject = NutritionFact.objects.all().filter(nutrient=nutrient_pk) # nutrient 가지고 있는 supplement 찾기
+        #         for i in range(nutrition_facts_oject.count()):
+        #             supplement_pk = nutrition_facts_oject[i].supplement
+        #             serializer = SupplementSerializer(supplement_pk)
+        #             self.return_list.append(serializer.data)
+        #             self.tmp_list.append(supplement_pk)
+                        
+        #     except IndexError:
+        #         pass
+
+        # organ 활용하여 pri_func 속성에 좋다고 표시되어 있으면 찾기
+        if organ == '요로':
+            self.search_pri_func('요로')
+
+        elif organ == '간':
+            self.search_pri_func('위 건강')
+            self.search_pri_func('담즙')
+
+        elif organ == '간':
+            self.search_pri_func('간 건강')
+            self.search_pri_func('간건강')
+
+        elif organ == '기관지':
+            self.search_pri_func('재채기')
+            self.search_pri_func('구강')
+
+        elif organ == '기억력':  
+            self.search_pri_func('기억력')
+
+        elif organ == '긴장완화':  
+            self.search_pri_func('긴장완화')
+
+        elif organ == '수면':  
+            self.search_pri_func('수면')
+
+        elif organ == '인지기능':  
+            self.search_pri_func('인지')
+
+        elif organ == '피로':  
+            self.search_pri_func('피로')
+
+        elif organ == '눈':  
+            self.search_pri_func('눈')
+
+        elif organ == '피부':  
+            self.search_pri_func('피부')
+
+        elif organ == '장':  
+            self.search_pri_func('배변활동')
+
+        elif organ == '체지방':  
+            self.search_pri_func('체지방')
+
+        elif organ == '콜레스테롤':  
+            self.search_pri_func('콜레스테롤')
+
+        elif organ == '혈압':  
+            self.search_pri_func('혈압')
+
+        elif organ == '혈액':  
+            self.search_pri_func('혈액')
+
+        elif organ == '혈당':
+            self.search_pri_func('혈당')
+
+        elif organ == '갱년기건강':
+            self.search_pri_func('갱년기')
+
+        elif organ == '남성생식':
+            self.search_pri_func('전립선')
+
+        elif organ == '여성생식':
+            self.search_pri_func('월경전')
+        
+        elif organ == '관절및뼈':
+            self.search_pri_func('관절')
+            self.search_pri_func('뼈')
+
+        elif organ == '근육':
+            self.search_pri_func('근육')
+
+        elif organ == '면역':
+            self.search_pri_func('면역')
+
+        elif organ == '항산화':
+           self.search_pri_func('항산화')
+
+        elif organ == '정자운동성':
+            self.search_pri_func('정자')
+
+        # elif organ == '항산화':
+            # pri_func = Supplement.objects.all().filter(pri_func__icontains='항산화')
+            # for i in range(pri_func.count()):
+            #     supplement_pk = pri_func[i]
+            #     have = False
+
+            #     for item in tmp_list:   # 위에서 추가된 값들과 중복되는지 확인
+            #         if supplement_pk == item:
+            #             have = True
+
+            #     if not have:
+            #         serializer = SupplementSerializer(supplement_pk)
+            #         return_list.append(serializer.data)
+            #         tmp_list.append(supplement_pk)
+
+        return Response(self.return_list)

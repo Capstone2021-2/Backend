@@ -330,6 +330,9 @@ class GoodForOrganToSupplements(APIView):
 
         elif organ == '체지방':  
             self.search_pri_func('체지방')
+        
+        elif organ == '치아':  
+            self.search_pri_func('치아')
 
         elif organ == '콜레스테롤':  
             self.search_pri_func('콜레스테롤')

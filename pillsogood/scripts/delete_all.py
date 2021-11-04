@@ -1,3 +1,4 @@
+from scripts import delete_body_types
 from scripts import delete_ages, delete_age_nutrients
 from scripts import delete_nutrients, delete_nutrition_facts
 from scripts import delete_supplements, delete_organs
@@ -14,3 +15,4 @@ def run():
     delete_nutrients.run()
     delete_supplements.run()
     delete_brands.run()
+    delete_body_types.run()

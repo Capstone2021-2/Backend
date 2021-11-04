@@ -1,0 +1,540 @@
+{
+    "Sheet1": [
+        {
+            "life_style": "올바른 영양 섭취가 중요한 어린이",
+            "nutrient": "비타민 B12"
+        },
+        {
+            "life_style": "올바른 영양 섭취가 중요한 어린이",
+            "nutrient": "철"
+        },
+        {
+            "life_style": "올바른 영양 섭취가 중요한 어린이",
+            "nutrient": "비타민 D"
+        },
+        {
+            "life_style": "올바른 영양 섭취가 중요한 어린이",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "올바른 영양 섭취가 중요한 어린이",
+            "nutrient": "비타민 B6"
+        },
+        {
+            "life_style": "올바른 영양 섭취가 중요한 어린이",
+            "nutrient": "비타민 A "
+        },
+        {
+            "life_style": "올바른 영양 섭취가 중요한 어린이",
+            "nutrient": "비타민 C "
+        },
+        {
+            "life_style": "에너지가 많이 필요한 10대 청소년(초등 후반〜중고생)",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "에너지가 많이 필요한 10대 청소년(초등 후반〜중고생)",
+            "nutrient": "철분 "
+        },
+        {
+            "life_style": "에너지가 많이 필요한 10대 청소년(초등 후반〜중고생)",
+            "nutrient": "아연 "
+        },
+        {
+            "life_style": "건강과 아름다움에 관심 많은 젊은 여성",
+            "nutrient": "비타민 B6 "
+        },
+        {
+            "life_style": "건강과 아름다움에 관심 많은 젊은 여성",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "건강과 아름다움에 관심 많은 젊은 여성",
+            "nutrient": "마그네슘"
+        },
+        {
+            "life_style": "건강과 아름다움에 관심 많은 젊은 여성",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "건강과 아름다움에 관심 많은 젊은 여성",
+            "nutrient": "EPA와 DHA의 합"
+        },
+        {
+            "life_style": "건강과 아름다움에 관심 많은 젊은 여성",
+            "nutrient": "비타민 B12"
+        },
+        {
+            "life_style": "건강과 아름다움에 관심 많은 젊은 여성",
+            "nutrient": "녹차추출물"
+        },
+        {
+            "life_style": "건강과 아름다움에 관심 많은 젊은 여성",
+            "nutrient": "비타민 D"
+        },
+        {
+            "life_style": "건강과 아름다움에 관심 많은 젊은 여성",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "녹차추출물"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "식이섬유"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "L-아르기닌"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "은행잎 추출물"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "쏘팔메토 열매 추출물 등 복합물"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "쏘팔메토 열매 추출물"
+        },
+        {
+            "life_style": "불규칙한 생활을 하는 젊은 남성",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "이소플라본 "
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "EPA와 DHA의 합"
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "비타민 D"
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "식이섬유"
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "프로바이오틱스"
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "크랜베리추출분말"
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "파크랜 크랜베리 분말"
+        },
+        {
+            "life_style": "갱년기 증상으로 괴로운 50대 여성",
+            "nutrient": "크랜베리 추출물"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "은행잎 추출물"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "L-아르기닌"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "쏘팔메토 열매 추출물 등 복합물"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "쏘팔메토 열매 추출물"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "글루코사민"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "콘드로이친"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "EPA와 DHA의 합"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "비타민 B6 "
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "비타민B12"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "비타민 D"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "남성호르몬 분비가 줄어드는 50대 갱년기 남성",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "노화가 진행되는 노년층",
+            "nutrient": "비타민 D "
+        },
+        {
+            "life_style": "노화가 진행되는 노년층",
+            "nutrient": "은행잎 추출물"
+        },
+        {
+            "life_style": "노화가 진행되는 노년층",
+            "nutrient": "비타민 E "
+        },
+        {
+            "life_style": "노화가 진행되는 노년층",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "노화가 진행되는 노년층",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "키가 작아 고민인 청소년",
+            "nutrient": "비타민 D"
+        },
+        {
+            "life_style": "키가 작아 고민인 청소년",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "공부에 시달리는 수험생",
+            "nutrient": "은행잎 추출물"
+        },
+        {
+            "life_style": "공부에 시달리는 수험생",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "공부에 시달리는 수험생",
+            "nutrient": "철"
+        },
+        {
+            "life_style": "공부에 시달리는 수험생",
+            "nutrient": "비타민 B6"
+        },
+        {
+            "life_style": "공부에 시달리는 수험생",
+            "nutrient": "비타민 B12"
+        },
+        {
+            "life_style": "영양보충에 특히 신경 써야하는 임산부",
+            "nutrient": "철"
+        },
+        {
+            "life_style": "영양보충에 특히 신경 써야하는 임산부",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "비타민 A "
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "구리"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "요오드"
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "비타민 B6"
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "비타민 B12"
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "식이섬유"
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "비타민 A "
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "빌베리 추출물"
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "밀크씨슬(카르두스 마리아누스) 추출물"
+        },
+        {
+            "life_style": "과중한 업무에 시달리는 사람",
+            "nutrient": "구기자추출물"
+        },
+        {
+            "life_style": "운동을 많이 하는 사람",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "운동을 많이 하는 사람",
+            "nutrient": "크레아틴"
+        },
+        {
+            "life_style": "운동을 많이 하는 사람",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "운동을 많이 하는 사람",
+            "nutrient": "철"
+        },
+        {
+            "life_style": "운동을 많이 하는 사람",
+            "nutrient": "발효생성아미노산 복합물"
+        },
+        {
+            "life_style": "잇몸이 걱정인 사람",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "잇몸이 걱정인 사람",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "비타민 B6"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "비타민 B12"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "마그네슘"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "EPA와 DHA의 합"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "밀크씨슬(카르두스 마리아누스) 추출물"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "구기자추출물"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "식이섬유"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "녹차추출물"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "프로바이오틱스"
+        },
+        {
+            "life_style": "스트레스가 많은 사람",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "스트레스가 많은 사람",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "스트레스가 많은 사람",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "스트레스가 많은 사람",
+            "nutrient": "비타민 A "
+        },
+        {
+            "life_style": "식욕이 없을 때",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "식욕이 없을 때",
+            "nutrient": "비타민 B1"
+        },
+        {
+            "life_style": "식욕이 없을 때",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 B1"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 B6"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 B12"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "EPA와 DHA의 합"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "은행잎 추출물"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "비타민 A "
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "베타카로틴"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "포도씨 효소분해 추출 분말"
+        },
+        {
+            "life_style": "사십견, 오십견이 왔을 때",
+            "nutrient": "글루코사민"
+        },
+        {
+            "life_style": "사십견, 오십견이 왔을 때",
+            "nutrient": "콘드로이친"
+        },
+        {
+            "life_style": "사십견, 오십견이 왔을 때",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "사십견, 오십견이 왔을 때",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "다이어트를 하는 사람",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "다이어트를 하는 사람",
+            "nutrient": "마그네슘"
+        },
+        {
+            "life_style": "다이어트를 하는 사람",
+            "nutrient": "식이섬유"
+        },
+        {
+            "life_style": "다이어트를 하는 사람",
+            "nutrient": "철"
+        }
+    ]
+}

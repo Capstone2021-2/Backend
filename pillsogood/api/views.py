@@ -148,8 +148,14 @@ class BrandToSupplements(APIView):
         return Response(return_list)
 
 class ReviewViewSet(viewsets.ModelViewSet):
-    query = Review.objects.all()
+    queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class BodyTypeViewSet(viewsets.ModelViewSet):
+    queryset = BodyType.objects.all()
+    serializer_class = BodyTypeSerializer
     permission_classes = [permissions.AllowAny]
 
 #-------------------------함수형 view-----------------------------
@@ -242,6 +248,11 @@ def login(request):
             'nickname': result[0].nickname,
         }
         return Response(response, status=status.HTTP_200_OK)
+
+
+#--------------------------함수형 view--------------------------
+
+#--------------------------긴 클래스 view--------------------------
 
 class GoodForOrganToSupplements(APIView):
     permission_classes = [permissions.AllowAny]

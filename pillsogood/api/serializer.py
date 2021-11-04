@@ -1,6 +1,6 @@
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
-from . models import Brand, GoodForOrgan, MainNutrient, NutritionFact, Supplement, User as UserTemp, Nutrient, Organ, Review
+from . models import Brand, GoodForOrgan, MainNutrient, NutritionFact, Supplement, User as UserTemp, Nutrient, Organ, Review, BodyType
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
@@ -45,6 +45,10 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = ['user_nickname', 'supplement', 'rating', 'time', 'image', 'text']
 
+class BodyTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BodyType
+        fields = ['body_type']
 
 #--------------------------------User ID 관련 Serializer---------------------------------------#
 

@@ -5,13 +5,14 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify
 
 router =  routers.DefaultRouter()
 router.register(r'main_nutrients', views.MainNutrientViewSet, basename='main_nutrients')  # nutrient_pk 값, nutrient_name 제공
-router.register(r'nutrients', views.NutrientViewSet, basename='nutrients')
-router.register(r'supplements', views.SupplementViewSet, basename='supplements')
-router.register(r'nutrition_facts', views.NutritionFactViewSet, basename='nutrition_facts')
-router.register(r'organs', views.OrganViewSet, basename='organs')
-router.register(r'good_for_organs', views.GoodForOrganViewSet, basename='good_for_organs')
-router.register(r'brands', views.BrandViewSet, basename='brands')
-router.register(r'reviews', views.ReviewViewSet, basename='reviews')
+router.register(r'nutrients', views.NutrientViewSet, basename='nutrients')  # 영양소
+router.register(r'supplements', views.SupplementViewSet, basename='supplements')  # 영양제
+router.register(r'nutrition_facts', views.NutritionFactViewSet, basename='nutrition_facts')  # 영양제가 함유하고 있는 영양소
+router.register(r'organs', views.OrganViewSet, basename='organs')  # 몸 기능
+router.register(r'good_for_organs', views.GoodForOrganViewSet, basename='good_for_organs')  # 몸 기능에 좋은 영양소
+router.register(r'brands', views.BrandViewSet, basename='brands')  # 약 회사
+router.register(r'reviews', views.ReviewViewSet, basename='reviews')  # 리뷰
+router.register(r'body_types', views.BodyTypeViewSet, basename='body_types')  # 체질
 # router.register(r'age_nutrients', views.SupplementViewSet)
 
 

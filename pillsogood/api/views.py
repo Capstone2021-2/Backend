@@ -152,11 +152,185 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     permission_classes = [permissions.AllowAny]
 
+    # custom 
+    def create(self, request):
+        request.data._mutable = True
+        supple_pk = request.data['supplement_pk'][0]
+        # print(supple_pk)
+        rating = int(request.data['rating'][0])
+        user_pk = request.data['user_pk'][0]  # User의 나이, 키, 몸무게르 획득할 수 있음.
+        user_object = User.objects.get(pk=user_pk)  # User 객체 가져오기
+
+        age = user_object.age  # 나이
+        bodytype = user_object.body_type  # 체질
+        height = user_object.height  # 키
+        weight = user_object.weight  # 몸무게
+
+        # request.data 값 추가해주기
+        request.data.__setitem__('age_pk', age.pk)  # age pk 값 추가
+        request.data.__setitem__('bodytype_pk', bodytype.pk)  # body_type pk 값 추가
+        request.data.__setitem__('height', height)  # age pk 값 추가
+        request.data.__setitem__('weight', weight)  # age pk 값 추가
+
+
+        supplement = Supplement.objects.get(pk=supple_pk)
+        # 평균 평점 수정과 리뷰 수 늘려주기
+        avg_rating = (supplement.review_num * supplement.avg_rating + rating) / (supplement.review_num + 1)
+        avg_rating = round(avg_rating, 2)
+        supplement.avg_rating = avg_rating
+        supplement.review_num += 1
+        supplement.save()
+        return super().create(request)
+    
+    def destroy(self, request, *args, **kwargs):
+        #print('request.data: ', self.get_object().supplement.pk)
+        supplement_pk = self.get_object().supplement_pk.pk
+        rating = self.get_object().rating
+
+        # print('request.data: (pk, rating) ', supplement_pk, rating)
+
+        # 평균 평점 수정과 리뷰 수 줄여주기
+        supplement = Supplement.objects.get(pk=supplement_pk)
+        # print('supplement: ', supplement)
+        avg_rating = (supplement.review_num * supplement.avg_rating - rating) / (supplement.review_num - 1)
+        avg_rating = round(avg_rating, 2)
+        supplement.avg_rating = avg_rating
+        supplement.review_num -= 1
+        supplement.save()
+        return super().destroy(request, *args, **kwargs)
+
+
+
+class ReviewUser(APIView):
+
+    def get_object(self, user_pk):
+        try:
+            return Review.objects.all().filter(user_pk=user_pk)  # user_pk로 리뷰 filtering
+        except Review.DoesNotExist:
+            raise Http404
+    def get(self, request, user_pk, format=None):
+        review = self.get_object(user_pk)
+        serializer = ReviewSerializer(review, many=True)  # User 한 명이 여러 리뷰를 남겼을 수 있기 떄문에 many = True
+        return Response(serializer.data)
+
+class ReviewSupplement(APIView):
+    def get_object(self, supplement_pk):
+        try:
+            return Review.objects.all().filter(supplement_pk=supplement_pk)  # supplement_pk로 리뷰 filtering
+        except Review.DoesNotExist:
+            raise Http404
+    def get(self, request, supplement_pk, format=None):
+        review = self.get_object(supplement_pk)
+        serializer = ReviewSerializer(review, many=True)  # 영양제에 여러 리뷰가 있기 때문에 many = True
+        return Response(serializer.data)
+    
+class AgeViewSet(viewsets.ModelViewSet):
+    queryset = Age.objects.all()
+    serializer_class = AgeSerializer
+    permission_classes = [permissions.AllowAny]
 
 class BodyTypeViewSet(viewsets.ModelViewSet):
     queryset = BodyType.objects.all()
     serializer_class = BodyTypeSerializer
     permission_classes = [permissions.AllowAny]
+
+class LifeStyleViewSet(viewsets.ModelViewSet):
+    queryset = LifeStyle.objects.all()
+    serializer_class = LifeStyleSerializer
+    permission_classes = [permissions.AllowAny]
+
+class GoodForLifeStyleViewSet(viewsets.ModelViewSet):
+    queryset = GoodForLifeStyle.objects.all()
+    serializer_class = GoodForLifeStyleSerializer
+    permission_classes = [permissions.AllowAny]
+
+class GoodForLifeStyleDetail(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    # 예) 클라이언트가 '공부에 시달리는 수험생 '에 좋은 영양소를 요청하면
+    # life_style에 '공부에 시달리는 수험생'이 올 것임.
+    def get_object(self, life_style):
+        try:
+            return GoodForLifeStyle.objects.all().filter(life_style=life_style)  # life_style 이름으로 filtering
+        except GoodForOrgan.DoesNotExist:
+            raise Http404
+    def get(self, request, life_style, format=None):
+        nutrient = self.get_object(life_style)
+        serializer = GoodForLifeStyleSerializer(nutrient, many=True)  # 해당 organ에 좋은 영양소 결과가 여러개 나오기 때문에 many = True
+        return Response(serializer.data)
+
+
+class LifeStyleToSupplements(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    return_list = []
+    tmp_list = []  # serializer 하기 전에 data 있는지 없는지 확인하기 위한 용도
+
+    def search_pri_func(self, keyword):
+        pri_func = Supplement.objects.all().filter(pri_func__icontains=keyword)
+        for i in range(pri_func.count()):
+            supplement_pk = pri_func[i]
+            have = False
+
+            # for item in self.tmp_list:   # 위에서 추가된 값들과 중복되는지 확인
+            #     if supplement_pk == item:
+            #         have = True
+
+            if not have:
+                serializer = SupplementSerializer(supplement_pk)
+                self.return_list.append(serializer.data)
+                self.tmp_list.append(supplement_pk)
+            
+    def search_prd_name_func(self, keyword):
+        pri_func = Supplement.objects.all().filter(name__icontains=keyword)
+
+        for i in range(pri_func.count()):
+            supplement_pk = pri_func[i]
+            have = False
+
+            for item in self.tmp_list:   # 위에서 추가된 값들과 중복되는지 확인
+                if supplement_pk == item:
+                    have = True
+
+            if not have:
+                serializer = SupplementSerializer(supplement_pk)
+                self.return_list.append(serializer.data)
+                self.tmp_list.append(supplement_pk)
+
+    def get(self, request, life_style, format=None):
+        good_nutrients_list = GoodForLifeStyle.objects.all().filter(life_style=life_style)  # organ에 좋은 영양소 리스트
+        # print(nutrient_list)
+        # for num in range(good_nutrients_list.count()):
+        #     try:
+        #         supplement_obj = good_nutrients_list[num]
+        #         print('옵젝', supplement_obj)
+        #         serializer = SupplementSerializer(supplement_obj)
+        #         return_list.append(serializer.data)
+                        
+        #     except IndexError:
+        #         pass
+        print(life_style)
+        if life_style == '올바른 영양 섭취가 중요한 어린이':
+            self.search_pri_func('키즈')
+            self.search_pri_func('우리아이')
+            self.search_pri_func('아이사랑')
+
+        elif life_style == '갱년기 증상으로 괴로운 50대 여성':
+            self.search_pri_func('갱년기 여성')
+            self.search_pri_func('갱년기여성')
+        elif life_style == '남성호르몬 분비가 줄어드는 50대 갱년기 남성':
+            self.search_pri_func('갱년기 남성')
+            self.search_pri_func('전립선')
+            self.search_pri_func('정자')
+        elif life_style == '건강과 아름다움에 관심 많은 젊은 여성':
+            self.search_prd_name_func('우먼')
+            self.search_pri_func('월경')
+        elif life_style == '공부에 시달리는 수험생':
+            self.search_pri_func('기억력')
+            self.search_pri_func('')
+
+        return Response(self.return_list)
+
 
 #-------------------------함수형 view-----------------------------
 
@@ -183,6 +357,13 @@ def is_id_duplicate(request):
             return Response({"isValid": 1}, status=status.HTTP_200_OK)  # Response 객체를 사용하여 client에게 적절한 return type으로 제공
         else:
             return Response({ "isValid": 0}, status=status.HTTP_200_OK)
+
+# @api_view(['POST'])
+# @permission_classes([permissions.AllowAny])
+# def add_review(request):
+#     if request.method == 'POST':
+#         serializer =
+        
 
 
 @api_view(['GET'])
@@ -246,6 +427,7 @@ def login(request):
             'login_id': serializer.data['login_id'],
             'email': result[0].email,
             'nickname': result[0].nickname,
+            'pk' : result[0].pk
         }
         return Response(response, status=status.HTTP_200_OK)
 

@@ -32,16 +32,19 @@ class Supplement(models.Model):
     warning = models.CharField(max_length=500)
     pri_func = models.CharField(max_length=500)
     raw_material = models.CharField(max_length=500)
-    tmp_id = models.CharField(max_length=30)
+    tmp_id = models.CharField(max_length=30)  # 01.json 파일에 적혀 있는 -id 값임
+    
+    # Review에 관련된 정보
     avg_rating = models.FloatField(default=0.0)
+    review_num = models.IntegerField(default=0)
     nuntrient = models.ManyToManyField(
         Nutrient,
         through='NutritionFact'
     )
-    user_review = models.ManyToManyField(
-        'User',
-        through='Review'
-    )
+    # user_review = models.ManyToManyField(
+    #     'User',
+    #     through='Review'
+    # )
 
     def __str__(self):
         return self.name
@@ -106,7 +109,7 @@ class User(AbstractBaseUser):
     weight = models.FloatField(blank=True, null=True)
     age = models.ForeignKey('Age', blank=True, null= True, on_delete=models.CASCADE)
     body_type = models.ForeignKey('BodyType', blank=True, null=True, on_delete=models.CASCADE)
-
+    
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -128,24 +131,21 @@ class User(AbstractBaseUser):
 
 
 class Review(models.Model):
-
-    # RATING_CHOICES = (
-    #     ('ONE', 1)
-    #     ('TWO', 2)
-    #     ('THREE', 3)
-    #     ('FOUR', 4)
-    #     ('FIVE', 5)
-    # )
-    user_nickname = models.ForeignKey(User, on_delete=models.CASCADE)
-    supplement = models.ForeignKey(Supplement, on_delete=models.CASCADE)
-    # rating = models.IntegerField(max_length=2, choices=RATING_CHOICES)
+    # user_nickname = models.CharField(max_length=30)
+    # supplement = models.CharField(max_length=100)
+    user_pk = models.ForeignKey(User, on_delete=models.CASCADE)
+    supplement_pk = models.ForeignKey(Supplement, on_delete=models.CASCADE)
+    bodytype_pk = models.ForeignKey('BodyType', blank=True, null=True, on_delete=models.CASCADE)
+    age_pk = models.ForeignKey('Age', blank=True, null= True, on_delete=models.CASCADE)
+    height = models.FloatField(blank=True, null=True)
+    weight = models.FloatField(blank=True, null=True)
     rating = models.IntegerField()
     time = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(blank=True, null=True)
     text = models.CharField(max_length=1000)
 
     def __str__(self):
-        return '{} : {} ({}) '.format(self.user_nickname, self.supplement, self.rating)
+        return '{} : {} ({}) '.format(self.user_pk, self.supplement_pk, self.rating)
 
 class Age(models.Model):
     age_range = models.CharField(max_length=20)
@@ -197,10 +197,6 @@ class LifeStyle(models.Model):
 
     def __str__(self):
         return self.life_style
-
-
-
-
 
 
 class GoodForBodyType(models.Model):

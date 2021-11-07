@@ -11,7 +11,11 @@ def run():
         for num in range(len(data['life_styles'])):
             life_style = data['life_styles'][num]['life_style']
 
-            # 몸에 좋은 영양소 추가
-            LifeStyle.objects.create(life_style=life_style)
+            try:
+                LifeStyle.objects.filter(life_style=life_style)[0]
+            except:
+                LifeStyle.objects.create(life_style=life_style)
     except IndexError:
         pass
+
+    

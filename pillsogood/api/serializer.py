@@ -1,6 +1,6 @@
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
-from . models import Brand, GoodForOrgan, MainNutrient, NutritionFact, Supplement, User as UserTemp, Nutrient, Organ, Review, BodyType
+from . models import Brand, GoodForLifeStyle, GoodForOrgan, LifeStyle, MainNutrient, NutritionFact, Supplement, User as UserTemp, Nutrient, Organ, Review, BodyType, Age
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
@@ -18,7 +18,10 @@ class MainNutrientSerializer(serializers.ModelSerializer):
 class SupplementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supplement
-        fields = ['pk', 'name', 'company', 'exp_date', 'dispos', 'sug_use', 'warning', 'pri_func', 'raw_material', 'tmp_id', 'avg_rating']
+        fields = [
+            'pk', 'name', 'company', 'exp_date', 'dispos', 'sug_use', 
+            'warning', 'pri_func', 'raw_material','tmp_id', 'avg_rating', 'review_num'
+            ]
 
 class NutritionFactSerializer(serializers.ModelSerializer):
     class Meta:
@@ -43,12 +46,27 @@ class BrandSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ['user_nickname', 'supplement', 'rating', 'time', 'image', 'text']
+        fields = ['pk', 'user_pk', 'supplement_pk', 'bodytype_pk', 'age_pk', 'height', 'weight', 'rating', 'time', 'image', 'text']
+
+class AgeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Age
+        fields = ['age_range']
 
 class BodyTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BodyType
         fields = ['body_type']
+
+class LifeStyleSerializer(serializers.ModelSerializer): 
+    class Meta:
+        model = LifeStyle
+        fields = ['life_style']
+
+class GoodForLifeStyleSerializer(serializers.ModelSerializer): 
+    class Meta:
+        model = GoodForLifeStyle
+        fields = ['life_style', 'nutrient']
 
 #--------------------------------User ID 관련 Serializer---------------------------------------#
 
@@ -144,6 +162,29 @@ class UserLoginSerializer(serializers.Serializer):
         }
 
 #--------------------------------User ID 관련 Serializer---------------------------------------#
+
+#--------------------------------REVIEW 관련 Serializer----------------------------------------#
+
+# class ReviewSerializer(serializers.Serializer):
+#     nickname = serializers.CharField(max_length=50)
+#     supplement =serializers.CharField(max_length=100)
+#     rating = serializers.FloatField(max_length=2)
+#     text = serializers.CharField(max_length=1000)
+
+
+#     def create(self, validated_data):
+#         review = Review.objects.create( # Review 생성
+#             nickname=validated_data['nickname'],  # validated_data에서 받은 값으로 설정
+#             supplement=validated_data['supplement'],
+#             rating=validated_data['nickname'],
+#             text=validated_data['text']
+#         )
+
+#         review.save()
+#         return review
+
+#--------------------------------REVIEW 관련 Serializer----------------------------------------#
+
 
 # class UserSerializerWithToken(serializers.ModelSerializer):
 #     token = serializers.SerializerMethodField()

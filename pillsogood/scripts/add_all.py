@@ -1,3 +1,4 @@
+from scripts import add_life_styles, add_good_for_life_styles
 from scripts import add_body_types
 from scripts import add_brands
 from scripts import add_age_nutrients, add_ages, add_nutrients, add_nutrition_facts, add_supplements
@@ -14,3 +15,5 @@ def run():
     add_main_nutrients.run()
     add_brands.run()
     add_body_types.run()
+    add_life_styles.run()
+    add_good_for_life_styles.run()

@@ -109,7 +109,7 @@ class User(AbstractBaseUser):
     weight = models.FloatField(blank=True, null=True)
     age = models.ForeignKey('Age', blank=True, null= True, on_delete=models.CASCADE)
     body_type = models.ForeignKey('BodyType', blank=True, null=True, on_delete=models.CASCADE)
-    
+
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

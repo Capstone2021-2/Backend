@@ -202,7 +202,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 
 class ReviewUser(APIView):
-
+    permission_classes = [permissions.AllowAny]
     def get_object(self, user_pk):
         try:
             return Review.objects.all().filter(user_pk=user_pk)  # user_pk로 리뷰 filtering
@@ -214,6 +214,7 @@ class ReviewUser(APIView):
         return Response(serializer.data)
 
 class ReviewSupplement(APIView):
+    permission_classes = [permissions.AllowAny]
     def get_object(self, supplement_pk):
         try:
             return Review.objects.all().filter(supplement_pk=supplement_pk)  # supplement_pk로 리뷰 filtering

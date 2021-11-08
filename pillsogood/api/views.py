@@ -266,7 +266,8 @@ class LifeStyleToSupplements(APIView):
 
     return_list = []
     tmp_list = []  # serializer 하기 전에 data 있는지 없는지 확인하기 위한 용도
-
+    life_style =''  # search_nutrition_facts에서 더 세분화된 검색 결과를 제공하기 위해 만듦
+    # 주요 기능으로 검색   
     def search_pri_func(self, keyword):
         pri_func = Supplement.objects.all().filter(pri_func__icontains=keyword)
         for i in range(pri_func.count()):
@@ -281,8 +282,9 @@ class LifeStyleToSupplements(APIView):
                 serializer = SupplementSerializer(supplement_pk)
                 self.return_list.append(serializer.data)
                 self.tmp_list.append(supplement_pk)
-            
-    def search_prd_name_func(self, keyword):
+
+    # 영양제 이름으로 검색
+    def search_prd_name(self, keyword):
         pri_func = Supplement.objects.all().filter(name__icontains=keyword)
 
         for i in range(pri_func.count()):
@@ -298,6 +300,84 @@ class LifeStyleToSupplements(APIView):
                 self.return_list.append(serializer.data)
                 self.tmp_list.append(supplement_pk)
 
+    # raw_material 이름으로 검색
+    def search_raw_material(self, keyword):
+        pri_func = Supplement.objects.all().filter(raw_material__icontains=keyword)
+
+        for i in range(pri_func.count()):
+            supplement_pk = pri_func[i]
+            have = False
+
+            for item in self.tmp_list:   # 위에서 추가된 값들과 중복되는지 확인
+                if supplement_pk == item:
+                    have = True
+
+            if not have:
+                serializer = SupplementSerializer(supplement_pk)
+                self.return_list.append(serializer.data)
+                self.tmp_list.append(supplement_pk)
+
+    # 성분 함유량으로 검색
+    def search_nutrition_facts(self, keyword):
+        nutrient = Nutrient.objects.filter(name=keyword)
+        nutrient_pk = nutrient[0].pk  # 칼슘의 pk 값은 20임.
+
+        # 일정량 이상 많이 들은 영양제만 추출하기 위함.
+        if keyword=='칼슘':
+            pri_func = NutritionFact.objects.all().filter(nutrient=nutrient_pk).filter(amount__gt=499)
+        elif keyword=='철':
+            pri_func = NutritionFact.objects.all().filter(nutrient=nutrient_pk).filter(amount__gt=14)
+        elif keyword=='은행잎 추출물':
+            pri_func = NutritionFact.objects.all().filter(nutrient=nutrient_pk)
+        elif keyword=='은행잎 추출물' and self.life_style == '공부에 시달리는 수험생':
+            pri_func = NutritionFact.objects.all().filter(nutrient=nutrient_pk).filter(amount_gt=28)
+        elif keyword=='비타민 D':
+            pri_func = NutritionFact.objects.all().filter(nutrient=nutrient_pk).filter(amount__gt=14)
+        elif keyword=='엽산' and self.life_style == '영양보충에 특히 신경 써야하는 임산부':
+            pri_func = NutritionFact.objects.all().filter(nutrient=nutrient_pk).filter(amount__gt=599)
+        elif keyword=='EPA와 DHA의 합':
+            pri_func = NutritionFact.objects.all().filter(nutrient=nutrient_pk).filter(amount__gt=700)
+    
+
+        # print(pri_func)
+
+        if keyword=='엽산' and self.life_style == '영양보충에 특히 신경 써야하는 임산부':
+            vitaminA = Nutrient.objects.filter(name='비타민 A')[0].pk
+            vitaminD = Nutrient.objects.filter(name='비타민 D')[0].pk
+            for i in range(pri_func.count()):
+                supplement_pk = pri_func[i].supplement
+                filter_A = NutritionFact.objects.all().filter(supplement=supplement_pk).filter(nutrient=vitaminA).filter(amount__gt=999)
+                filter_D = NutritionFact.objects.all().filter(supplement=supplement_pk).filter(nutrient=vitaminD).filter(amount__gt=19)
+                have = False
+
+                if filter_A.count() != 0:
+                    have = True
+                    # print('filter A:', filter_A)
+
+                if have == False and filter_D.count() != 0:
+                    have = True
+                    # print('filter D:', filter_D)
+
+                if not have:
+                    serializer = SupplementSerializer(supplement_pk)
+                    self.return_list.append(serializer.data)
+                    self.tmp_list.append(supplement_pk)
+                
+        else:
+            for i in range(pri_func.count()):
+                supplement_pk = pri_func[i].supplement
+                # print('supplement pk: ', supplement_pk)
+                have = False
+
+                for item in self.tmp_list:   # 위에서 추가된 값들과 중복되는지 확인
+                    if supplement_pk == item:
+                        have = True
+
+                if not have:
+                    serializer = SupplementSerializer(supplement_pk)
+                    self.return_list.append(serializer.data)
+                    self.tmp_list.append(supplement_pk)
+
     def get(self, request, life_style, format=None):
         good_nutrients_list = GoodForLifeStyle.objects.all().filter(life_style=life_style)  # organ에 좋은 영양소 리스트
         # print(nutrient_list)
@@ -310,12 +390,12 @@ class LifeStyleToSupplements(APIView):
                         
         #     except IndexError:
         #         pass
+        self.life_style = life_style
         print(life_style)
         if life_style == '올바른 영양 섭취가 중요한 어린이':
-            self.search_pri_func('키즈')
-            self.search_pri_func('우리아이')
-            self.search_pri_func('아이사랑')
-
+            self.search_prd_name('키즈')
+            self.search_prd_name('우리아이')
+            self.search_prd_name('아이사랑')
         elif life_style == '갱년기 증상으로 괴로운 50대 여성':
             self.search_pri_func('갱년기 여성')
             self.search_pri_func('갱년기여성')
@@ -324,12 +404,34 @@ class LifeStyleToSupplements(APIView):
             self.search_pri_func('전립선')
             self.search_pri_func('정자')
         elif life_style == '건강과 아름다움에 관심 많은 젊은 여성':
-            self.search_prd_name_func('우먼')
+            self.search_prd_name('우먼')
             self.search_pri_func('월경')
+            self.search_nutrition_facts('철')
         elif life_style == '공부에 시달리는 수험생':
             self.search_pri_func('기억력')
-            self.search_pri_func('')
-
+            self.search_nutrition_facts('은행잎 추출물')
+        elif life_style == '에너지가 많이 필요한 10대 청소년(초등 후반〜중고생)':
+            self.search_nutrition_facts('칼슘')
+            self.search_nutrition_facts('철')
+        elif life_style == '불규칙한 생활을 하는 젊은 남성':
+            self.search_prd_name('미네랄')
+            self.search_raw_material('미네랄')
+        elif life_style == '노화가 진행되는 노년층':
+            self.search_pri_func('인지력')
+            self.search_nutrition_facts('은행잎 추출물')
+        elif life_style == '키가 작아 고민인 청소년':
+            self.search_nutrition_facts('칼슘')
+            self.search_nutrition_facts('비타민 D')
+        elif life_style == '영양보충에 특히 신경 써야하는 임산부':
+            self.search_nutrition_facts('엽산')
+        elif life_style == '운동을 많이 하는 사람':
+            self.search_pri_func('근육,')
+            self.search_pri_func('지구성')
+        elif life_style == '과중한 업무에 시달리는 사람':
+            self.search_nutrition_facts('EPA와 DHA의 합')
+            self.search_pri_func('코엔자임Q10')
+        elif life_style == '다이어트를 하는 사람':
+            self.search_prd_name('다이어트')
         return Response(self.return_list)
 
 

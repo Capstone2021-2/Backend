@@ -269,6 +269,34 @@
             "nutrient": "칼슘"
         },
         {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "비타민 A "
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "칼슘"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "구리"
+        },
+        {
+            "life_style": "모유 수유하는 산모",
+            "nutrient": "요오드"
+        },
+        {
             "life_style": "과중한 업무에 시달리는 사람",
             "nutrient": "비타민 C"
         },
@@ -327,6 +355,170 @@
         {
             "life_style": "운동을 많이 하는 사람",
             "nutrient": "발효생성아미노산 복합물"
+        },
+        {
+            "life_style": "잇몸이 걱정인 사람",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "잇몸이 걱정인 사람",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "비타민 B6"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "비타민 B12"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "마그네슘"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "늘 피곤한 사람",
+            "nutrient": "EPA와 DHA의 합"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "밀크씨슬(카르두스 마리아누스) 추출물"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "구기자추출물"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "식이섬유"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "녹차추출물"
+        },
+        {
+            "life_style": "술을 많이 마시는 사람",
+            "nutrient": "프로바이오틱스"
+        },
+        {
+            "life_style": "스트레스가 많은 사람",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "스트레스가 많은 사람",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "스트레스가 많은 사람",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "스트레스가 많은 사람",
+            "nutrient": "비타민 A "
+        },
+        {
+            "life_style": "식욕이 없을 때",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "식욕이 없을 때",
+            "nutrient": "비타민 B1"
+        },
+        {
+            "life_style": "식욕이 없을 때",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 B1"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 B6"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 B12"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "홍삼"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "EPA와 DHA의 합"
+        },
+        {
+            "life_style": "혈액순환이 잘되지 않을 때",
+            "nutrient": "은행잎 추출물"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "비타민 A "
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "비타민 E"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "베타카로틴"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "코엔자임Q10"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "아연"
+        },
+        {
+            "life_style": "피부 건강이 염려될 때",
+            "nutrient": "포도씨 효소분해 추출 분말"
+        },
+        {
+            "life_style": "사십견, 오십견이 왔을 때",
+            "nutrient": "글루코사민"
+        },
+        {
+            "life_style": "사십견, 오십견이 왔을 때",
+            "nutrient": "콘드로이친"
+        },
+        {
+            "life_style": "사십견, 오십견이 왔을 때",
+            "nutrient": "비타민 C"
+        },
+        {
+            "life_style": "사십견, 오십견이 왔을 때",
+            "nutrient": "아연"
         },
         {
             "life_style": "다이어트를 하는 사람",

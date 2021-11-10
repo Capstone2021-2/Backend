@@ -75,7 +75,7 @@ class NutritionFactViewSet(viewsets.ModelViewSet):
     serializer_class = NutritionFactSerializer
     permission_classes = [permissions.AllowAny]
 
-class NutritionFactDetail(APIView):
+class NutritionFactNutrientToSupplement(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get_object(self, nutrient):
@@ -87,6 +87,35 @@ class NutritionFactDetail(APIView):
     def get(self, request, nutrient, format=None):
         nutrition = self.get_object(nutrient)
         serializer = NutritionFactSerializer(nutrition, many=True)  # 결과가 여러개 나오기 때문에 many = True
+        return Response(serializer.data)
+
+# 영양소가 어떤 영양제에 들었는지 검색
+class NutritionFactNutrientToSupplement(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self, nutrient):
+        print("이름 출력:", nutrient)
+        try:
+            return NutritionFact.objects.all().filter(nutrient=nutrient)  # 여러 데이터 전달하기 위해
+        except NutritionFact.DoesNotExist:
+            raise Http404
+    def get(self, request, nutrient, format=None):
+        nutrition = self.get_object(nutrient)
+        serializer = NutritionFactSerializer(nutrition, many=True)  # 결과가 여러개 나오기 때문에 many = True
+        return Response(serializer.data)
+
+# 영양제에 무슨 영양소 들었는지 검색
+class NutritionFactSupplementToNutrient(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self, supplement):
+        try:
+            return NutritionFact.objects.all().filter(supplement=supplement)  # 여러 데이터 전달하기 위해
+        except NutritionFact.DoesNotExist:
+            raise Http404
+    def get(self, request, supplement, format=None):
+        supplement = self.get_object(supplement)
+        serializer = NutritionFactSerializer(supplement, many=True)  # 결과가 여러개 나오기 때문에 many = True
         return Response(serializer.data)
 
 class OrganViewSet(viewsets.ModelViewSet):

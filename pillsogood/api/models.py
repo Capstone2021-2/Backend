@@ -37,6 +37,9 @@ class Supplement(models.Model):
     # Review에 관련된 정보
     avg_rating = models.FloatField(default=0.0)
     review_num = models.IntegerField(default=0)
+    taking_num = models.IntegerField(default=0)
+    # 복용중인 사람 수
+    
     nuntrient = models.ManyToManyField(
         Nutrient,
         through='NutritionFact'
@@ -146,6 +149,13 @@ class Review(models.Model):
 
     def __str__(self):
         return '{} : {} ({}) '.format(self.user_pk, self.supplement_pk, self.rating)
+
+class TakingSupplements(models.Model):
+    user_pk = models.ForeignKey(User, on_delete=models.CASCADE)
+    supplement_pk  =models.ForeignKey(Supplement, on_delete=models.CASCADE)
+
+    def __str(self):
+        return '{}이 복용 중인 영양제: {} '.format(self.user_pk, self.supplement_pk) 
 
 class Age(models.Model):
     age_range = models.CharField(max_length=20)

@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 
 from django.utils.regex_helper import contains
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import views
 from .models import *
 from .serializer import *
@@ -31,14 +32,14 @@ class NutrientViewSet(viewsets.ModelViewSet):
 class NutrientDetail(APIView):
     permission_classes = [permissions.AllowAny]
 
-    def get_object(self, name):
-        print("이름 출력:", name)
+    def get_object(self, nutrient):
+        print("이름 출력:", nutrient)
         try:
-            return Nutrient.objects.get(name=name)
+            return Nutrient.objects.get(name=nutrient)
         except Nutrient.DoesNotExist:
             raise Http404
-    def get(self, request, name, format=None):
-        nutrient = self.get_object(name)
+    def get(self, request, nutrient, format=None):
+        nutrient = self.get_object(nutrient)
         serializer = NutrientSerializer(nutrient)
         return Response(serializer.data)
         
@@ -52,15 +53,80 @@ class SupplementDetail(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get_object(self, name):
-        print("이름 출력:", name)
         try:
             return Supplement.objects.get(name=name)
         except Supplement.DoesNotExist:
             raise Http404
     def get(self, request, name, format=None):
-        supplement = self.get_object(name)
+        supplement = self.get_object(name)  # get_object()를 통해 client가 전달해준 name과 일치하는 영양제 가져옴.
         serializer = SupplementSerializer(supplement)
         return Response(serializer.data)
+
+# 복용 중인 영양제 전체
+class TakingSupplementsViewSet(viewsets.ModelViewSet):
+    queryset = TakingSupplements.objects.all()
+    serializer_class = TakingSupplementsSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+    # POST 부분
+    def create(self, request, *args, **kwargs):
+        supple_pk = request.data['supplement_pk'][0] # 사용자가 보내준 supplement_pk 추출
+        supplement = Supplement.objects.get(pk=supple_pk)  # supple_pk 값으로 supplement 객체 가져오기
+
+        # 현재 복용 중인 수 늘려주기
+        supplement.taking_num += 1
+        supplement.save()
+        return super().create(request, *args, **kwargs)
+
+    # DELETE 부분 (TakingSupplements pk 값으로만 삭제)
+    def destroy(self, request, *args, **kwargs):
+
+        supplement_pk = self.get_object().supplement_pk.pk
+
+        # 현재 복용 중인 수 줄여주기
+        supplement = Supplement.objects.get(pk=supplement_pk)
+        if supplement.taking_num > 0:
+            supplement.taking_num -= 1
+        supplement.save()
+
+        return super().destroy(request, *args, **kwargs)
+
+
+# user pk로 복용중인 영양제 가져오기 & 삭제 하기
+
+class TakingSupplementsUser(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self, user_pk):
+        try:
+            return TakingSupplements.objects.all().filter(user_pk=user_pk)  # 여러 데이터 전달하기 위해
+        except TakingSupplements.DoesNotExist:
+            raise Http404
+    def get(self, request, user_pk, format=None):
+        taking_supplements = self.get_object(user_pk)
+        serializer =TakingSupplementsSerializer(taking_supplements, many=True)  # 결과가 여러개 나오기 때문에 many = True
+        return Response(serializer.data)
+
+    # user_pk와 supplement_pk로 삭제
+    def delete(self, request, **kwargs):
+        if kwargs.get('user_pk') is None or kwargs.get('supplement_pk') is None:
+            return Response("invalid request", status=status.HTTP_400_BAD_REQUEST)
+        else:
+            
+            taking_supplements_objects = TakingSupplements.objects.all().filter(user_pk=kwargs.get('user_pk'))  # 여러 데이터 전달하기 위해
+            taking_supplements_objects = taking_supplements_objects.filter(supplement_pk=kwargs.get('supplement_pk'))
+            print(taking_supplements_objects)
+            taking_supplements_objects.delete()
+
+            # 현재 복용 중인 수 줄여주기
+            supplement = Supplement.objects.get(pk=kwargs.get('supplement_pk'))
+            if supplement.taking_num > 0:
+                supplement.taking_num -= 1
+            supplement.save()
+            return Response("Delete Success", status=status.HTTP_200_OK)
+
+    
 
 class TmpBestSupplements(APIView):
     permission_classes = [permissions.AllowAny]
@@ -70,51 +136,39 @@ class TmpBestSupplements(APIView):
         serializer = SupplementSerializer(supplement, many=True)
         return Response(serializer.data)
 
+# 함유 영양소 전체
 class NutritionFactViewSet(viewsets.ModelViewSet):
     queryset = NutritionFact.objects.all()
     serializer_class = NutritionFactSerializer
     permission_classes = [permissions.AllowAny]
 
+
+# 함유 영양소로 영양제 검색
 class NutritionFactNutrientToSupplement(APIView):
     permission_classes = [permissions.AllowAny]
 
-    def get_object(self, nutrient):
-        print("이름 출력:", nutrient)
+    def get_object(self, nutrient_pk):
+        print("이름 출력:", nutrient_pk)
         try:
-            return NutritionFact.objects.all().filter(nutrient=nutrient)  # 여러 데이터 전달하기 위해
+            return NutritionFact.objects.all().filter(nutrient=nutrient_pk)  # 여러 데이터 전달하기 위해
         except NutritionFact.DoesNotExist:
             raise Http404
-    def get(self, request, nutrient, format=None):
-        nutrition = self.get_object(nutrient)
+    def get(self, request, nutrient_pk, format=None):
+        nutrition = self.get_object(nutrient_pk)
         serializer = NutritionFactSerializer(nutrition, many=True)  # 결과가 여러개 나오기 때문에 many = True
         return Response(serializer.data)
 
-# 영양소가 어떤 영양제에 들었는지 검색
-class NutritionFactNutrientToSupplement(APIView):
-    permission_classes = [permissions.AllowAny]
-
-    def get_object(self, nutrient):
-        print("이름 출력:", nutrient)
-        try:
-            return NutritionFact.objects.all().filter(nutrient=nutrient)  # 여러 데이터 전달하기 위해
-        except NutritionFact.DoesNotExist:
-            raise Http404
-    def get(self, request, nutrient, format=None):
-        nutrition = self.get_object(nutrient)
-        serializer = NutritionFactSerializer(nutrition, many=True)  # 결과가 여러개 나오기 때문에 many = True
-        return Response(serializer.data)
-
-# 영양제에 무슨 영양소 들었는지 검색
+# 영양제로 함유 여양소 검색
 class NutritionFactSupplementToNutrient(APIView):
     permission_classes = [permissions.AllowAny]
 
-    def get_object(self, supplement):
+    def get_object(self, supplement_pk):
         try:
-            return NutritionFact.objects.all().filter(supplement=supplement)  # 여러 데이터 전달하기 위해
+            return NutritionFact.objects.all().filter(supplement=supplement_pk)  # 여러 데이터 전달하기 위해
         except NutritionFact.DoesNotExist:
             raise Http404
-    def get(self, request, supplement, format=None):
-        supplement = self.get_object(supplement)
+    def get(self, request, supplement_pk, format=None):
+        supplement = self.get_object(supplement_pk)
         serializer = NutritionFactSerializer(supplement, many=True)  # 결과가 여러개 나오기 때문에 many = True
         return Response(serializer.data)
 
@@ -176,6 +230,7 @@ class BrandToSupplements(APIView):
         
         return Response(return_list)
 
+
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
@@ -210,21 +265,25 @@ class ReviewViewSet(viewsets.ModelViewSet):
         supplement.review_num += 1
         supplement.save()
         return super().create(request)
-    
+
+
     def destroy(self, request, *args, **kwargs):
-        #print('request.data: ', self.get_object().supplement.pk)
         supplement_pk = self.get_object().supplement_pk.pk
         rating = self.get_object().rating
 
-        # print('request.data: (pk, rating) ', supplement_pk, rating)
-
         # 평균 평점 수정과 리뷰 수 줄여주기
         supplement = Supplement.objects.get(pk=supplement_pk)
-        # print('supplement: ', supplement)
-        avg_rating = (supplement.review_num * supplement.avg_rating - rating) / (supplement.review_num - 1)
-        avg_rating = round(avg_rating, 2)
-        supplement.avg_rating = avg_rating
-        supplement.review_num -= 1
+
+        if (supplement.review_num-1) > 0:
+            avg_rating = (supplement.review_num * supplement.avg_rating - rating) / (supplement.review_num - 1)
+            avg_rating = round(avg_rating, 2)
+            supplement.avg_rating = avg_rating
+            supplement.review_num -= 1
+        elif (supplement.review_num-1)  == 0:
+            supplement.avg_rating = 0
+            supplement.review_num -= 1
+        else:
+            return Response("Nothing to delete", status=status.HTTP_400_BAD_REQUEST)
         supplement.save()
         return super().destroy(request, *args, **kwargs)
 
@@ -232,15 +291,44 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 class ReviewUser(APIView):
     permission_classes = [permissions.AllowAny]
+
     def get_object(self, user_pk):
         try:
             return Review.objects.all().filter(user_pk=user_pk)  # user_pk로 리뷰 filtering
         except Review.DoesNotExist:
             raise Http404
+
     def get(self, request, user_pk, format=None):
         review = self.get_object(user_pk)
         serializer = ReviewSerializer(review, many=True)  # User 한 명이 여러 리뷰를 남겼을 수 있기 떄문에 many = True
         return Response(serializer.data)
+
+    # user_pk와 supplement_pk로 리뷰 삭제
+    def delete(self, request, **kwargs):
+        if kwargs.get('user_pk') is None or kwargs.get('supplement_pk') is None:
+            return Response("invalid request", status=status.HTTP_400_BAD_REQUEST)
+        else:
+            review_objects= Review.objects.all().filter(user_pk=kwargs.get('user_pk')) 
+            review_objects = review_objects.filter(supplement_pk=kwargs.get('supplement_pk'))
+            rating = review_objects[0].rating
+            print(rating)
+            review_objects.delete()
+
+            # 현재 복용 중인 수 줄여주기
+            supplement = Supplement.objects.get(pk=kwargs.get('supplement_pk'))
+            if (supplement.review_num-1) > 0:
+                avg_rating = (supplement.review_num * supplement.avg_rating - rating) / (supplement.review_num - 1)
+                avg_rating = round(avg_rating, 2)
+                supplement.avg_rating = avg_rating
+                supplement.review_num -= 1
+            elif (supplement.review_num-1)  == 0:
+                supplement.avg_rating = 0
+                supplement.review_num -= 1
+            else:
+                return Response("Nothing to delete", status=status.HTTP_400_BAD_REQUEST)
+            supplement.save()
+            return Response("Delete Success", status=status.HTTP_200_OK)
+
 
 class ReviewSupplement(APIView):
     permission_classes = [permissions.AllowAny]
@@ -489,13 +577,6 @@ def is_id_duplicate(request):
             return Response({"isValid": 1}, status=status.HTTP_200_OK)  # Response 객체를 사용하여 client에게 적절한 return type으로 제공
         else:
             return Response({ "isValid": 0}, status=status.HTTP_200_OK)
-
-# @api_view(['POST'])
-# @permission_classes([permissions.AllowAny])
-# def add_review(request):
-#     if request.method == 'POST':
-#         serializer =
-        
 
 
 @api_view(['GET'])

@@ -51,7 +51,7 @@ schema_url_patterns = [
 
     # 복용중인 영양제
     path('taking_supplements/user/<int:user_pk>', views.TakingSupplementsUser.as_view()),  # user별 복용하고 있는 영양제 볼 때
-    path('taking_supplements/delete/<int:user_pk>/<int:supplement_pk>', views.TakingSupplementsUser.as_view()),  # user가 삭제할 때
+    path('taking_supplements/delete/<int:user_pk>/<int:supplement_pk>', views.TakingSupplementsDelete.as_view()),  # user가 삭제할 때
 
     path('tmp_best_supplements/<str:name>', views.TmpBestSupplements.as_view()), 
     path('user/jwt-auth/', obtain_jwt_token),
@@ -106,7 +106,7 @@ urlpatterns = [
 
     # 복용중인 영양제
     path('taking_supplements/user/<int:user_pk>', views.TakingSupplementsUser.as_view()),  # user별 복용하고 있는 영양제 볼 때
-    path('taking_supplements/delete/<int:user_pk>/<int:supplement_pk>', views.TakingSupplementsUser.as_view()),  # user가 삭제할 때
+    path('taking_supplements/delete/<int:user_pk>/<int:supplement_pk>', views.TakingSupplementsDelete.as_view()),  # user가 삭제할 때
 
     path('tmp_best_supplements/<str:name>', views.TmpBestSupplements.as_view()), 
     path('user/jwt-auth/', obtain_jwt_token),

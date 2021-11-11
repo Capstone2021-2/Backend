@@ -62,6 +62,8 @@ class SupplementDetail(APIView):
         serializer = SupplementSerializer(supplement)
         return Response(serializer.data)
 
+
+#--------------------------------------------복용 중인 영양제----------------------------------------------------------
 # 복용 중인 영양제 전체
 class TakingSupplementsViewSet(viewsets.ModelViewSet):
     queryset = TakingSupplements.objects.all()
@@ -72,12 +74,20 @@ class TakingSupplementsViewSet(viewsets.ModelViewSet):
     # POST 부분
     def create(self, request, *args, **kwargs):
         supple_pk = request.data['supplement_pk'][0] # 사용자가 보내준 supplement_pk 추출
+        user_pk = request.data['user_pk'][0]
         supplement = Supplement.objects.get(pk=supple_pk)  # supple_pk 값으로 supplement 객체 가져오기
 
-        # 현재 복용 중인 수 늘려주기
-        supplement.taking_num += 1
-        supplement.save()
-        return super().create(request, *args, **kwargs)
+        obj = TakingSupplements.objects.all().filter(user_pk=user_pk)
+        print('first obj', obj)
+        obj = obj.all().filter(supplement_pk=supple_pk)
+
+        print(obj.count())
+
+        if obj.count() == 0:
+            # 현재 복용 중인 수 늘려주기
+            supplement.taking_num += 1
+            supplement.save()
+            return super().create(request, *args, **kwargs)
 
     # DELETE 부분 (TakingSupplements pk 값으로만 삭제)
     def destroy(self, request, *args, **kwargs):
@@ -126,7 +136,27 @@ class TakingSupplementsUser(APIView):
             supplement.save()
             return Response("Delete Success", status=status.HTTP_200_OK)
 
-    
+class TakingSupplementsDelete(APIView):
+     # user_pk와 supplement_pk로 삭제
+    def delete(self, request, **kwargs):
+        if kwargs.get('user_pk') is None or kwargs.get('supplement_pk') is None:
+            return Response("invalid request", status=status.HTTP_400_BAD_REQUEST)
+        else:
+            
+            taking_supplements_objects = TakingSupplements.objects.all().filter(user_pk=kwargs.get('user_pk'))  # 여러 데이터 전달하기 위해
+            taking_supplements_objects = taking_supplements_objects.filter(supplement_pk=kwargs.get('supplement_pk'))
+            print(taking_supplements_objects)
+            taking_supplements_objects.delete()
+
+            # 현재 복용 중인 수 줄여주기
+            supplement = Supplement.objects.get(pk=kwargs.get('supplement_pk'))
+            if supplement.taking_num > 0:
+                supplement.taking_num -= 1
+            supplement.save()
+            return Response("Delete Success", status=status.HTTP_200_OK)
+
+#--------------------------------------------복용 중인 영양제----------------------------------------------------------
+
 
 class TmpBestSupplements(APIView):
     permission_classes = [permissions.AllowAny]

@@ -280,14 +280,22 @@ class ReviewViewSet(viewsets.ModelViewSet):
         height = user_object.height  # 키
         weight = user_object.weight  # 몸무게
 
+        supplement = Supplement.objects.get(pk=supple_pk)  # 영양제 이름
+        name = supplement.name
+        company = supplement.company
+
+
+
         # request.data 값 추가해주기
         request.data.__setitem__('age_pk', age.pk)  # age pk 값 추가
         request.data.__setitem__('bodytype_pk', bodytype.pk)  # body_type pk 값 추가
         request.data.__setitem__('height', height)  # age pk 값 추가
         request.data.__setitem__('weight', weight)  # age pk 값 추가
 
+        request.data.__setitem__('supplement', name)
+        request.data.__setitem__('company', company)
 
-        supplement = Supplement.objects.get(pk=supple_pk)
+
         # 평균 평점 수정과 리뷰 수 늘려주기
         avg_rating = (supplement.review_num * supplement.avg_rating + rating) / (supplement.review_num + 1)
         avg_rating = round(avg_rating, 2)

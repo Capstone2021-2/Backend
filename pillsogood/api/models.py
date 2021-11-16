@@ -137,6 +137,8 @@ class Review(models.Model):
     # user_nickname = models.CharField(max_length=30)
     # supplement = models.CharField(max_length=100)
     user_pk = models.ForeignKey(User, on_delete=models.CASCADE)
+    supplement = models.CharField(max_length=50)
+    company = models.CharField(max_length=50)
     supplement_pk = models.ForeignKey(Supplement, on_delete=models.CASCADE)
     bodytype_pk = models.ForeignKey('BodyType', blank=True, null=True, on_delete=models.CASCADE)
     age_pk = models.ForeignKey('Age', blank=True, null= True, on_delete=models.CASCADE)

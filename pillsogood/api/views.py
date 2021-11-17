@@ -269,16 +269,17 @@ class ReviewViewSet(viewsets.ModelViewSet):
     # custom 
     def create(self, request):
         request.data._mutable = True
-        supple_pk = request.data['supplement_pk'][0]
         # print(supple_pk)
         rating = int(request.data['rating'][0])
-        user_pk = request.data['user_pk'][0]  # User의 나이, 키, 몸무게르 획득할 수 있음.
+        supple_pk = request.data['supplement_pk'][0]
+        user_pk = request.data['user_pk'][0]  # User의 나이, 키, 몸무게, 성별을 획득할 수 있음.
         user_object = User.objects.get(pk=user_pk)  # User 객체 가져오기
 
         age = user_object.age  # 나이
         bodytype = user_object.body_type  # 체질
         height = user_object.height  # 키
         weight = user_object.weight  # 몸무게
+        gender = user_object.gender
 
         supplement = Supplement.objects.get(pk=supple_pk)  # 영양제 이름
         name = supplement.name
@@ -288,9 +289,12 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
         # request.data 값 추가해주기
         request.data.__setitem__('age_pk', age.pk)  # age pk 값 추가
+        request.data.__setitem__('age', age.age_range)  # age 값 추가
         request.data.__setitem__('bodytype_pk', bodytype.pk)  # body_type pk 값 추가
-        request.data.__setitem__('height', height)  # age pk 값 추가
-        request.data.__setitem__('weight', weight)  # age pk 값 추가
+        request.data.__setitem__('bodytype', bodytype.body_type)  # body_type 값 추가
+        request.data.__setitem__('height', height)  # 키
+        request.data.__setitem__('weight', weight)  # 몸무게
+        request.data.__setitem__('gender', gender)  # gender 추가
 
         request.data.__setitem__('supplement', name)
         request.data.__setitem__('company', company)

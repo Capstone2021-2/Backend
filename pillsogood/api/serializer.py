@@ -51,7 +51,11 @@ class BrandSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ['pk', 'user_pk', 'supplement_pk','supplement', 'company', 'bodytype_pk', 'age_pk', 'height', 'weight', 'rating', 'time', 'image', 'text']
+        fields = [
+            'pk', 'user_pk', 'supplement_pk','supplement', 
+            'gender','company', 'bodytype_pk', 'bodytype',
+            'age_pk', 'age', 'height', 'weight', 'rating', 'time', 'image', 'text'
+            ]
 
 class AgeSerializer(serializers.ModelSerializer):
     class Meta:

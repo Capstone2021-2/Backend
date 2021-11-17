@@ -23,8 +23,10 @@ router.register(r'body_types', views.BodyTypeViewSet, basename='body_types')  # 
 router.register(r'life_styles', views.LifeStyleViewSet, basename='life_styles')  # 라이프 스타일
 router.register(r'good_for_life_styles', views.GoodForLifeStyleViewSet, basename='good_for_lifestyles')  # 라이프 스타일에 맞는 영양소
 router.register(r'taking_supplements', views.TakingSupplementsViewSet, basename='taking_supplements')  # 복용 중인 영양제 
+#router.register(r'user_edit', views.UserEdit, basename='user_edit')  # 유저 변경
 # router.register(r'age_nutrients', views.SupplementViewSet)
 
+# swagger를 위한 것
 schema_url_patterns = [ 
     # path('', include(router.urls)),  # include는 폴더 자체를 저장하는 것임.
     path('nutrients/name/<str:nutrient>', views.NutrientDetail.as_view()),  # (영양소 pk가 아니라) 영양소 이름으로 영양소검색
@@ -118,6 +120,7 @@ urlpatterns = [
     path('user/login', views.login),
     path('user/find-id/', views.find_id),
     path('user/duplicate-id', views.is_id_duplicate),
+    path('user/edit', views.edit_user),
 
     # path('user/current/', views.current_user),
     path('user/dj-rest-auth/', include('dj_rest_auth.urls')),

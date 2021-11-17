@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 
 from django.utils.regex_helper import contains
+from django.utils.timezone import get_default_timezone
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import views
 from .models import *
@@ -61,6 +62,16 @@ class SupplementDetail(APIView):
         supplement = self.get_object(name)  # get_object()를 통해 client가 전달해준 name과 일치하는 영양제 가져옴.
         serializer = SupplementSerializer(supplement)
         return Response(serializer.data)
+
+class UserEdit(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def update(self, request, *args, **kwargs):
+        user_pk = request.data['user_pk'][0]
+        print(user_pk)
+        return super().update(request, *args, **kwargs)
 
 
 #--------------------------------------------복용 중인 영양제----------------------------------------------------------
@@ -617,6 +628,50 @@ def is_id_duplicate(request):
 
         if result_cnt == 0:
             return Response({"isValid": 1}, status=status.HTTP_200_OK)  # Response 객체를 사용하여 client에게 적절한 return type으로 제공
+        else:
+            return Response({ "isValid": 0}, status=status.HTTP_200_OK)
+
+# 아이디 중복 확인용
+@api_view(['POST'])  # @api_view는 함수형 view를 사용할 때 사용
+@permission_classes([permissions.AllowAny])
+def edit_user(request):
+    user = None
+    gender = None
+    height = None
+    weight = None
+    age = None
+    body_type = None 
+    if request.method == 'POST':
+        serializer = UserEditSerializer(data=request.data)  # Request 객체인 request를 사용하여 request.data (POST, PUT, PATCH 사용 가능)
+        if not serializer.is_valid(raise_exception=True):
+            return Response({"message": "Request Body Error."}, status=status.HTTP_409_CONFLICT)
+
+        user = User.objects.get(pk=serializer.data['user_pk'])
+        
+        if serializer.data['gender'] != None:
+            gender = serializer.data['gender']
+            user.gender = gender
+        if serializer.data['height'] != None:
+            height = serializer.data['height']
+            user.height = height
+        if serializer.data['weight'] != None:
+            weight = serializer.data['weight']
+            user.weight = weight
+        if serializer.data['age'] != None:
+            age = serializer.data['age']
+            age = Age.objects.filter(age_range=age)
+            user.age = age[0]
+        if serializer.data['body_type'] != None:
+            body_type = serializer.data['body_type']
+            body_type = BodyType.objects.filter(body_type=body_type)
+            user.body_type = body_type[0]
+
+            
+
+        if user != None:
+            user.save()
+            return Response({"isValid": 1}, status=status.HTTP_200_OK)  # Response 객체를 사용하여 client에게 적절한 return type으로 제공
+
         else:
             return Response({ "isValid": 0}, status=status.HTTP_200_OK)
 

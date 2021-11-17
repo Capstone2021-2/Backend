@@ -2,16 +2,16 @@ from api.models import BodyType
 
 def run():
     # 체질 추가
-    BodyType.objects.create(body_type='금양')
-    BodyType.objects.create(body_type='금음')
+    BodyType.objects.create(body_type='열태양')
+    BodyType.objects.create(body_type='한태양')
 
-    BodyType.objects.create(body_type='수양')
-    BodyType.objects.create(body_type='수음')
+    BodyType.objects.create(body_type='열소음')
+    BodyType.objects.create(body_type='한소음')
 
-    BodyType.objects.create(body_type='토음')
-    BodyType.objects.create(body_type='토양')
+    BodyType.objects.create(body_type='열소양')
+    BodyType.objects.create(body_type='한소양')
 
-    BodyType.objects.create(body_type='목음')
-    BodyType.objects.create(body_type='목양')
+    BodyType.objects.create(body_type='열태음')
+    BodyType.objects.create(body_type='한태음')
 
 

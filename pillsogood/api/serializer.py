@@ -89,7 +89,37 @@ class IsIdDuplicateSerializer(serializers.Serializer):
             return {'login_id' : 'None'}
         else:
             return { 'login_id' : login_id }
-            
+
+class UserEditSerializer(serializers.Serializer):
+    user_pk = serializers.CharField(max_length=10)
+    gender = serializers.CharField(max_length=10, required=False)
+    height = serializers.CharField(max_length=10, required=False)
+    weight = serializers.CharField(max_length=10, required=False)
+    age = serializers.CharField(max_length=10, required=False)
+    body_type = serializers.CharField(max_length=10, required=False)
+
+    def validate(self, data):
+        user_pk = data.get("user_pk", None)
+        gender = data.get("gender", None)
+        height = data.get("height", None)
+        weight = data.get("weight", None)
+        age = data.get("age", None)
+        body_type = data.get("body_type", None)
+
+        
+
+        if user_pk is None:
+            return {'user_pk' : 'None'}
+        else:
+            return { 
+                'user_pk' : user_pk,
+                'gender' :gender,
+                'height' : height,
+                'weight' : weight,
+                'age' : age,
+                'body_type' : body_type
+                }
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

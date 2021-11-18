@@ -733,13 +733,19 @@ def login(request):
         # if serializer.validated_data['nickname'] == "None": # nickname required
         #     return Response({'message': 'fail'}, status=status.HTTP_200_OK)
         result = User.objects.filter(login_id=serializer.data['login_id'])
+
+        print('age', Age.objects.filter(age_range=result[0].age)[0].age_range)
         response = {
             'success': True,
             'token': serializer.data['token'], # 시리얼라이저에서 받은 토큰 전달
             'login_id': serializer.data['login_id'],
             'email': result[0].email,
             'nickname': result[0].nickname,
-            'pk' : result[0].pk
+            'pk' : result[0].pk,
+            'gender' : result[0].gender,
+            'age' : Age.objects.filter(age_range=result[0].age)[0].age_range,
+            'bodytype' : BodyType.objects.filter(body_type=result[0].body_type)[0].body_type
+
         }
         return Response(response, status=status.HTTP_200_OK)
 

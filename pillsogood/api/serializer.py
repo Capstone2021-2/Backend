@@ -179,8 +179,9 @@ class UserLoginSerializer(serializers.Serializer):
         password = data.get("password", None)
         # email = data.get("email", None)
         # nickname = data.get("nickname", None)
-        # print(login_id)
-        # print(password)
+        # print(data) 
+        print(login_id)
+        print(password)
         user = authenticate(login_id=login_id, password=password)  # email, nickname
         # print('user info: ', user)
         if user is None:

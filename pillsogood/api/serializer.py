@@ -52,7 +52,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = [
-            'pk', 'user_pk', 'supplement_pk','supplement', 
+            'pk', 'user_pk', 'nickname', 'supplement_pk','supplement', 
             'gender','company', 'bodytype_pk', 'bodytype',
             'age_pk', 'age', 'height', 'weight', 'rating', 'time', 'image', 'text'
             ]

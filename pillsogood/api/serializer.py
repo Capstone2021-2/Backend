@@ -183,7 +183,7 @@ class UserLoginSerializer(serializers.Serializer):
         print(login_id)
         print(password)
         user = authenticate(login_id=login_id, password=password)  # email, nickname
-        # print('user info: ', user)
+        print('user info: ', user)
         if user is None:
             return {
                 'login_id' : 'None'

@@ -42,12 +42,12 @@
           "-self-closing": "true"
         },
         "LAST_UPDT_DTM": "20210924",
-        "INTK_UNIT": "mg",
+        "INTK_UNIT": "µg",
         "IFTKN_ATNT_MATR_CN": "(1) 이상사례 발생 시 섭취를 중단하고 전문가와 상담할 것",
-        "DAY_INTK_HIGHLIMIT": "0.9",
+        "DAY_INTK_HIGHLIMIT": "900",
         "PRDCT_NM": "비오틴",
         "CRET_DTM": "20080626",
-        "DAY_INTK_LOWLIMIT": "0.009",
+        "DAY_INTK_LOWLIMIT": "9",
         "PRIMARY_FNCLTY": "(1) 지방, 탄수화물, 단백질 대사와 에너지 생성에 필요",
         "INTK_MEMO": {
           "-self-closing": "true"
@@ -3122,14 +3122,14 @@
           "-self-closing": "true"
         },
         "LAST_UPDT_DTM": "20200521",
-        "INTK_UNIT": "mg",
+        "INTK_UNIT": "µg",
         "IFTKN_ATNT_MATR_CN": {
           "-self-closing": "true"
         },
-        "DAY_INTK_HIGHLIMIT": "0.135",
+        "DAY_INTK_HIGHLIMIT": "135",
         "PRDCT_NM": "셀레늄",
         "CRET_DTM": "20080626",
-        "DAY_INTK_LOWLIMIT": "0.0165",
+        "DAY_INTK_LOWLIMIT": "16.5",
         "PRIMARY_FNCLTY": "①유해산소로부터 세포를 보호하는데 필요",
         "INTK_MEMO": {
           "-self-closing": "true"
@@ -3141,14 +3141,14 @@
           "-self-closing": "true"
         },
         "LAST_UPDT_DTM": "20080626",
-        "INTK_UNIT": "mg",
+        "INTK_UNIT": "µg",
         "IFTKN_ATNT_MATR_CN": {
           "-self-closing": "true"
         },
-        "DAY_INTK_HIGHLIMIT": "0.15",
+        "DAY_INTK_HIGHLIMIT": "150",
         "PRDCT_NM": "요오드",
         "CRET_DTM": "20080626",
-        "DAY_INTK_LOWLIMIT": "0.045",
+        "DAY_INTK_LOWLIMIT": "45",
         "PRIMARY_FNCLTY": "①갑상선 호르몬의 합성에 필요②에너지 생성에 필요③신경발달에 필요",
         "INTK_MEMO": {
           "-self-closing": "true"
@@ -3179,14 +3179,14 @@
           "-self-closing": "true"
         },
         "LAST_UPDT_DTM": "20200820",
-        "INTK_UNIT": "mg",
+        "INTK_UNIT": "µg",
         "IFTKN_ATNT_MATR_CN": {
           "-self-closing": "true"
         },
-        "DAY_INTK_HIGHLIMIT": "0.23",
+        "DAY_INTK_HIGHLIMIT": "230",
         "PRDCT_NM": "몰리브덴",
         "CRET_DTM": "20080626",
-        "DAY_INTK_LOWLIMIT": "0.0075",
+        "DAY_INTK_LOWLIMIT": "7.5",
         "PRIMARY_FNCLTY": "-산화·환원 효소의 활성에 필요",
         "INTK_MEMO": {
           "-self-closing": "true"

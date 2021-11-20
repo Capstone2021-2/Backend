@@ -142,6 +142,7 @@ class Review(models.Model):
     gender = models.CharField(max_length=10)
     supplement = models.CharField(max_length=50)
     company = models.CharField(max_length=50)
+    tmp_id = models.IntegerField()
     supplement_pk = models.ForeignKey(Supplement, on_delete=models.CASCADE)
     bodytype_pk = models.ForeignKey('BodyType', blank=True, null=True, on_delete=models.CASCADE)
     bodytype = models.CharField(max_length=10)

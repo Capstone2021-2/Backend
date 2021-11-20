@@ -294,6 +294,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
         gender = user_object.gender
 
         supplement = Supplement.objects.get(pk=supple_pk)  # 영양제 이름
+        tmp_id = supplement.tmp_id
         name = supplement.name
         company = supplement.company
 
@@ -310,6 +311,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
         request.data.__setitem__('gender', gender)  # gender 추가
 
         request.data.__setitem__('supplement', name)
+        request.data.__setitem__('tmp_id', tmp_id)  # tmp_id 추가
         request.data.__setitem__('company', company)
 
 

@@ -63,15 +63,15 @@ class SupplementDetail(APIView):
         serializer = SupplementSerializer(supplement)
         return Response(serializer.data)
 
-class UserEdit(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = ReviewSerializer
-    permission_classes = [permissions.AllowAny]
+# class UserEdit(viewsets.ModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = ReviewSerializer
+#     permission_classes = [permissions.AllowAny]
 
-    def update(self, request, *args, **kwargs):
-        user_pk = request.data['user_pk'][0]
-        print(user_pk)
-        return super().update(request, *args, **kwargs)
+#     def update(self, request, *args, **kwargs):
+#         user_pk = request.data['user_pk'][0]
+#         print(user_pk)
+#         return super().update(request, *args, **kwargs)
 
 
 #--------------------------------------------복용 중인 영양제----------------------------------------------------------
@@ -635,7 +635,7 @@ def is_id_duplicate(request):
         else:
             return Response({ "isValid": 0}, status=status.HTTP_200_OK)
 
-# 아이디 중복 확인용
+# 유저 수정하기
 @api_view(['POST'])  # @api_view는 함수형 view를 사용할 때 사용
 @permission_classes([permissions.AllowAny])
 def edit_user(request):
@@ -735,6 +735,15 @@ def login(request):
         # if serializer.validated_data['nickname'] == "None": # nickname required
         #     return Response({'message': 'fail'}, status=status.HTTP_200_OK)
         result = User.objects.filter(login_id=serializer.data['login_id'])
+
+        age = ""
+        bodytype = ""
+
+        if Age.objects.filter(age_range=result[0].age).count() != 0:
+
+            age = Age.objects.filter(age_range=result[0].age)[0].age_range
+        if BodyType.objects.filter(body_type=result[0].body_type).count() != 0:
+            bodytype = BodyType.objects.filter(body_type=result[0].body_type)[0].body_type
         response = {
             'success': True,
             'token': serializer.data['token'], # 시리얼라이저에서 받은 토큰 전달
@@ -743,8 +752,8 @@ def login(request):
             'nickname': result[0].nickname,
             'pk' : result[0].pk,
             'gender' : result[0].gender,
-            'age' : Age.objects.filter(age_range=result[0].age)[0].age_range,
-            'bodytype' : BodyType.objects.filter(body_type=result[0].body_type)[0].body_type
+            'age' : age,
+            'bodytype' : bodytype,
         }
         return Response(response, status=status.HTTP_200_OK)
 

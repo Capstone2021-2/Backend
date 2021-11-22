@@ -81,15 +81,17 @@ class SupplementViewSet(viewsets.ModelViewSet):
     serializer_class = SupplementSerializer
     permission_classes = [permissions.AllowAny]
 
-
         # GET api/nutrients/pk 재정의 
     def retrieve(self, request, *args, **kwargs):
+        request
         supplement = self.get_object()
+        print('hi')
         supplement.search_count += 1
         supplement.save()
         
         return super().retrieve(request, *args, **kwargs)
 
+    # api/nutrients/top_search
     @action(detail=False)
     def top_search(self, request):
         qs = self.queryset.order_by('-search_count')[:1]   # 조회 수으로 다시 정렬

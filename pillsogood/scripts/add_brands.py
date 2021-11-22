@@ -6,10 +6,9 @@ def run():
     with open('scripts/01.json') as json_file:
         data = json.load(json_file)
     
-    print(len)
 
     for num in range(len(data['C003']['row'])):
-        
+        id = data['C003']['row'][num]['-id']
         company = data['C003']['row'][num]["BSSH_NM"]
 
         if '(주)' in company:

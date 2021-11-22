@@ -15,6 +15,7 @@ from rest_framework import permissions, status, generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import action
 import django_filters.rest_framework
 
 #--------------------------클래스형 view--------------------------
@@ -25,10 +26,38 @@ class MainNutrientViewSet(viewsets.ModelViewSet):
 
 # APIView는 클래스형 view를 사용할 때 사용
 class NutrientViewSet(viewsets.ModelViewSet):
-    queryset = Nutrient.objects.all()
+    queryset = Nutrient.objects.all().order_by('-search_count')
     serializer_class = NutrientSerializer
     permission_classes = [permissions.AllowAny]
     # permission_classes = [permissions.IsAuthenticated]
+
+
+    # GET api/nutrients/pk 재정의 
+    def retrieve(self, request, *args, **kwargs):
+        nutrient = self.get_object()
+        nutrient.search_count += 1
+        nutrient.save()
+        
+        return super().retrieve(request, *args, **kwargs)
+
+    @action(detail=False)
+    def top_search(self, request):
+        qs = self.queryset[:4]
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
+
+    # 이번에 쓰진 않을 것임. 이렇게 한다는 것 적어둔 것.
+    # search count 추가해주는 함수 정의
+    # @action(detail=True)
+    # def search(self, request, pk):
+    #     print(pk)
+    #     nutrient = self.get_object()
+    #     nutrient.search_count += 1
+    #     nutrient.save()
+
+    #     serializer = self.get_serializer(nutrient)
+
+    #     return Response(serializer.data)
 
 class NutrientDetail(APIView):
     permission_classes = [permissions.AllowAny]
@@ -41,6 +70,8 @@ class NutrientDetail(APIView):
             raise Http404
     def get(self, request, nutrient, format=None):
         nutrient = self.get_object(nutrient)
+        nutrient.search_count += 1
+        nutrient.save()
         serializer = NutrientSerializer(nutrient)
         return Response(serializer.data)
         
@@ -49,6 +80,21 @@ class SupplementViewSet(viewsets.ModelViewSet):
     queryset = Supplement.objects.all().order_by('name')
     serializer_class = SupplementSerializer
     permission_classes = [permissions.AllowAny]
+
+
+        # GET api/nutrients/pk 재정의 
+    def retrieve(self, request, *args, **kwargs):
+        supplement = self.get_object()
+        supplement.search_count += 1
+        supplement.save()
+        
+        return super().retrieve(request, *args, **kwargs)
+
+    @action(detail=False)
+    def top_search(self, request):
+        qs = self.queryset.order_by('-search_count')[:1]   # 조회 수으로 다시 정렬
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
 
 class SupplementDetail(APIView):
     permission_classes = [permissions.AllowAny]
@@ -60,6 +106,8 @@ class SupplementDetail(APIView):
             raise Http404
     def get(self, request, name, format=None):
         supplement = self.get_object(name)  # get_object()를 통해 client가 전달해준 name과 일치하는 영양제 가져옴.
+        supplement.search_count += 1
+        supplement.save()
         serializer = SupplementSerializer(supplement)
         return Response(serializer.data)
 

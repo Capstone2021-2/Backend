@@ -10,6 +10,7 @@ class Nutrient(models.Model):
     lower = models.FloatField(blank=True, null=True)
     unit = models.CharField(max_length=20)
     tmp_id = models.CharField(max_length=30)
+    search_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -33,6 +34,7 @@ class Supplement(models.Model):
     pri_func = models.CharField(max_length=500)
     raw_material = models.CharField(max_length=500)
     tmp_id = models.CharField(max_length=30)  # 01.json 파일에 적혀 있는 -id 값임
+    search_count = models.IntegerField(default=0)  # 조회 수 
     
     # Review에 관련된 정보
     avg_rating = models.FloatField(default=0.0)

@@ -17,6 +17,7 @@ def run():
             lowlimit = data['I2710']['row'][num]['DAY_INTK_LOWLIMIT']
             unit = data['I2710']['row'][num]['INTK_UNIT']
             tmp_id = data['I2710']['row'][num]["-id"]
+            search_count = 0
 
             # New라는 부분 없애기
             if 'New' in prdct_nm:
@@ -39,6 +40,6 @@ def run():
                 Nutrient.objects.filter(name=prdct_nm)[0]
             except:
                 # create(테이블 속성명 = 위에 변수)
-                Nutrient.objects.create(name=prdct_nm, upper=highlimit, lower=lowlimit, unit=unit, tmp_id=tmp_id)
+                Nutrient.objects.create(name=prdct_nm, upper=highlimit, lower=lowlimit, unit=unit, tmp_id=tmp_id, search_count=search_count)
     except IndexError:
         pass

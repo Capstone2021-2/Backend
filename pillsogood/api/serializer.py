@@ -7,7 +7,7 @@ from rest_framework_jwt.settings import api_settings
 class NutrientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nutrient
-        fields = ['pk', 'name', 'upper', 'lower', 'unit']
+        fields = ['pk', 'name', 'upper', 'lower', 'unit', 'search_count']
 
 class MainNutrientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,7 +20,8 @@ class SupplementSerializer(serializers.ModelSerializer):
         model = Supplement
         fields = [
             'pk', 'name', 'company', 'exp_date', 'dispos', 'sug_use', 
-            'warning', 'pri_func', 'raw_material','tmp_id', 'avg_rating', 'review_num'
+            'warning', 'pri_func', 'raw_material','tmp_id', 'avg_rating', 'review_num',
+            'search_count', 'taking_num'
             ]
 
 class NutritionFactSerializer(serializers.ModelSerializer):

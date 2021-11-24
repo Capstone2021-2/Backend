@@ -9,6 +9,11 @@ class NutrientSerializer(serializers.ModelSerializer):
         model = Nutrient
         fields = ['pk', 'name', 'upper', 'lower', 'unit', 'search_count']
 
+class TopNutrientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Nutrient
+        fields = ['pk', 'name']
+
 class MainNutrientSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainNutrient
@@ -23,6 +28,12 @@ class SupplementSerializer(serializers.ModelSerializer):
             'warning', 'pri_func', 'raw_material','tmp_id', 'avg_rating', 'review_num',
             'search_count', 'taking_num'
             ]
+
+class TopSupplementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Supplement
+        fields = ['pk', 'tmp_id', 'name', 'company', 'avg_rating', 'taking_num']
+
 
 class NutritionFactSerializer(serializers.ModelSerializer):
     class Meta:

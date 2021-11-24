@@ -27,10 +27,17 @@ class MainNutrientViewSet(viewsets.ModelViewSet):
 # APIView는 클래스형 view를 사용할 때 사용
 class NutrientViewSet(viewsets.ModelViewSet):
     queryset = Nutrient.objects.all().order_by('-search_count')
+    
     serializer_class = NutrientSerializer
     permission_classes = [permissions.AllowAny]
-    # permission_classes = [permissions.IsAuthenticated]
 
+    # 상황에 따라 다른 serializer를 사용하기 위한 오버라이딩
+    def get_serializer_class(self):
+        if self.request.get_full_path_info() == '/api/nutrients/top_search/':
+            self.serializer_class = TopNutrientSerializer
+        else:
+            self.serializer_class = NutrientSerializer
+        return super().get_serializer_class()
 
     # GET api/nutrients/pk 재정의 
     def retrieve(self, request, *args, **kwargs):
@@ -80,6 +87,15 @@ class SupplementViewSet(viewsets.ModelViewSet):
     queryset = Supplement.objects.all().order_by('name')
     serializer_class = SupplementSerializer
     permission_classes = [permissions.AllowAny]
+
+
+        # 상황에 따라 다른 serializer를 사용하기 위한 오버라이딩
+    def get_serializer_class(self):
+        if self.request.get_full_path_info() == '/api/supplements/top_search/':
+            self.serializer_class = TopSupplementSerializer
+        else:
+            self.serializer_class = SupplementSerializer
+        return super().get_serializer_class()
 
         # GET api/nutrients/pk 재정의 
     def retrieve(self, request, *args, **kwargs):

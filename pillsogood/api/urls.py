@@ -22,7 +22,8 @@ router.register(r'ages', views.AgeViewSet, basename='ages')  # 나이
 router.register(r'body_types', views.BodyTypeViewSet, basename='body_types')  # 체질
 router.register(r'life_styles', views.LifeStyleViewSet, basename='life_styles')  # 라이프 스타일
 router.register(r'good_for_life_styles', views.GoodForLifeStyleViewSet, basename='good_for_lifestyles')  # 라이프 스타일에 맞는 영양소
-router.register(r'taking_supplements', views.TakingSupplementsViewSet, basename='taking_supplements')  # 복용 중인 영양제 
+router.register(r'taking_supplements', views.TakingSupplementsViewSet, basename='taking_supplements')  # 복용 중인 영양제
+#router.register(r'search', views.SearchSet, basename='search')  # 영양소, 영양제, 브랜드 검색 기능
 #router.register(r'user_edit', views.UserEdit, basename='user_edit')  # 유저 변경
 # router.register(r'age_nutrients', views.SupplementViewSet)
 
@@ -54,6 +55,9 @@ schema_url_patterns = [
     # 복용중인 영양제
     path('taking_supplements/user/<int:user_pk>', views.TakingSupplementsUser.as_view()),  # user별 복용하고 있는 영양제 볼 때
     path('taking_supplements/delete/<int:user_pk>/<int:supplement_pk>', views.TakingSupplementsDelete.as_view()),  # user가 삭제할 때
+
+    # 검색
+    path('search/<str:search_name>', views.SearchSet.as_view()),  # search_name으로 해당 영양소, 영양제, 브랜드 검색
 
     path('tmp_best_supplements/<str:name>', views.TmpBestSupplements.as_view()), 
     path('user/jwt-auth/', obtain_jwt_token),
@@ -109,6 +113,9 @@ urlpatterns = [
     # 복용중인 영양제
     path('taking_supplements/user/<int:user_pk>', views.TakingSupplementsUser.as_view()),  # user별 복용하고 있는 영양제 볼 때
     path('taking_supplements/delete/<int:user_pk>/<int:supplement_pk>', views.TakingSupplementsDelete.as_view()),  # user가 삭제할 때
+
+    # 검색
+    path('search/<str:search_name>', views.SearchSet.as_view()),  # search_name으로 해당 영양소, 영양제, 브랜드 검색
 
     path('tmp_best_supplements/<str:name>', views.TmpBestSupplements.as_view()), 
     path('user/jwt-auth/', obtain_jwt_token),

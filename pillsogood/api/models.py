@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
 
 class Nutrient(models.Model):
+    type = models.IntegerField(default=0)
     name = models.CharField(max_length=100)
     upper = models.FloatField(blank=True, null=True)
     lower = models.FloatField(blank=True, null=True)
@@ -22,8 +23,8 @@ class MainNutrient(models.Model):
     def __str__(self):
         return '{}'.format(self.name)
 
-
 class Supplement(models.Model):
+    type = models.IntegerField(default=1)
     name = models.CharField(max_length=100)
     image = models.ImageField(blank=True, null=True)
     company = models.CharField(max_length=50)
@@ -46,17 +47,9 @@ class Supplement(models.Model):
         Nutrient,
         through='NutritionFact'
     )
-    # user_review = models.ManyToManyField(
-    #     'User',
-    #     through='Review'
-    # )
 
     def __str__(self):
         return self.name
-
-    # def __eq__(self, other):
-    #     return self.pk == other.pk
-        
 
 
 class NutritionFact(models.Model):
@@ -68,6 +61,7 @@ class NutritionFact(models.Model):
         return '{} : {}  {} '.format(self.supplement, self.nutrient, self.amount)
 
 class Brand(models.Model):
+    type = models.IntegerField(default=2)
     name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -246,3 +240,5 @@ class GoodForLifeStyle(models.Model):
 
     def __str__(self):
         return '{} : {} '.format(self.life_style, self.nutrient)
+
+

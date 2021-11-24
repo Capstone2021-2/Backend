@@ -101,7 +101,6 @@ class SupplementViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         request
         supplement = self.get_object()
-        print('hi')
         supplement.search_count += 1
         supplement.save()
         
@@ -129,24 +128,50 @@ class SupplementDetail(APIView):
         serializer = SupplementSerializer(supplement)
         return Response(serializer.data)
 
-# class UserEdit(viewsets.ModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = ReviewSerializer
-#     permission_classes = [permissions.AllowAny]
+class SearchSet(APIView):
 
-#     def update(self, request, *args, **kwargs):
-#         user_pk = request.data['user_pk'][0]
-#         print(user_pk)
-#         return super().update(request, *args, **kwargs)
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, search_name, format=None):
+        search_name2 = search_name.replace(' ', '')
+        supplement_list = Supplement.objects.all().filter(name__icontains=search_name) | Supplement.objects.all().filter(name__icontains=search_name2)
+        nutrient_list = Nutrient.objects.all().filter(name__icontains=search_name)
+        brand_list = Brand.objects.all().filter(name__icontains=search_name)
+
+        return_list = []
+    
+        for num in range(supplement_list.count()):
+            try:
+                supplement_obj = supplement_list[num]
+                serializer = SearchSupplementSerializer(supplement_obj)
+                return_list.append(serializer.data)
+            except IndexError:
+                pass
+        for num in range(nutrient_list.count()):
+            try:
+                nutrient_obj = nutrient_list[num]
+                serializer = SearchNutrientSerializer(nutrient_obj)
+                return_list.append(serializer.data)
+            except IndexError:
+                pass
+
+        for num in range(brand_list.count()):
+            try:
+                brand_obj = brand_list[num]
+                serializer = SearchBrandSerializer(brand_obj)
+                return_list.append(serializer.data)
+            except IndexError:
+                pass
+
+        return Response(return_list)
 
 
-#--------------------------------------------복용 중인 영양제----------------------------------------------------------
+#--------------------------------------------복용 중인 영양제 관련 API----------------------------------------------------------
 # 복용 중인 영양제 전체
 class TakingSupplementsViewSet(viewsets.ModelViewSet):
     queryset = TakingSupplements.objects.all()
     serializer_class = TakingSupplementsSerializer
     permission_classes = [permissions.AllowAny]
-
 
     # POST 부분
     def create(self, request, *args, **kwargs):
@@ -232,7 +257,7 @@ class TakingSupplementsDelete(APIView):
             supplement.save()
             return Response("Delete Success", status=status.HTTP_200_OK)
 
-#--------------------------------------------복용 중인 영양제----------------------------------------------------------
+#--------------------------------------------복용 중인 영양제 관련 API----------------------------------------------------------
 
 
 class TmpBestSupplements(APIView):
@@ -320,7 +345,7 @@ class BrandViewSet(viewsets.ModelViewSet):
 class BrandToSupplements(APIView):
     permission_classes = [permissions.AllowAny]
     def get(self, request, brand, format=None):
-        supplement_list = Supplement.objects.all().filter(company=brand)  # organ에 좋은 영양소 리스트
+        supplement_list = Supplement.objects.all().filter(company=brand) 
         # print('리스티', supplement_list)
         # tmp_list = []  # serializer 하기 전에 data 있는지 없는지 확인하기 위한 용도
         return_list = []

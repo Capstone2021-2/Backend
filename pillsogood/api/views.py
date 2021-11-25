@@ -110,7 +110,7 @@ class SupplementViewSet(viewsets.ModelViewSet):
     @action(detail=False)
     def top_search(self, request):
         qs = self.queryset.order_by('-search_count')[:1]   # 조회 수으로 다시 정렬
-        serializer = self.get_serializer(qs, many=True)
+        serializer = self.get_serializer(qs[0])
         return Response(serializer.data)
 
 class SupplementDetail(APIView):

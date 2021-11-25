@@ -140,17 +140,18 @@ class SearchSet(APIView):
 
         return_list = []
     
-        for num in range(supplement_list.count()):
-            try:
-                supplement_obj = supplement_list[num]
-                serializer = SearchSupplementSerializer(supplement_obj)
-                return_list.append(serializer.data)
-            except IndexError:
-                pass
         for num in range(nutrient_list.count()):
             try:
                 nutrient_obj = nutrient_list[num]
                 serializer = SearchNutrientSerializer(nutrient_obj)
+                return_list.append(serializer.data)
+            except IndexError:
+                pass
+
+        for num in range(supplement_list.count()):
+            try:
+                supplement_obj = supplement_list[num]
+                serializer = SearchSupplementSerializer(supplement_obj)
                 return_list.append(serializer.data)
             except IndexError:
                 pass

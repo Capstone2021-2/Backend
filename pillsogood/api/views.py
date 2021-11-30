@@ -176,12 +176,22 @@ class TakingSupplementsViewSet(viewsets.ModelViewSet):
 
     # POST 부분
     def create(self, request, *args, **kwargs):
-        supple_pk = request.data['supplement_pk'][0] # 사용자가 보내준 supplement_pk 추출
-        user_pk = request.data['user_pk'][0]
+
+        request.data._mutable = True
+        supple_pk = request.data['supplement_pk'][:] # 사용자가 보내준 supplement_pk 추출
+        user_pk = request.data['user_pk'][:]
         supplement = Supplement.objects.get(pk=supple_pk)  # supple_pk 값으로 supplement 객체 가져오기
+        name = supplement.name
+        company = supplement.company
+        tmp_id = supplement.tmp_id
+        
+
+        request.data.__setitem__('name', name)  # name 추가
+        request.data.__setitem__('company', company)  # company 추가
+        request.data.__setitem__('tmp_id', tmp_id)  # tmp_id 추가
+
 
         obj = TakingSupplements.objects.all().filter(user_pk=user_pk)
-        print('first obj', obj)
         obj = obj.all().filter(supplement_pk=supple_pk)
 
         print(obj.count())
@@ -207,7 +217,6 @@ class TakingSupplementsViewSet(viewsets.ModelViewSet):
 
 
 # user pk로 복용중인 영양제 가져오기 & 삭제 하기
-
 class TakingSupplementsUser(APIView):
     permission_classes = [permissions.AllowAny]
 
@@ -260,6 +269,7 @@ class TakingSupplementsDelete(APIView):
 
 #--------------------------------------------복용 중인 영양제 관련 API----------------------------------------------------------
 
+#--------------------------------------------영양제 영양소 정보 API-----------------------------------------------------------
 
 class TmpBestSupplements(APIView):
     permission_classes = [permissions.AllowAny]
@@ -291,7 +301,7 @@ class NutritionFactNutrientToSupplement(APIView):
         serializer = NutritionFactSerializer(nutrition, many=True)  # 결과가 여러개 나오기 때문에 many = True
         return Response(serializer.data)
 
-# 영양제로 함유 여양소 검색
+# 영양제로 함유 영양소 검색
 class NutritionFactSupplementToNutrient(APIView):
     permission_classes = [permissions.AllowAny]
 
@@ -300,6 +310,7 @@ class NutritionFactSupplementToNutrient(APIView):
             return NutritionFact.objects.all().filter(supplement=supplement_pk)  # 여러 데이터 전달하기 위해
         except NutritionFact.DoesNotExist:
             raise Http404
+
     def get(self, request, supplement_pk, format=None):
         supplement = self.get_object(supplement_pk)
         serializer = NutritionFactSerializer(supplement, many=True)  # 결과가 여러개 나오기 때문에 many = True
@@ -374,8 +385,8 @@ class ReviewViewSet(viewsets.ModelViewSet):
         request.data._mutable = True
         # print(supple_pk)
         rating = int(request.data['rating'][0])
-        supple_pk = request.data['supplement_pk'][0]
-        user_pk = request.data['user_pk'][0]  # User의 나이, 키, 몸무게, 성별을 획득할 수 있음.
+        supple_pk = request.data['supplement_pk'][:]
+        user_pk = request.data['user_pk'][:]  # User의 나이, 키, 몸무게, 성별을 획득할 수 있음.
         user_object = User.objects.get(pk=user_pk)  # User 객체 가져오기
 
         nickname = user_object.nickname

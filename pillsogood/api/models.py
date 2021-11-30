@@ -57,6 +57,12 @@ class NutritionFact(models.Model):
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE, db_column='nutrient')
     amount = models.FloatField()
 
+    # 나중에 추가한 부분
+    nutrient_name = models.CharField(max_length=100)
+    upper = models.FloatField(blank=True, null=True)
+    lower = models.FloatField(blank=True, null=True)
+    unit = models.CharField(max_length=20, blank=True, null=True)
+
     def __str__(self):
         return '{} : {}  {} '.format(self.supplement, self.nutrient, self.amount)
 
@@ -157,6 +163,9 @@ class Review(models.Model):
 class TakingSupplements(models.Model):
     user_pk = models.ForeignKey(User, on_delete=models.CASCADE)
     supplement_pk  =models.ForeignKey(Supplement, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, blank=True, null= True)
+    company = models.CharField(max_length=50, blank=True, null= True)
+    tmp_id = models.CharField(max_length=30, blank=True, null= True)  # 01.json 파일에 적혀 있는 -id 값임
 
     def __str(self):
         return '{}이 복용 중인 영양제: {} '.format(self.user_pk, self.supplement_pk) 

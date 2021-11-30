@@ -458,6 +458,11 @@ def run():
                 # 함량 이름과 양 둘 다 유효할 경우만 print
                 if c_name is not None and c_amount is not None:
                     nutrient_obj = Nutrient.objects.get(name=c_name.fixed[0])  # 영양소 성분 이름으로 찾기
+
+                    nutrient_name = nutrient_obj.name
+                    upper = nutrient_obj.upper
+                    lower = nutrient_obj.lower
+                    unit = nutrient_obj.unit
                     if '프로바이오틱스' in c_name.fixed[0]:
                         # print(
                         #     c_name.fixed[0],
@@ -465,7 +470,10 @@ def run():
 
                         # DB에 저장하는 부분
                         amount= c_amount.fixed[0].replace('CFU', '').replace(' ', '').replace(',', '').replace('cfu', '')
-                        NutritionFact.objects.create(supplement=supplement_obj, nutrient=nutrient_obj, amount=amount)
+                        NutritionFact.objects.create(
+                            supplement=supplement_obj, nutrient=nutrient_obj, amount=amount,
+                            nutrient_name =nutrient_name, upper=upper, lower=lower, unit=unit
+                            )
                     else:
                         # 오류 찾기용 print
                         # print(c_name)  # 영양소 이름이 잘못되었나?
@@ -475,7 +483,10 @@ def run():
 
                         # DB에 저장하는 부분
                         amount= floats[0].replace(',', '')
-                        NutritionFact.objects.create(supplement=supplement_obj, nutrient=nutrient_obj, amount=amount)
+                        NutritionFact.objects.create(
+                            supplement=supplement_obj, nutrient=nutrient_obj, amount=amount,
+                            nutrient_name =nutrient_name, upper=upper, lower=lower, unit=unit
+                            )
 
             # print('\n')
     except IndexError:

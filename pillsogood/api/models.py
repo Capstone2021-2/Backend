@@ -250,4 +250,15 @@ class GoodForLifeStyle(models.Model):
     def __str__(self):
         return '{} : {} '.format(self.life_style, self.nutrient)
 
+class Caution(models.Model):
+    name = models.CharField(max_length=50)
+    caution = models.CharField(max_length=1000)
 
+    def __str__(self):
+        return '{}'.format(self.name)
+
+class RequestSupplement(models.Model):
+
+    supplement = models.CharField(max_length=100)
+    company = models.CharField(max_length=50)
+    image = models.ImageField(blank=True, null=True, upload_to="uploads")

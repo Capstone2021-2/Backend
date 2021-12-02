@@ -23,6 +23,7 @@ router.register(r'body_types', views.BodyTypeViewSet, basename='body_types')  # 
 router.register(r'life_styles', views.LifeStyleViewSet, basename='life_styles')  # 라이프 스타일
 router.register(r'good_for_life_styles', views.GoodForLifeStyleViewSet, basename='good_for_lifestyles')  # 라이프 스타일에 맞는 영양소
 router.register(r'taking_supplements', views.TakingSupplementsViewSet, basename='taking_supplements')  # 복용 중인 영양제
+router.register(r'cautions', views.CautionViewSet, basename='cautions')  # 주의할 영양소
 #router.register(r'search', views.SearchSet, basename='search')  # 영양소, 영양제, 브랜드 검색 기능
 #router.register(r'user_edit', views.UserEdit, basename='user_edit')  # 유저 변경
 # router.register(r'age_nutrients', views.SupplementViewSet)
@@ -116,6 +117,9 @@ urlpatterns = [
 
     # 검색
     path('search/<str:search_name>', views.SearchSet.as_view()),  # search_name으로 해당 영양소, 영양제, 브랜드 검색
+
+    # 해로운 조합 검색
+    path('cautions/search/<str:name>', views.CautionDetail.as_view()),
 
     path('tmp_best_supplements/<str:name>', views.TmpBestSupplements.as_view()), 
     path('user/jwt-auth/', obtain_jwt_token),

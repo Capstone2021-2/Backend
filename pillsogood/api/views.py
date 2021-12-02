@@ -1,5 +1,3 @@
-# from django.shortcuts import render
-
 from django.utils.regex_helper import contains
 from django.utils.timezone import get_default_timezone
 from django.views.decorators.csrf import csrf_exempt
@@ -342,7 +340,23 @@ class GoodForOrganDetail(APIView):
         serializer = GoodForOrganSerializer(nutrient, many=True)  # 해당 organ에 좋은 영양소 결과가 여러개 나오기 때문에 many = True
         return Response(serializer.data)  # 
 
-            
+class CautionViewSet(viewsets.ModelViewSet):
+    queryset = Caution.objects.all()
+    serializer_class = CautionSerializer
+    permission_classes = [permissions.AllowAny]
+
+class CautionDetail(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self, name):
+        try:
+            return Caution.objects.all().get(name=name)
+        except Caution.DoesNotExist:
+            raise Http404
+    def get(self, request, name, format=None):
+        result = self.get_object(name)
+        serializer = CautionSerializer(result)
+        return Response(serializer.data) 
 
 class AgeNutrientViewSet(viewsets.ModelViewSet):
     queryset = AgeNutrient.objects.all()

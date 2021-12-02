@@ -290,7 +290,7 @@ def run():
 
                 elif c_name is not None and '감마리놀렌산' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
-                    c_name.fixed[0] = '감마리놀렌산 함유 유지'
+                    c_name.fixed[0] = '감마리놀렌산'
                 elif c_name is not None and '대두이소' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '대두이소플라본'
@@ -359,13 +359,13 @@ def run():
                     c_name.fixed[0] = 'Lactobacillus sakei Probio65'
                 elif c_name is not None and '데커신' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
-                    c_name.fixed[0] = '참당귀 추출분말(Nutragen)'
+                    c_name.fixed[0] = '참당귀'
                 elif c_name is not None and 'Chlorogenic' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '그린커피빈추출물'
                 elif c_name is not None and 'Damulin' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
-                    c_name.fixed[0] = '돌외잎주정추출분말'
+                    c_name.fixed[0] = '돌외잎'
                 elif c_name is not None and '폴리감마' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '폴리감마글루탐산'
@@ -423,6 +423,9 @@ def run():
                 elif c_name is not None and '나토균배양분말' in c_name.fixed[0]:
                     c_name.fixed = list(c_name.fixed)
                     c_name.fixed[0] = '나토균배양분말'
+                elif c_name is not None and '참당귀' in c_name.fixed[0]:
+                    c_name.fixed = list(c_name.fixed)
+                    c_name.fixed[0] = '참당귀'
 
 
 
@@ -456,7 +459,9 @@ def run():
                 supplement_obj = Supplement.objects.get(tmp_id=tmp_id_sup)
 
                 # 함량 이름과 양 둘 다 유효할 경우만 print
+                
                 if c_name is not None and c_amount is not None:
+                    # print(content, " ", c_name.fixed[0])
                     nutrient_obj = Nutrient.objects.get(name=c_name.fixed[0])  # 영양소 성분 이름으로 찾기
 
                     nutrient_name = nutrient_obj.name
@@ -491,3 +496,4 @@ def run():
             # print('\n')
     except IndexError:
         pass
+    

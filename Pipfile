@@ -15,6 +15,7 @@ requests = "*"
 django-extensions = "*"
 parse = "*"
 drf-yasg = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 

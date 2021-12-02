@@ -73,8 +73,10 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'django_extensions',
     'drf_yasg',
-    'parse'
+    'parse',
+    'crispy_forms'
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,7 +93,7 @@ ROOT_URLCONF = 'pillsogood.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

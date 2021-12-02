@@ -130,7 +130,7 @@ urlpatterns = [
     path('user/edit', views.edit_user),
 
     # path('user/current/', views.current_user),
-    path('user/dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('user/dj-rest-auth/', include('dj_rest_auth.urls')),  # 비밀번호 재설정 들어 있음
     path('', include('django.contrib.auth.urls')),
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

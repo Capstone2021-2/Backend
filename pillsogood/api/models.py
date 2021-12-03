@@ -223,13 +223,12 @@ class LifeStyle(models.Model):
 
 
 class GoodForBodyType(models.Model):
-    # body_type = models.ForeignKey(BodyType, on_delete=models.CASCADE)
-    # nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
-    body_type =models.CharField(max_length=30)
+    bodytype =models.CharField(max_length=30)
+    nutrient_pk = models.IntegerField()
     nutrient = models.CharField(max_length=50)
 
     def __str__(self):
-        return '{} : {} '.format(self.body_type, self.nutrient)
+        return '{} : {} '.format(self.bodytype, self.nutrient)
 
 
 class GoodForOrgan(models.Model):
@@ -249,6 +248,16 @@ class GoodForLifeStyle(models.Model):
 
     def __str__(self):
         return '{} : {} '.format(self.life_style, self.nutrient)
+
+
+class GoodForAge(models.Model):
+    age_range = models.CharField(max_length=30)
+    gender = models.CharField(max_length=5)
+    nutrient_pk = models.IntegerField()
+    nutrient = models.CharField(max_length=50)
+
+    def __str__(self):
+        return '{} : {} '.format(self.age_range, self.nutrient)
 
 class Caution(models.Model):
     name = models.CharField(max_length=50)

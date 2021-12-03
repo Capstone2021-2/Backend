@@ -1,0 +1,94 @@
+{
+    "age_range_list": [
+        {
+            "age_range": "6~8",
+            "gender": "남",
+            "nutrient": "단백질, 칼슘, 아연, 비타민 B12"
+        },
+        {
+            "age_range": "9~11",
+            "gender": "남",
+            "nutrient": "단백질, 칼슘, 아연, 비타민 B12"
+        },
+        {
+            "age_range": "12~14",
+            "gender": "남",
+            "nutrient": "비타민 A, 비타민 C, 비타민 D, 아연"
+        },
+        {
+            "age_range": "15~18",
+            "gender": "남",
+            "nutrient": "비타민 A, 비타민 C, 비타민 D, 아연"
+        },
+        {
+            "age_range": "19~29",
+            "gender": "남",
+            "nutrient": "비타민 B1, 단백질, 칼슘, 철"
+        },
+        {
+            "age_range": "30~49",
+            "gender": "남",
+            "nutrient": "코엔자임Q10, 비타민 B1, 셀레늄, 비타민 C"
+        },
+        {
+            "age_range": "50~64",
+            "gender": "남",
+            "nutrient": "코엔자임Q10, 클로렐라, 단백질, 셀레늄"
+        },
+        {
+            "age_range": "65~74",
+            "gender": "남",
+            "nutrient": "클로렐라, 루테인지아잔틴복합추출물, 올리브잎주정추출물, 필수 지방산"
+        },
+        {
+            "age_range": "75~",
+            "gender": "남",
+            "nutrient": "클로렐라, 루테인지아잔틴복합추출물, 올리브잎주정추출물, 필수 지방산"
+        },
+        {
+            "age_range": "6~8",
+            "gender": "여",
+            "nutrient": "단백질, 칼슘, 아연, 비타민 B12"
+        },
+        {
+            "age_range": "9~11",
+            "gender": "여",
+            "nutrient": "단백질, 칼슘, 아연, 비타민 B12"
+        },
+        {
+            "age_range": "12~14",
+            "gender": "여",
+            "nutrient": "비타민 A, 비타민 C, 비타민 D, 아연"
+        },
+        {
+            "age_range": "15~18",
+            "gender": "여",
+            "nutrient": "비타민 A, 비타민 C, 비타민 D, 아연"
+        },
+        {
+            "age_range": "19~29",
+            "gender": "여",
+            "nutrient": "비타민 B1, 단백질, 칼슘, 철"
+        },
+        {
+            "age_range": "30~49",
+            "gender": "여",
+            "nutrient": "코엔자임Q10, 비타민 B1, 마그네슘, 칼슘"
+        },
+        {
+            "age_range": "50~64",
+            "gender": "여",
+            "nutrient": "코엔자임Q10, 클로렐라, 마그네슘, 칼슘"
+        },
+        {
+            "age_range": "65~74",
+            "gender": "여",
+            "nutrient": "클로렐라, 루테인지아잔틴복합추출물, 올리브잎주정추출물, 필수 지방산"
+        },
+        {
+            "age_range": "75~",
+            "gender": "여",
+            "nutrient": "클로렐라, 루테인지아잔틴복합추출물, 올리브잎주정추출물, 필수 지방산"
+        }
+    ]
+}

@@ -521,6 +521,28 @@ class AgeViewSet(viewsets.ModelViewSet):
     serializer_class = AgeSerializer
     permission_classes = [permissions.AllowAny]
 
+class GoodForAgeDetail(APIView):
+
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self, **kwargs):
+        try:
+            age_range = kwargs.get('age_range')
+            gender = kwargs.get('gender')
+            tmp = GoodForAge.objects.all().filter(age_range=age_range)
+            result = tmp.filter(gender=gender)
+            # print(result)
+            return result  
+        except GoodForAge.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None, **kargs):
+        goodforage = self.get_object(**kargs)
+        serializer = GoodForAgeSerializer(goodforage, many=True)  # User 한 명이 여러 리뷰를 남겼을 수 있기 떄문에 many = True
+        return Response(serializer.data) 
+
+
+
 class BodyTypeViewSet(viewsets.ModelViewSet):
     queryset = BodyType.objects.all()
     serializer_class = BodyTypeSerializer
@@ -544,7 +566,7 @@ class GoodForLifeStyleDetail(APIView):
     def get_object(self, life_style):
         try:
             return GoodForLifeStyle.objects.all().filter(life_style=life_style)  # life_style 이름으로 filtering
-        except GoodForOrgan.DoesNotExist:
+        except GoodForLifeStyle.DoesNotExist:
             raise Http404
     def get(self, request, life_style, format=None):
         nutrient = self.get_object(life_style)
@@ -670,7 +692,7 @@ class LifeStyleToSupplements(APIView):
                     self.tmp_list.append(supplement_pk)
 
     def get(self, request, life_style, format=None):
-        good_nutrients_list = GoodForLifeStyle.objects.all().filter(life_style=life_style)  # organ에 좋은 영양소 리스트
+        good_nutrients_list = GoodForLifeStyle.objects.all().filter(life_style=life_style)  # life_style에 좋은 영양소 리스트
         # print(nutrient_list)
         # for num in range(good_nutrients_list.count()):
         #     try:

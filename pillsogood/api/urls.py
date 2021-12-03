@@ -121,6 +121,9 @@ urlpatterns = [
     # 해로운 조합 검색
     path('cautions/search/<str:name>', views.CautionDetail.as_view()),
 
+    # 나이, 성별에 따라 좋은 영양소
+    path('good_for_ages/<str:age_range>/<str:gender>', views.GoodForAgeDetail.as_view()),
+
     path('tmp_best_supplements/<str:name>', views.TmpBestSupplements.as_view()), 
     path('user/jwt-auth/', obtain_jwt_token),
     path('user/jwt-auth/verify/', verify_jwt_token),

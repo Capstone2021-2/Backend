@@ -1,7 +1,7 @@
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
 
-from . models import Brand, Caution, GoodForBodyType, GoodForLifeStyle, GoodForOrgan, GoodForAge, LifeStyle, MainNutrient, NutritionFact, Supplement, TakingSupplements, User as UserTemp, Nutrient, Organ, Review, BodyType, Age
+from . models import Brand, Caution, GoodForBodyType, GoodForLifeStyle, GoodForOrgan, GoodForAge, LifeStyle, MainNutrient, NutritionFact, Supplement, TakingSupplements, TopSearch, User as UserTemp, Nutrient, Organ, Review, BodyType, Age
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
@@ -39,6 +39,11 @@ class TopSupplementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supplement
         fields = ['pk', 'tmp_id', 'name', 'company', 'avg_rating', 'taking_num']
+
+class TopSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TopSearch
+        fields = ['nutrient_pk', 'nutrient']
 
 class SearchSupplementSerializer(serializers.ModelSerializer):
     class Meta:

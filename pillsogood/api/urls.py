@@ -91,6 +91,10 @@ urlpatterns = [
     path('', include(router.urls)),  # include는 폴더 자체를 저장하는 것임.
     path('nutrients/name/<str:nutrient>', views.NutrientDetail.as_view()),  # (영양소 pk가 아니라) 영양소 이름으로 영양소검색
 
+    # 상위 영양소 검색
+    path('nutritions_top_search', views.TopSearchDetail.as_view()),
+
+
     # 함유 영양소
     path('nutrition_facts/nutrient_to_supplement/<int:nutrient_pk>', views.NutritionFactNutrientToSupplement.as_view()),  # 영양소 pk 값으로 어떤 영양제가 이 영양소 갖고 있는지
     path('nutrition_facts/supplement_to_nutrient/<int:supplement_pk>', views.NutritionFactSupplementToNutrient.as_view()),  # 영양제 pk 값으로 어떤 영양소들을 가지고 있는 지
@@ -124,6 +128,9 @@ urlpatterns = [
     # 나이, 성별에 따라 좋은 영양소
     path('good_for_ages/<str:age_range>/<str:gender>', views.GoodForAgeDetail.as_view()),
 
+    
+
+    # 체질에 따라 좋은 영양소
     path('tmp_best_supplements/<str:name>', views.TmpBestSupplements.as_view()), 
     path('user/jwt-auth/', obtain_jwt_token),
     path('user/jwt-auth/verify/', verify_jwt_token),

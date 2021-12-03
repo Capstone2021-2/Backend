@@ -45,11 +45,12 @@ class NutrientViewSet(viewsets.ModelViewSet):
         
         return super().retrieve(request, *args, **kwargs)
 
-    @action(detail=False)
-    def top_search(self, request):
-        qs = self.queryset[:4]
-        serializer = self.get_serializer(qs, many=True)
-        return Response(serializer.data)
+
+    # @action(detail=False)
+    # def top_search(self, request):
+    #     qs = self.queryset[:4]
+    #     serializer = self.get_serializer(qs, many=True)
+    #     return Response(serializer.data)
 
     # 이번에 쓰진 않을 것임. 이렇게 한다는 것 적어둔 것.
     # search count 추가해주는 함수 정의
@@ -63,6 +64,35 @@ class NutrientViewSet(viewsets.ModelViewSet):
     #     serializer = self.get_serializer(nutrient)
 
     #     return Response(serializer.data)
+
+
+class TopSearchDetail(APIView):
+
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self):
+        try:
+            result = Nutrient.objects.all().order_by('-search_count')[:4]
+            print(result)
+            return result
+        except Nutrient.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
+        return_list = []
+        result = self.get_object()
+        
+        
+        for i in range(result.count()):
+            tmp = TopSearch.objects.create(nutrient_pk=result[i].pk, nutrient=result[i].name)
+            tmp_result = TopSearchSerializer(tmp)
+            return_list.append(tmp_result.data)
+            
+        # TopSearch.objects.all().delete()  # 기존에 있던 TopSearch 전부 삭제
+        TopSearch.objects.all().delete()
+        return Response(return_list)
+    
+
 
 class NutrientDetail(APIView):
     permission_classes = [permissions.AllowAny]
@@ -541,8 +571,22 @@ class GoodForAgeDetail(APIView):
 
     def get(self, request, format=None, **kargs):
         goodforage = self.get_object(**kargs)
-        serializer = GoodForAgeSerializer(goodforage, many=True)  # User 한 명이 여러 리뷰를 남겼을 수 있기 떄문에 many = True
-        return Response(serializer.data) 
+        serializer = GoodForAgeSerializer(goodforage, many=True)  # 여러 영양소가 나옴
+        return Response(serializer.data)
+
+class GoodForBodyTypeDetail(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self, bodytype):
+        try:
+            return GoodForBodyType.objects.all().filter(bodytype=bodytype)
+        except GoodForBodyType.DoesNotExist:
+            raise Http404
+
+    def get(self, request, bodytype, format=None):
+        goodforbodytype = self.get_object(bodytype)
+        serializer = GoodForBodyTypeSerializer(goodforbodytype, many=True)  # 여러 영양소가 나옴
+        return Response(serializer.data)
 
 
 

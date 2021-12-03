@@ -532,6 +532,9 @@ class GoodForAgeDetail(APIView):
             tmp = GoodForAge.objects.all().filter(age_range=age_range)
             result = tmp.filter(gender=gender)
             # print(result)
+            if result.count() == 0:
+                tmp = GoodForAge.objects.all().filter(age_range='19~29')
+                result = tmp.filter(gender='남')
             return result  
         except GoodForAge.DoesNotExist:
             raise Http404

@@ -270,14 +270,14 @@
           "-self-closing": "true"
         },
         "LAST_UPDT_DTM": "20080626",
-        "INTK_UNIT": "mg",
+        "INTK_UNIT": "μg",
         "IFTKN_ATNT_MATR_CN": {
           "-self-closing": "true"
         },
-        "DAY_INTK_HIGHLIMIT": "0.4",
+        "DAY_INTK_HIGHLIMIT": "400",
         "PRDCT_NM": "엽산",
         "CRET_DTM": "20080626",
-        "DAY_INTK_LOWLIMIT": "0.12",
+        "DAY_INTK_LOWLIMIT": "120",
         "PRIMARY_FNCLTY": "①세포와 혈액생성에 필요②태아 신경관의 정상 발달에 필요③혈액의 호모시스테인 수준을 정상으로 유지하는데 필요",
         "INTK_MEMO": {
           "-self-closing": "true"

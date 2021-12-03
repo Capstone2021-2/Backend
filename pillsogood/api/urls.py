@@ -92,8 +92,7 @@ urlpatterns = [
     path('nutrients/name/<str:nutrient>', views.NutrientDetail.as_view()),  # (영양소 pk가 아니라) 영양소 이름으로 영양소검색
 
     # 상위 영양소 검색
-    path('nutritions_top_search', views.TopSearchDetail.as_view()),
-
+    path('nutrients_top_search', views.TopSearchDetail.as_view()),
 
     # 함유 영양소
     path('nutrition_facts/nutrient_to_supplement/<int:nutrient_pk>', views.NutritionFactNutrientToSupplement.as_view()),  # 영양소 pk 값으로 어떤 영양제가 이 영양소 갖고 있는지

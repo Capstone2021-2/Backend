@@ -617,6 +617,8 @@ class GoodForBodyTypeToSupplements(APIView):
             supplement_list = NutritionFact.objects.all().filter(nutrient=pk)
             supplement_list = supplement_list.order_by('-avg_rating')
             cnt = 0
+            
+            #suppelement_list는 Nutrition_fact 들 모은 것
             for supplement in supplement_list:
                 # print(supplement.avg_rating)
                 supplement_obj = supplement.supplement
@@ -634,8 +636,8 @@ class GoodForBodyTypeToSupplements(APIView):
 
                 if cnt >= 10:
                     break
-            # print('###############################')
-        # print(self.return_list)
+
+        # 평점 순으로 전체 정렬
         result = sorted(self.return_list, key = itemgetter('avg_rating'), reverse=True)
         return Response(result)
             
@@ -844,6 +846,11 @@ class LifeStyleToSupplements(APIView):
         elif life_style == '다이어트를 하는 사람':
             self.search_prd_name('다이어트')
         return Response(self.return_list)
+
+class RequestSupplementView(viewsets.ModelViewSet):
+    queryset = RequestSupplement.objects.all()
+    serializer_class = RequestSupplementSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 #-------------------------함수형 view-----------------------------

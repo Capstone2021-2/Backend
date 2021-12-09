@@ -8,6 +8,11 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+# 이미지 업로드 위한 것
+from django.views.static import serve
+from django.conf import settings	
+from django.conf.urls.static import static
+
 
 router =  routers.DefaultRouter()
 router.register(r'main_nutrients', views.MainNutrientViewSet, basename='main_nutrients')  # nutrient_pk 값, nutrient_name 제공
@@ -24,6 +29,7 @@ router.register(r'life_styles', views.LifeStyleViewSet, basename='life_styles') 
 router.register(r'good_for_life_styles', views.GoodForLifeStyleViewSet, basename='good_for_lifestyles')  # 라이프 스타일에 맞는 영양소
 router.register(r'taking_supplements', views.TakingSupplementsViewSet, basename='taking_supplements')  # 복용 중인 영양제
 router.register(r'cautions', views.CautionViewSet, basename='cautions')  # 주의할 영양소
+router.register(r'request_supplement', views.RequestSupplementView, 'request_supplement')
 #router.register(r'search', views.SearchSet, basename='search')  # 영양소, 영양제, 브랜드 검색 기능
 #router.register(r'user_edit', views.UserEdit, basename='user_edit')  # 유저 변경
 # router.register(r'age_nutrients', views.SupplementViewSet)
@@ -154,3 +160,4 @@ urlpatterns = [
 
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -468,6 +468,7 @@ def run():
                     upper = nutrient_obj.upper
                     lower = nutrient_obj.lower
                     unit = nutrient_obj.unit
+                    avg_rating = supplement_obj.avg_rating
                     if '프로바이오틱스' in c_name.fixed[0]:
                         # print(
                         #     c_name.fixed[0],
@@ -490,7 +491,7 @@ def run():
                         amount= floats[0].replace(',', '')
                         NutritionFact.objects.create(
                             supplement=supplement_obj, nutrient=nutrient_obj, amount=amount,
-                            nutrient_name =nutrient_name, upper=upper, lower=lower, unit=unit
+                            nutrient_name =nutrient_name, upper=upper, lower=lower, unit=unit, avg_rating = avg_rating
                             )
 
             # print('\n')

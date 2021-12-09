@@ -1,3 +1,4 @@
+from operator import attrgetter, itemgetter
 from django.utils.regex_helper import contains
 from django.utils.timezone import get_default_timezone
 from django.views.decorators.csrf import csrf_exempt
@@ -445,7 +446,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
         name = supplement.name
         company = supplement.company
 
-
+        nutrients = NutritionFact.objects.all().filter(supplement=supplement)
 
         # request.data 값 추가해주기
         request.data.__setitem__('nickname', nickname)  # age 값 추가
@@ -468,6 +469,14 @@ class ReviewViewSet(viewsets.ModelViewSet):
         supplement.avg_rating = avg_rating
         supplement.review_num += 1
         supplement.save()
+
+
+        # 평균 평점 수정하기
+        for nutrient in nutrients:
+            print(nutrient)
+            nutrient.avg_rating = avg_rating
+            print(nutrient.avg_rating)
+            nutrient.save()
         return super().create(request)
 
 
@@ -588,6 +597,48 @@ class GoodForBodyTypeDetail(APIView):
         serializer = GoodForBodyTypeSerializer(goodforbodytype, many=True)  # 여러 영양소가 나옴
         return Response(serializer.data)
 
+
+class GoodForBodyTypeToSupplements(APIView):
+    permission_classes = [permissions.AllowAny]
+    tmp_list = []  # serializer 하기 전에 data 있는지 없는지 확인하기 위한 용도
+    return_list = []
+
+
+
+    def get(self, request, bodytype, format=None):
+        nutrient_list = GoodForBodyType.objects.all().filter(bodytype=bodytype)  # organ에 좋은 영양소 리스트
+        self.tmp_list = []
+        self.return_list = []
+
+        for nutrient in nutrient_list:
+            pk = nutrient.nutrient_pk
+            # lower = Nutrient.objects.get(pk=pk).lower
+            
+            supplement_list = NutritionFact.objects.all().filter(nutrient=pk)
+            supplement_list = supplement_list.order_by('-avg_rating')
+            cnt = 0
+            for supplement in supplement_list:
+                # print(supplement.avg_rating)
+                supplement_obj = supplement.supplement
+                supplement_pk = supplement_obj.pk
+                have = False
+
+                if supplement_pk in self.tmp_list:
+                    have = True
+
+                if not have:
+                    cnt += 1
+                    serializer = SupplementSerializer(supplement_obj)
+                    self.return_list.append(serializer.data)
+                    self.tmp_list.append(supplement_pk)
+
+                if cnt >= 10:
+                    break
+            # print('###############################')
+        # print(self.return_list)
+        result = sorted(self.return_list, key = itemgetter('avg_rating'), reverse=True)
+        return Response(result)
+            
 
 
 class BodyTypeViewSet(viewsets.ModelViewSet):

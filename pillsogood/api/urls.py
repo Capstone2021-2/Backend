@@ -129,6 +129,7 @@ urlpatterns = [
 
     #체질에 따라 좋은 영양소
     path('good_for_body_types/<str:bodytype>', views.GoodForBodyTypeDetail.as_view()),
+    path('good_for_body_types_supplements/<str:bodytype>', views.GoodForBodyTypeToSupplements.as_view()),
 
     # 체질에 따라 좋은 영양소
     path('tmp_best_supplements/<str:name>', views.TmpBestSupplements.as_view()), 

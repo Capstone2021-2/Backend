@@ -56,6 +56,7 @@ class NutritionFact(models.Model):
     supplement = models.ForeignKey(Supplement, on_delete=models.CASCADE, db_column='supplement')
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE, db_column='nutrient')
     amount = models.FloatField()
+    avg_rating = models.FloatField(blank=True, null=True)
 
     # 나중에 추가한 부분
     nutrient_name = models.CharField(max_length=100)

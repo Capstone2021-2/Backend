@@ -683,6 +683,7 @@ class LifeStyleToSupplements(APIView):
     # 주요 기능으로 검색   
     def search_pri_func(self, keyword):
         pri_func = Supplement.objects.all().filter(pri_func__icontains=keyword)
+        print(pri_func)
         for i in range(pri_func.count()):
             supplement_pk = pri_func[i]
             have = False
@@ -803,6 +804,7 @@ class LifeStyleToSupplements(APIView):
                         
         #     except IndexError:
         #         pass
+        self.return_list = []
         self.life_style = life_style
         print(life_style)
         if life_style == '올바른 영양 섭취가 중요한 어린이':
@@ -846,6 +848,8 @@ class LifeStyleToSupplements(APIView):
         elif life_style == '다이어트를 하는 사람':
             self.search_prd_name('다이어트')
         return Response(self.return_list)
+
+
 
 class RequestSupplementView(viewsets.ModelViewSet):
     queryset = RequestSupplement.objects.all()
